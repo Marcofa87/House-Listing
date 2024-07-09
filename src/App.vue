@@ -12,7 +12,6 @@
             <img :src="isActive('/about') ? infoActiveIcon : infoIcon" alt="InfoPage" />
           </RouterLink>
         </li>
-        <h1>Hi</h1>
       </ul>
     </nav>
   </header>
