@@ -45,7 +45,7 @@ header {
 
 nav {
   margin: 0 auto;
-  height: 80px;
+  height: 60px;
   width: 80%;
 }
 
