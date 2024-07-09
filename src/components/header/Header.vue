@@ -9,11 +9,20 @@
     <div class="input">
       <input type="text" placeholder="Search for a house" />
     </div>
-    <div class="buttons"></div>
+    <div class="buttons">
+      <CustomButton color="#EB5440" borderRadius="15px 0 0 15px" @click="sortByPrice"
+        >Price</CustomButton
+      >
+      <CustomButton color="#C3C3C3" borderRadius="0 15px 15px 0" @click="sortBySize"
+        >Size</CustomButton
+      >
+    </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import CustomButton from '../../shared/CustomButtons.vue'
+</script>
 
 <style scoped>
 .header {

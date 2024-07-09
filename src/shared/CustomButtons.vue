@@ -1,0 +1,49 @@
+<template>
+  <button :class="['custom-button', buttonClass]" :style="buttonStyle" @click="handleClick">
+    <slot></slot>
+  </button>
+</template>
+
+<script setup>
+import { defineProps } from 'vue'
+
+const props = defineProps({
+  buttonClass: {
+    type: String,
+    default: ''
+  },
+  color: {
+    type: String,
+    default: '#EB5440'
+  },
+  borderRadius: {
+    type: String,
+    default: '0'
+  },
+  onClick: {
+    type: Function,
+    default: () => {}
+  }
+})
+
+const handleClick = () => {
+  props.onClick()
+}
+
+const buttonStyle = {
+  backgroundColor: props.color,
+  color: 'white',
+  borderRadius: props.borderRadius
+}
+</script>
+
+<style scoped>
+.custom-button {
+  padding: 15px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  width: 50%;
+}
+</style>
