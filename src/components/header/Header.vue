@@ -6,9 +6,11 @@
         <img src="../../assets/ic_plus_grey@3x.png" alt="Edit listing" />
       </RouterLink>
     </div>
-    <div class="input">
-      <input type="text" placeholder="Search for a house" />
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search for a house" />
+      <span class="clear-icon"></span>
     </div>
+
     <div class="buttons">
       <CustomButton color="#EB5440" borderRadius="15px 0 0 15px" @click="sortByPrice"
         >Price</CustomButton
@@ -40,14 +42,42 @@ import CustomButton from '../../shared/CustomButtons.vue'
 input[type='text'] {
   font-size: 12px;
   font-weight: 600;
-  font-style: 'Opens sans' 'Regular';
+  font-family: 'Open Sans', 'Regular';
+}
+
+.search-container {
+  position: relative;
+  width: 90%;
+  margin: 0 auto;
 }
 
 input {
-  width: 90%;
+  width: 100%;
   padding: 20px;
   border-radius: 10px;
-  background: #c3c3c3;
+  background-color: #c3c3c3;
+  padding-left: 45px;
+  padding-right: 45px;
+  background: url('../../assets/ic_search@3x.png') no-repeat left 15px center;
+  background-size: 20px 20px;
+  border: 2px solid #000;
+  outline: none;
+}
+
+input:focus {
+  border-color: #666;
+}
+
+.clear-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: url('../../assets/ic_clear@3x.png') no-repeat center;
+  background-size: contain;
+  cursor: pointer;
 }
 
 .buttons {
