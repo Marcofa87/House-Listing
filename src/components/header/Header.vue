@@ -37,6 +37,12 @@ import CustomButton from '../../shared/CustomButtons.vue'
   margin-top: 20px;
 }
 
+input[type='text'] {
+  font-size: 12px;
+  font-weight: 600;
+  font-style: 'Opens sans' 'Regular';
+}
+
 input {
   width: 90%;
   padding: 20px;

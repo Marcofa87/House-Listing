@@ -40,9 +40,10 @@ const buttonStyle = {
 <style scoped>
 .custom-button {
   padding: 15px;
+
   border: none;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 12px;
   transition: background-color 0.3s;
   width: 50%;
 }
