@@ -13,6 +13,7 @@
           </RouterLink>
         </li>
       </ul>
+      <p>hi</p>
     </nav>
   </header>
   <RouterView />
