@@ -32,19 +32,20 @@
 </template>
 
 <script setup>
-import { onMounted, computed } from 'vue'
+import { computed } from 'vue'
+import { onMounted } from 'vue'
 import { useHouseListingStore } from '../../stores/houseListing'
+import { useSearchStore } from '../../stores/searchStore'
 
-const store = useHouseListingStore()
+const houseStore = useHouseListingStore()
+const searchStore = useSearchStore()
 
-// Caricare i dati quando il componente viene montato
 onMounted(() => {
-  store.fetchHouses()
+  houseStore.fetchHouses()
 })
 
-// Binding dei dati dello store alle variabili del componente
-const houses = computed(() => store.house)
-const loading = computed(() => store.loading)
+const houses = computed(() => searchStore.filteredHouses)
+const loading = computed(() => houseStore.loading)
 </script>
 
 <style scoped>
