@@ -7,10 +7,15 @@
       </RouterLink>
     </div>
     <div class="search-container">
-      <input type="text" id="searchInput" placeholder="Search for a house" />
-      <span class="clear-icon"></span>
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search for a house"
+        v-model="searchTerm"
+        @input="updateSearch"
+      />
+      <span v-if="showClearIcon" class="clear-icon" @click="clearSearch"></span>
     </div>
-
     <div class="buttons">
       <CustomButton color="#EB5440" borderRadius="15px 0 0 15px" @click="sortByPrice"
         >Price</CustomButton
@@ -23,7 +28,18 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import CustomButton from '../../shared/CustomButtons.vue'
+import { useSearchStore } from '../../stores/searchStore'
+
+const searchStore = useSearchStore()
+const searchTerm = ref('')
+const showClearIcon = ref(true)
+
+const clearSearch = () => {
+  searchTerm.value = ''
+  searchStore.setSearchTerm('')
+}
 </script>
 
 <style scoped>

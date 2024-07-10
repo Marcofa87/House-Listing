@@ -3,7 +3,7 @@ import type { House } from '@/types'
 
 export const useHouseListingStore = defineStore('houseListingStore', {
   state: () => ({
-    house: [] as House[],
+    houses: [] as House[],
     loading: false,
     error: null as string | null
   }),
@@ -30,9 +30,10 @@ export const useHouseListingStore = defineStore('houseListingStore', {
 
         const res = await response.json()
 
-        this.house = res
+        this.houses = res
       } catch (error) {
         console.log('error', error)
+        this.error = error.message
       } finally {
         this.loading = false
       }
