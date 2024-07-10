@@ -31,6 +31,7 @@ import CustomButton from '../../shared/CustomButtons.vue'
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin: 30px 0;
 }
 
 .input {
