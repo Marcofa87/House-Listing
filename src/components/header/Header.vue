@@ -47,7 +47,6 @@ const clearSearch = () => {
   showClearIcon.value = false
 }
 
-// Aggiungi questo watch per aggiornare showClearIcon quando searchTerm cambia
 watch(searchTerm, (newValue) => {
   showClearIcon.value = newValue.length > 0
 })
