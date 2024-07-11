@@ -34,22 +34,16 @@
 <script setup>
 import { computed, onMounted } from 'vue'
 import { useHouseListingStore } from '../../stores/houseListing'
-import { useSearchStore } from '../../stores/searchStore'
+import { useSortingByStore } from '../../stores/sortByStore'
 
 const houseStore = useHouseListingStore()
-const searchStore = useSearchStore()
+const sortingByStore = useSortingByStore()
 
 onMounted(() => {
   houseStore.fetchHouses()
 })
 
-const houses = computed(() => {
-  if (searchStore.searchTerm) {
-    return searchStore.filteredHouses
-  }
-  return houseStore.houses
-})
-
+const houses = computed(() => sortingByStore.filteredAndSortedHouses)
 const loading = computed(() => houseStore.loading)
 </script>
 

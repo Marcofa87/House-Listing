@@ -19,10 +19,18 @@
     </div>
 
     <div class="buttons">
-      <CustomButton color="#EB5440" borderRadius="15px 0 0 15px" @click="sortByPrice">
+      <CustomButton
+        color="#EB5440"
+        borderRadius="15px 0 0 15px"
+        @click="sortingByStore.setSortBy('price')"
+      >
         Price
       </CustomButton>
-      <CustomButton color="#C3C3C3" borderRadius="0 15px 15px 0" @click="sortBySize">
+      <CustomButton
+        color="#C3C3C3"
+        borderRadius="0 15px 15px 0"
+        @click="sortingByStore.setSortBy('size')"
+      >
         Size
       </CustomButton>
     </div>
@@ -37,15 +45,15 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
-import { useSearchStore } from '../../stores/searchStore'
+import { useSortingByStore } from '@/stores/sortByStore'
 import CustomButton from '../../shared/CustomButtons.vue'
 import NotFound from '../cardComponent/NotFound.vue'
 
-const searchStore = useSearchStore()
+const sortingByStore = useSortingByStore()
 const searchTerm = ref('')
 const showClearIcon = ref(false)
 
-const filteredHousesCount = computed(() => searchStore.filteredHouses.length)
+const filteredHousesCount = computed(() => sortingByStore.filteredAndSortedHouses.length)
 const isSearching = computed(() => searchTerm.value.length > 0)
 
 const resultText = computed(() => {
@@ -53,19 +61,15 @@ const resultText = computed(() => {
 })
 
 const updateSearch = () => {
-  searchStore.setSearchTerm(searchTerm.value)
+  sortingByStore.setSearchTerm(searchTerm.value)
   showClearIcon.value = searchTerm.value.length > 0
 }
 
 const clearSearch = () => {
   searchTerm.value = ''
-  searchStore.setSearchTerm('')
+  sortingByStore.setSearchTerm('')
   showClearIcon.value = false
 }
-
-const sortByPrice = () => {}
-
-const sortBySize = () => {}
 
 watch(searchTerm, (newValue) => {
   showClearIcon.value = newValue.length > 0
