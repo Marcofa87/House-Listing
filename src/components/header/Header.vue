@@ -6,6 +6,7 @@
         <img src="../../assets/ic_plus_grey@3x.png" alt="Edit listing" />
       </RouterLink>
     </div>
+
     <div class="search-container">
       <input
         type="text"
@@ -16,25 +17,40 @@
       />
       <span v-if="showClearIcon" class="clear-icon" @click="clearSearch"></span>
     </div>
+
     <div class="buttons">
-      <CustomButton color="#EB5440" borderRadius="15px 0 0 15px" @click="sortByPrice"
-        >Price</CustomButton
-      >
-      <CustomButton color="#C3C3C3" borderRadius="0 15px 15px 0" @click="sortBySize"
-        >Size</CustomButton
-      >
+      <CustomButton color="#EB5440" borderRadius="15px 0 0 15px" @click="sortByPrice">
+        Price
+      </CustomButton>
+      <CustomButton color="#C3C3C3" borderRadius="0 15px 15px 0" @click="sortBySize">
+        Size
+      </CustomButton>
     </div>
+
+    <NotFound
+      v-if="isSearching"
+      :filteredHousesCount="filteredHousesCount"
+      :resultText="resultText"
+    />
   </div>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
-import CustomButton from '../../shared/CustomButtons.vue'
+import { ref, computed, watch } from 'vue'
 import { useSearchStore } from '../../stores/searchStore'
+import CustomButton from '../../shared/CustomButtons.vue'
+import NotFound from '../cardComponent/NotFound.vue'
 
 const searchStore = useSearchStore()
 const searchTerm = ref('')
 const showClearIcon = ref(false)
+
+const filteredHousesCount = computed(() => searchStore.filteredHouses.length)
+const isSearching = computed(() => searchTerm.value.length > 0)
+
+const resultText = computed(() => {
+  return `Find ${filteredHousesCount.value} House${filteredHousesCount.value !== 1 ? 's' : ''}`
+})
 
 const updateSearch = () => {
   searchStore.setSearchTerm(searchTerm.value)
@@ -46,6 +62,10 @@ const clearSearch = () => {
   searchStore.setSearchTerm('')
   showClearIcon.value = false
 }
+
+const sortByPrice = () => {}
+
+const sortBySize = () => {}
 
 watch(searchTerm, (newValue) => {
   showClearIcon.value = newValue.length > 0
