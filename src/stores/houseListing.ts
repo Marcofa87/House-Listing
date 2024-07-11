@@ -30,7 +30,7 @@ export const useHouseListingStore = defineStore('houseListingStore', {
 
         const res = await response.json()
 
-        this.houses = res
+        this.houses = res // Cambiato da this.house a this.houses
       } catch (error) {
         console.log('error', error)
         this.error = error.message

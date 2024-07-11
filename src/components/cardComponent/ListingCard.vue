@@ -32,8 +32,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useHouseListingStore } from '../../stores/houseListing'
 import { useSearchStore } from '../../stores/searchStore'
 
@@ -44,7 +43,13 @@ onMounted(() => {
   houseStore.fetchHouses()
 })
 
-const houses = computed(() => searchStore.filteredHouses)
+const houses = computed(() => {
+  if (searchStore.searchTerm) {
+    return searchStore.filteredHouses
+  }
+  return houseStore.houses
+})
+
 const loading = computed(() => houseStore.loading)
 </script>
 

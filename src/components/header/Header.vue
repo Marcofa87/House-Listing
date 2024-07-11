@@ -28,18 +28,29 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import CustomButton from '../../shared/CustomButtons.vue'
 import { useSearchStore } from '../../stores/searchStore'
 
 const searchStore = useSearchStore()
 const searchTerm = ref('')
-const showClearIcon = ref(true)
+const showClearIcon = ref(false)
+
+const updateSearch = () => {
+  searchStore.setSearchTerm(searchTerm.value)
+  showClearIcon.value = searchTerm.value.length > 0
+}
 
 const clearSearch = () => {
   searchTerm.value = ''
   searchStore.setSearchTerm('')
+  showClearIcon.value = false
 }
+
+// Aggiungi questo watch per aggiornare showClearIcon quando searchTerm cambia
+watch(searchTerm, (newValue) => {
+  showClearIcon.value = newValue.length > 0
+})
 </script>
 
 <style scoped>

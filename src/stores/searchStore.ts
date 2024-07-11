@@ -16,8 +16,11 @@ export const useSearchStore = defineStore('searchStore', {
         return houseStore.houses
       }
 
-      return houseStore.houses.filter((house) =>
-        house.location.city.toLowerCase().includes(searchLower)
+      return houseStore.houses.filter(
+        (house) =>
+          house.location.city.toLowerCase().includes(searchLower) ||
+          house.location.street.toLowerCase().includes(searchLower) ||
+          house.location.zip.toLowerCase().includes(searchLower)
       )
     }
   },
