@@ -3,7 +3,9 @@
     <div class="houses-container">
       <div class="house-detail-card" v-for="house in houses" :key="house.id">
         <div class="detail-image">
-          <img :src="house.image" alt="House image detail" class="house-image" />
+          <router-link :to="{ name: 'house-detail' }">
+            <img :src="house.image" alt="House image detail" class="house-image"
+          /></router-link>
         </div>
         <div class="house-detail-container">
           <div class="house-detail-location">

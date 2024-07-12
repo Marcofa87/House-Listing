@@ -29,6 +29,7 @@ export const useHouseListingStore = defineStore('houseListingStore', {
         }
 
         const res = await response.json()
+        console.log(res)
 
         this.houses = res // Cambiato da this.house a this.houses
       } catch (error) {

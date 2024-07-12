@@ -2,7 +2,7 @@
   <div>
     <div class="header">
       <h1>Houses</h1>
-      <RouterLink to="/about">
+      <RouterLink to="/new-listing">
         <img src="../../assets/ic_plus_grey@3x.png" alt="Edit listing" />
       </RouterLink>
     </div>
