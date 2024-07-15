@@ -1,5 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import HouseDetail from '../components/houseDetail/HouseDetail.vue'
+</script>
 
 <template>
-  <main>This is the detail page</main>
+  <main><HouseDetail /></main>
 </template>

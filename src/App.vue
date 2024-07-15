@@ -35,7 +35,7 @@ const isActive = (path: string) => {
 <style scoped>
 header {
   display: flex;
-  position: fixed;
+  /* position: fixed; */
   bottom: 0;
   width: 100%;
   margin: 0 auto;

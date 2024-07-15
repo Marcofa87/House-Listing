@@ -3,7 +3,7 @@
     <div class="houses-container">
       <div class="house-detail-card" v-for="house in houses" :key="house.id">
         <div class="detail-image">
-          <router-link :to="{ name: 'house-detail' }">
+          <router-link :to="{ name: 'house-detail', params: { id: house.id } }">
             <img :src="house.image" alt="House image detail" class="house-image"
           /></router-link>
         </div>
