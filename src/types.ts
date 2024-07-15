@@ -31,4 +31,5 @@ export interface Apartment {
   constructionYear: number
   hasGarage: boolean
   description: string
+  madeByMe: boolean
 }

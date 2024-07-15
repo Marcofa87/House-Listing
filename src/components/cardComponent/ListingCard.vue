@@ -8,10 +8,18 @@
           /></router-link>
         </div>
         <div class="house-detail-container">
-          <div class="house-detail-location">
-            <h3>{{ house.location.street }}</h3>
-            <p>€ {{ house.price }}</p>
-            <p>{{ house.location.zip }} {{ house.location.city }}</p>
+          <div class="house-detail-location-edit-delete">
+            <div class="house-detail-location">
+              <h3>{{ house.location.street }}</h3>
+              <p>€ {{ house.price }}</p>
+              <p>{{ house.location.zip }} {{ house.location.city }}</p>
+            </div>
+            <div v-if="house.madeByMe" class="edit-delete">
+              <img src="../../assets/ic_edit@3x.png" alt="edit button" /><img
+                src="../../assets/ic_delete@3x.png"
+                alt=""
+              />
+            </div>
           </div>
           <div class="house-detail-amenities">
             <div class="house-detail-intern">
@@ -75,6 +83,16 @@ const loading = computed(() => houseStore.loading)
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.house-detail-location-edit-delete {
+  display: flex;
+  justify-content: space-between;
+}
+
+.house-detail-location-edit-delete img {
+  width: 32px;
+  margin: 5px;
 }
 
 .house-detail-location h3 {
