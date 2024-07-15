@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import NewListing from '../components/newListing/NewListing.vue'
+import NewListing from '../components/newListing/CreateListing.vue'
 </script>
 
 <template>

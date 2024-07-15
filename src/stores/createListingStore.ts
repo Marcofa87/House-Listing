@@ -22,7 +22,7 @@ export const useApartmentStore = defineStore('apartment', {
     },
     async createApartment(newApartment: Apartment) {
       const myHeaders = new Headers()
-      myHeaders.append('X-Api-Key', '{api_key}')
+      myHeaders.append('X-Api-Key', 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg')
 
       const formdata = new FormData()
       formdata.append('price', newApartment.price.toString())
