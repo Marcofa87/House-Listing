@@ -1,7 +1,7 @@
 // src/stores/houseStore.js
 import { defineStore } from 'pinia'
 
-export const useHouseStore = defineStore('house', {
+export const useHouseDetailStore = defineStore('house', {
   state: () => ({
     house: null,
     loading: false,
@@ -15,7 +15,7 @@ export const useHouseStore = defineStore('house', {
         const response = await fetch(`https://api.intern.d-tt.nl/api/houses/${id}`, {
           method: 'GET',
           headers: {
-            'X-Api-Key': '{api_key}'
+            'X-Api-Key': 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
           }
         })
         if (!response.ok) {

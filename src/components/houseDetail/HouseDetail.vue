@@ -42,7 +42,12 @@
   </main>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useHouseDetailStore } from '@/stores/houseDetailStore'
+
+const houseDetailStore = useHouseDetailStore()
+console.log(houseDetailStore)
+</script>
 
 <style scoped>
 .house-detail-container {
