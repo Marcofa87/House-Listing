@@ -64,6 +64,7 @@ const houseStore = useHouseDetailStore()
 const route = useRoute()
 
 const id = Number(route.params.id)
+console.log(id)
 
 houseStore.fetchHouseDetails(id)
 </script>
