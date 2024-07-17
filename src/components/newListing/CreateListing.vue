@@ -131,7 +131,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useApartmentStore } from '../../stores/createListingStore'
+import { useApartmentStore } from '@/stores/createListingStore'
 import { useRouter } from 'vue-router'
 import CustomButtons from '@/shared/CustomButtons.vue'
 

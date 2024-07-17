@@ -22,14 +22,18 @@ export interface House {
 
 export interface Apartment {
   price: number
-  bedrooms: number
-  bathrooms: number
+  rooms: {
+    bedrooms: number
+    bathrooms: number
+  }
   size: number
-  streetName: string
-  houseNumber: string
-  numberAddition?: string
-  zip: string
-  city: string
+  location: {
+    street: string
+    houseNumber: string
+    numberAddition?: string
+    zip: string
+    city: string
+  }
   constructionYear: number
   hasGarage: boolean
   description: string
