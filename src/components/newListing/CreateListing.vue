@@ -162,6 +162,7 @@ const newApartment = ref({
   hasGarage: false,
   description: ''
 })
+console.log(newApartment)
 
 const submitForm = async () => {
   try {
@@ -181,6 +182,7 @@ const submitForm = async () => {
       hasGarage: false,
       description: ''
     }
+
     router.push('/')
   } catch (error) {
     console.error('There was an error during creation of the announce:', error)
