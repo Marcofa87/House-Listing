@@ -2,7 +2,7 @@
   <div class="create-listing-container">
     <div class="content-wrapper">
       <div class="listing-header">
-        <img src="@/assets/ic_back_grey@3x.png" alt="Logo" class="logo" />
+        <img src="@/assets/ic_back_grey@3x.png" alt="Logo" class="back" @click="goBack" />
         <h2>Create new listing</h2>
       </div>
 
@@ -122,20 +122,29 @@
             required
           ></textarea>
         </div>
-
-        <CustomButtons @click="submitForm" class="post-button">POST</CustomButtons>
       </form>
+      <div class="post-form-button">
+        <CustomButtons :disabled="isDisabled" @click="submitForm" class="post-button"
+          >POST</CustomButtons
+        >
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useApartmentStore } from '@/stores/createListingStore'
+import { useApartmentStore } from '../../stores/createListingStore'
 import { useRouter } from 'vue-router'
 import CustomButtons from '@/shared/CustomButtons.vue'
 
+const isDisabled = ref(true)
+
 const router = useRouter()
+
+const goBack = () => {
+  router.go(-1)
+}
 
 const apartmentStore = useApartmentStore()
 
@@ -194,12 +203,15 @@ const handleImageUpload = (event: Event) => {
   justify-content: space-around;
   align-items: flex-start;
   padding: 20px;
+  background-image: url('@/assets/img_background@3x.png');
+  background-size: cover;
+  background-position: center 50%;
+  background-attachment: fixed;
 }
 
 .content-wrapper {
   max-width: 600px;
   width: 100%;
-
   border-radius: 8px;
   padding: 20px;
 }
@@ -210,21 +222,15 @@ const handleImageUpload = (event: Event) => {
   margin-bottom: 20px;
 }
 
-.listing-header .logo {
+.listing-header .back {
   max-width: 80px;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .listing-header h2 {
   text-align: center;
   width: 80%;
-}
-
-form {
-  background-image: url('@/assets/img_background@3x.png');
-  background-size: cover;
-  background-position: center 50%;
-  background-attachment: fixed;
 }
 
 .form-group {
@@ -263,5 +269,10 @@ textarea {
 
 .create-listing-container .content-wrapper .post-button {
   width: 80%;
+}
+
+.post-form-button {
+  display: flex;
+  justify-content: center;
 }
 </style>

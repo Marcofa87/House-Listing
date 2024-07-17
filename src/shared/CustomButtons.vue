@@ -18,6 +18,10 @@ const props = defineProps({
     type: String,
     default: '0'
   },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
   onClick: {
     type: Function,
     default: () => {}
