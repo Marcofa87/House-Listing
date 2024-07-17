@@ -124,9 +124,7 @@
         </div>
       </form>
       <div class="post-form-button">
-        <CustomButtons :disabled="isDisabled" @click="submitForm" class="post-button"
-          >POST</CustomButtons
-        >
+        <CustomButtons @click="submitForm" class="post-button">POST</CustomButtons>
       </div>
     </div>
   </div>
@@ -137,8 +135,6 @@ import { ref } from 'vue'
 import { useApartmentStore } from '../../stores/createListingStore'
 import { useRouter } from 'vue-router'
 import CustomButtons from '@/shared/CustomButtons.vue'
-
-const isDisabled = ref(true)
 
 const router = useRouter()
 
@@ -225,7 +221,7 @@ const handleImageUpload = (event: Event) => {
 }
 
 .listing-header .back {
-  max-width: 80px;
+  width: 32px;
   margin-bottom: 10px;
   cursor: pointer;
 }
