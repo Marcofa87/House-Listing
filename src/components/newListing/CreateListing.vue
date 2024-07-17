@@ -45,7 +45,9 @@
 
         <div class="form-group">
           <label for="image">Upload Picture (PNG or JPG)*</label>
-          <input type="file" id="image" @change="handleImageUpload" accept="image/*" />
+          <div class="upload-label" @click="handleImageUpload">
+            <img src="../../assets/ic_upload@3x.png" alt="" />
+          </div>
         </div>
 
         <div class="form-group">
@@ -186,10 +188,7 @@ const submitForm = async () => {
 }
 
 const handleImageUpload = (event: Event) => {
-  const file = (event.target as HTMLInputElement).files?.[0]
-  if (file) {
-    // Handle the file upload
-  }
+  console.log('upload image')
 }
 </script>
 
@@ -226,6 +225,20 @@ const handleImageUpload = (event: Event) => {
   cursor: pointer;
 }
 
+.upload-label {
+  border: 3px grey dashed;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.upload-label img {
+  width: 32px;
+}
+
 .listing-header h2 {
   text-align: center;
   width: 80%;
@@ -247,16 +260,17 @@ const handleImageUpload = (event: Event) => {
 label {
   display: block;
   margin-bottom: 5px;
-  font-weight: bold;
+  font-weight: lighter;
 }
 
 input,
 select,
 textarea {
   width: 100%;
-  padding: 10px;
+  padding: 15px;
+  height: 50px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 12px;
   font-size: 16px;
 }
 
