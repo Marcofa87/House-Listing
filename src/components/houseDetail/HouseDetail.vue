@@ -113,7 +113,6 @@ houseStore.fetchHouseDetails(id)
 .house-detail-zip-house-city {
   display: flex;
   align-items: center;
-  border: 1px solid gold;
   padding: 10px;
 }
 
