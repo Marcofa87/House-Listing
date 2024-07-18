@@ -145,7 +145,7 @@ houseStore.fetchHouseDetails(id)
 .house-detail-zip-house-city,
 .house-detail-price-size-construction-container,
 .house-detail-description {
-  margin: 20px 0;
+  margin: 40px;
 }
 
 .house-detail-zip-house-city {
@@ -156,7 +156,6 @@ houseStore.fetchHouseDetails(id)
 .house-detail-price-size-construction-container {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
 }
 
 .house-detail-price-size-construction-container > div {

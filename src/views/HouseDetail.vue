@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import HouseDetail from '../components/houseDetail/HouseDetail.vue'
+import HouseDetailContainer from '../components/houseDetail/HouseDetailContainer.vue'
 </script>
 
 <template>
-  <main><HouseDetail /></main>
+  <main><HouseDetailContainer /></main>
 </template>
