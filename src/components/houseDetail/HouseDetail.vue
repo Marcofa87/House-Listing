@@ -3,15 +3,25 @@
     <div v-if="houseStore.loading">Loading...</div>
     <div v-else-if="houseStore.error">Error: {{ houseStore.error }}</div>
     <div v-else-if="houseStore.house" class="house-detail-container">
-      <div class="house-detail-images">
-        <div class="back-img">
-          <img src="@/assets/ic_back_white@3x.png" alt="back button" @click="goBack" />
+      <div class="house-detail-images-container">
+        <div class="house-detail-images">
+          <div class="back-img">
+            <img src="@/assets/ic_back_white@3x.png" alt="back button" @click="goBack" />
+          </div>
+          <div class="edit-delete-buttons">
+            <img src="@/assets/ic_edit_white@3x.png" alt="edit button" />
+            <img src="@/assets/ic_delete_white@3x.png" alt="delete button" />
+          </div>
         </div>
-        <div class="edit-delete-buttons">
-          <img src="@/assets/ic_edit_white@3x.png" alt="edit button" />
-          <img src="@/assets/ic_delete_white@3x.png" alt="delete button" />
+        <div class="placeholder-container">
+          <img
+            class="placeholder-image"
+            src="../../assets/img_placeholder_house@3x.png"
+            alt="placeholder_house_image"
+          />
         </div>
       </div>
+
       <div class="container">
         <div class="house-detail-street">
           <h2>
@@ -43,11 +53,11 @@
           </div>
           <div>
             <img src="@/assets/ic_bath@3x.png" alt="bath icon" />
-            <p>{{ houseStore.house.rooms.bathrooms }}m²</p>
+            <p>{{ houseStore.house.rooms.bathrooms }}</p>
           </div>
           <div class="house-detail-price-garage">
             <img src="@/assets/ic_garage@3x.png" alt="garage icon" />
-            <p>Built in {{ houseStore.house.hasGarage ? 'Yes' : 'No' }}</p>
+            <p>{{ houseStore.house.hasGarage ? 'Yes' : 'No' }}</p>
           </div>
         </div>
         <div class="house-detail-description">
@@ -77,43 +87,70 @@ houseStore.fetchHouseDetails(id)
 </script>
 
 <style scoped>
-.house-detail-container {
+.house-detail-images-container {
+  position: relative;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  max-width: 100%;
-}
-
-.house-detail-container img {
-  width: 32px;
+  align-items: center;
 }
 
 .house-detail-images {
+  position: absolute;
+  top: 10px;
+  left: 10px;
   display: flex;
   justify-content: space-between;
-  margin: 20px 10px;
-  height: 150px;
-  background-image: url('../../assets/img_placeholder_house@3x.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  width: calc(100% - 20px);
+  z-index: 2;
+  padding: 10px;
 }
 
-.back-img img {
-  cursor: pointer;
+.back-img img,
+.edit-delete-buttons img {
+  width: 32px;
+  z-index: 4;
 }
 
 .edit-delete-buttons img {
   margin: 0 10px;
 }
 
+.placeholder-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+}
+
+.placeholder-image {
+  max-width: 100%;
+  height: auto;
+}
+
 .container {
   padding: 50px;
+  border-radius: 35px 35px;
+  position: relative;
+  top: -50px;
+  z-index: 3;
+  background-color: white;
+}
+
+.container img {
+  width: 32px;
+}
+
+.house-detail-street,
+.house-detail-zip-house-city,
+.house-detail-price-size-construction-container,
+.house-detail-description {
+  margin: 20px 0;
 }
 
 .house-detail-zip-house-city {
   display: flex;
   align-items: center;
-  padding: 10px;
 }
 
 .house-detail-price-size-construction-container {
@@ -128,12 +165,6 @@ houseStore.fetchHouseDetails(id)
 }
 
 .house-detail-price-size-construction-container img {
-  margin-right: 5px;
-}
-
-.house-detail-description {
-  padding: 20px;
-  border: 1px solid #ccc;
-  margin-top: 20px;
+  margin-right: 10px;
 }
 </style>
