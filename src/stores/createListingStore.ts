@@ -1,4 +1,3 @@
-// stores/apartmentStore.ts
 import { defineStore } from 'pinia'
 import type { Apartment } from '../types'
 
@@ -7,51 +6,58 @@ export const useApartmentStore = defineStore('apartment', {
     apartments: [] as Apartment[]
   }),
   actions: {
-    async fetchApartments() {
-      try {
-        const response = await fetch('https://api.intern.d-tt.nl/api/houses', {
-          headers: {
-            'X-Api-Key': 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
-          }
-        })
-        const data = await response.json()
-        this.apartments = data
-      } catch (error) {
-        console.log('error', error)
-      }
-    },
     async createApartment(newApartment: Apartment) {
-      const myHeaders = new Headers()
-      myHeaders.append('X-Api-Key', 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg')
+      if (
+        !newApartment.streetName ||
+        !newApartment.houseNumber ||
+        !newApartment.zip ||
+        !newApartment.city ||
+        !newApartment.price ||
+        !newApartment.bedrooms ||
+        !newApartment.bathrooms ||
+        !newApartment.size ||
+        !newApartment.constructionYear
+      ) {
+        console.error('Missing required fields')
+        return
+      }
 
-      const formdata = new FormData()
-      formdata.append('price', newApartment.price.toString())
-      formdata.append('bedrooms', newApartment.bedrooms.toString())
-      formdata.append('bathrooms', newApartment.bathrooms.toString())
-      formdata.append('size', newApartment.size.toString())
-      formdata.append('streetName', newApartment.streetName)
-      formdata.append('houseNumber', newApartment.houseNumber)
-      if (newApartment.numberAddition)
-        formdata.append('numberAddition', newApartment.numberAddition)
-      formdata.append('zip', newApartment.zip)
-      formdata.append('city', newApartment.city)
-      formdata.append('constructionYear', newApartment.constructionYear.toString())
-      formdata.append('hasGarage', newApartment.hasGarage.toString())
-      formdata.append('description', newApartment.description)
+      const formData = new FormData()
+      formData.append('price', newApartment.price.toString())
+      formData.append('size', newApartment.size.toString())
+      formData.append('constructionYear', newApartment.constructionYear.toString())
+      formData.append('hasGarage', newApartment.hasGarage.toString())
+      formData.append('description', newApartment.description)
+      formData.append('location[city]', newApartment.city)
+      formData.append('location[houseNumber]', newApartment.houseNumber.toString())
+      formData.append('location[houseNumberAddition]', newApartment.numberAddition || '')
+      formData.append('location[street]', newApartment.streetName)
+      formData.append('location[zip]', newApartment.zip)
+      formData.append('rooms[bedrooms]', newApartment.bedrooms.toString())
+      formData.append('rooms[bathrooms]', newApartment.bathrooms.toString())
+      if (newApartment.imageURL) {
+        formData.append('imageURL', newApartment.imageURL)
+      }
 
       const requestOptions = {
         method: 'POST',
-        headers: myHeaders,
-        body: formdata,
+        headers: {
+          'X-Api-Key': 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
+        },
+        body: formData,
         redirect: 'follow'
       }
 
       try {
         const response = await fetch('https://api.intern.d-tt.nl/api/houses', requestOptions)
+        if (!response.ok) {
+          const errorText = await response.text()
+          throw new Error(`HTTP error! status: ${response.status}. ${errorText}`)
+        }
         const result = await response.json()
         this.apartments.push(result)
       } catch (error) {
-        console.log('error', error)
+        console.log('Error creating apartment:', error)
       }
     }
   }

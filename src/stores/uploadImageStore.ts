@@ -1,39 +1,45 @@
-const myHeaders = new Headers()
-myHeaders.append('X-Api-Key', 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg')
+import { defineStore } from 'pinia'
 
-// Definizione di FormData
-const formdata = new FormData()
-const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement
-if (fileInput && fileInput.files) {
-  formdata.append('image', fileInput.files[0], 'pexels-photo-1311518.jpeg')
+interface UploadState {
+  imagePreview: string | null
+  uploadStatus: 'idle' | 'loading' | 'success' | 'error'
 }
 
-// Opzioni della richiesta
-const requestOptions: RequestInit = {
-  method: 'POST',
-  headers: myHeaders,
-  body: formdata,
-  redirect: 'follow'
-}
+export const useUploadImageStore = defineStore('upload', {
+  state: (): UploadState => ({
+    imagePreview: null,
+    uploadStatus: 'idle'
+  }),
+  actions: {
+    async uploadImage(file: File) {
+      const formData = new FormData()
+      formData.append('image', file) // Assicurati che 'image' sia il nome corretto per il parametro
 
-// Funzione per inviare la richiesta
-const uploadImage = async () => {
-  try {
-    console.log('Invio della richiesta...')
+      try {
+        const response = await fetch('https://api.intern.d-tt.nl/api/houses/upload', {
+          method: 'POST',
+          headers: {
+            'X-Api-Key': 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
+          },
+          body: formData
+        })
 
-    const response = await fetch(
-      'https://api.intern.d-tt.nl/api/houses/:houseId/upload',
-      requestOptions
-    )
+        if (!response.ok) {
+          const errorText = await response.text()
+          throw new Error(`Upload failed: ${response.status} ${response.statusText}. ${errorText}`)
+        }
 
-    console.log('Risposta ricevuta:', response)
-
-    const result = await response.text()
-
-    console.log('Risultato:', result)
-  } catch (error) {
-    console.error('Errore:', error)
+        const result = await response.json()
+        this.uploadStatus = 'success'
+        return result.imageURL // Assumendo che l'URL dell'immagine venga restituito così
+      } catch (error) {
+        console.error('Error:', error)
+        this.uploadStatus = 'error'
+        throw error
+      }
+    },
+    setImagePreview(preview: string) {
+      this.imagePreview = preview
+    }
   }
-}
-
-// E
+})

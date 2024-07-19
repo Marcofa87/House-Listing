@@ -1,7 +1,11 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <InputField />
   </div>
 </template>
+
+<script setup>
+import InputField from '@/components/newListing/InputField.vue'
+</script>
 
 <style scoped></style>
