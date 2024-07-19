@@ -137,6 +137,7 @@ import { ref } from 'vue'
 import { useApartmentStore } from '../../stores/createListingStore'
 import { useRouter } from 'vue-router'
 import CustomButtons from '@/shared/CustomButtons.vue'
+import { useImageUploadStore } from '@/stores/uploadImageStore'
 
 const router = useRouter()
 
@@ -145,6 +146,7 @@ const goBack = () => {
 }
 
 const apartmentStore = useApartmentStore()
+const uploadImageStore = useImageUploadStore()
 
 const newApartment = ref({
   streetName: '',
@@ -152,6 +154,7 @@ const newApartment = ref({
   numberAddition: '',
   zip: '',
   city: '',
+  uploadImage: '',
   price: 0,
   bedrooms: 0,
   bathrooms: 0,
@@ -161,6 +164,7 @@ const newApartment = ref({
   description: ''
 })
 console.log(newApartment)
+/* console.log(uploadImageStore) */
 
 const submitForm = async () => {
   try {
@@ -172,6 +176,7 @@ const submitForm = async () => {
       numberAddition: '',
       zip: '',
       city: '',
+      uploadImage: '',
       price: 0,
       bedrooms: 0,
       bathrooms: 0,
@@ -186,6 +191,7 @@ const submitForm = async () => {
     console.error('There was an error during creation of the announce:', error)
   }
 }
+console.log(newApartment)
 
 const handleImageUpload = (event: Event) => {
   console.log('upload image')
