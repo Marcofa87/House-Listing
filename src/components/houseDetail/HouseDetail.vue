@@ -9,7 +9,10 @@
             <img src="@/assets/ic_back_white@3x.png" alt="back button" @click="goBack" />
           </div>
           <div class="edit-delete-buttons">
-            <img src="@/assets/ic_edit_white@3x.png" alt="edit button" />
+            <router-link :to="{ name: 'new-listing' }">
+              <img src="@/assets/ic_edit_white@3x.png" alt="edit button" />
+            </router-link>
+
             <img src="@/assets/ic_delete_white@3x.png" alt="delete button" />
           </div>
         </div>
