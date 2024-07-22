@@ -39,8 +39,11 @@ export const useImageUploadStore = defineStore('imageUpload', {
         }
 
         const text = await response.text()
+
+        // Se la risposta è vuota, assumiamo che l'upload sia andato a buon fine
         if (!text) {
-          throw new Error('Empty response')
+          console.log('Image upload successful, but received empty response')
+          return { success: true }
         }
 
         const result = JSON.parse(text)
@@ -52,7 +55,7 @@ export const useImageUploadStore = defineStore('imageUpload', {
 
         return result
       } catch (error) {
-        console.error('error', error)
+        console.error('Error uploading image:', error)
         throw error
       } finally {
         this.isUploading = false

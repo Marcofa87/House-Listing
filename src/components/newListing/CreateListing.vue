@@ -48,12 +48,15 @@
           <input
             type="file"
             id="image"
+            ref="fileInput"
             @change="handleImageUpload"
             accept="image/png, image/jpeg"
             required
+            style="display: none"
           />
           <div class="upload-label" @click="$refs.fileInput.click()">
-            <img src="../../assets/ic_upload@3x.png" alt="" />
+            <img v-if="!imagePreview" src="../../assets/ic_upload@3x.png" alt="Upload" />
+            <img v-else :src="imagePreview" alt="Preview" class="image-preview" />
           </div>
         </div>
 
@@ -155,6 +158,8 @@ const goBack = () => {
 const apartmentStore = useApartmentStore()
 const imageUploadStore = useImageUploadStore()
 
+const imagePreview = ref<string | null>(null)
+
 const newApartment = ref({
   streetName: '',
   houseNumber: '',
@@ -175,6 +180,10 @@ console.log(newApartment)
 const submitForm = async () => {
   try {
     const createdApartment = await apartmentStore.createApartment(newApartment.value)
+
+    if (!createdApartment || !createdApartment.id) {
+      throw new Error('Failed to create apartment: No ID returned')
+    }
 
     if (newApartment.value.image && createdApartment.id) {
       await imageUploadStore.uploadHouseImage(
@@ -201,6 +210,7 @@ const submitForm = async () => {
       description: '',
       image: null
     }
+    imagePreview.value = null
 
     router.push('/')
   } catch (error) {
@@ -211,7 +221,15 @@ const submitForm = async () => {
 const handleImageUpload = (event: Event) => {
   const target = event.target as HTMLInputElement
   if (target.files && target.files.length > 0) {
-    newApartment.value.image = target.files[0]
+    const file = target.files[0]
+    newApartment.value.image = file
+
+    // Create image preview
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      imagePreview.value = e.target?.result as string
+    }
+    reader.readAsDataURL(file)
   }
 }
 </script>
@@ -257,10 +275,16 @@ const handleImageUpload = (event: Event) => {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .upload-label img {
-  width: 32px;
+  object-fit: cover;
+}
+
+.image-preview {
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .listing-header h2 {

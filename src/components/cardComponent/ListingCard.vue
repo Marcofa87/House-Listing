@@ -73,6 +73,7 @@ const loading = computed(() => houseStore.loading)
 
 .house-image {
   width: 100%;
+  max-height: 200px;
   height: auto;
   border-radius: 5px;
 }
