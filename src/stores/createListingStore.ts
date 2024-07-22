@@ -50,6 +50,7 @@ export const useApartmentStore = defineStore('apartment', {
         const response = await fetch('https://api.intern.d-tt.nl/api/houses', requestOptions)
         const result = await response.json()
         this.apartments.push(result)
+        return result
       } catch (error) {
         console.log('error', error)
       }

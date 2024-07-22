@@ -30,7 +30,7 @@
         </div>
         <div class="house-detail-zip-house-city">
           <img src="@/assets/ic_location@3x.png" alt="location icon" />
-          <p>{{ houseStore.house.location.zip }}{{ houseStore.house.location.city }}</p>
+          <p>{{ houseStore.house.location.zip }} {{ houseStore.house.location.city }}</p>
         </div>
         <div class="house-detail-price-size-construction-container">
           <div>
@@ -110,6 +110,7 @@ houseStore.fetchHouseDetails(id)
 .edit-delete-buttons img {
   width: 32px;
   z-index: 4;
+  cursor: pointer;
 }
 
 .edit-delete-buttons img {

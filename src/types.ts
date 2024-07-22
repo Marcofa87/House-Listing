@@ -22,6 +22,8 @@ export interface House {
 
 export interface Apartment {
   price: number
+  image?: File | null
+
   rooms: {
     bedrooms: number
     bathrooms: number

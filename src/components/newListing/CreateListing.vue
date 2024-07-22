@@ -45,7 +45,14 @@
 
         <div class="form-group">
           <label for="image">Upload Picture (PNG or JPG)*</label>
-          <div class="upload-label" @click="handleImageUpload">
+          <input
+            type="file"
+            id="image"
+            @change="handleImageUpload"
+            accept="image/png, image/jpeg"
+            required
+          />
+          <div class="upload-label" @click="$refs.fileInput.click()">
             <img src="../../assets/ic_upload@3x.png" alt="" />
           </div>
         </div>
@@ -135,6 +142,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useApartmentStore } from '../../stores/createListingStore'
+import { useImageUploadStore } from '../../stores/uploadImageStore'
 import { useRouter } from 'vue-router'
 import CustomButtons from '@/shared/CustomButtons.vue'
 
@@ -145,6 +153,7 @@ const goBack = () => {
 }
 
 const apartmentStore = useApartmentStore()
+const imageUploadStore = useImageUploadStore()
 
 const newApartment = ref({
   streetName: '',
@@ -153,6 +162,7 @@ const newApartment = ref({
   zip: '',
   city: '',
   price: 0,
+  image: null as File | null,
   bedrooms: 0,
   bathrooms: 0,
   size: 0,
@@ -164,7 +174,17 @@ console.log(newApartment)
 
 const submitForm = async () => {
   try {
-    await apartmentStore.createApartment(newApartment.value)
+    const createdApartment = await apartmentStore.createApartment(newApartment.value)
+
+    if (newApartment.value.image && createdApartment.id) {
+      await imageUploadStore.uploadHouseImage(
+        createdApartment.id.toString(),
+        newApartment.value.image
+      )
+    } else {
+      console.error('Missing image or apartment ID')
+    }
+
     // Resetting form
     newApartment.value = {
       streetName: '',
@@ -178,7 +198,8 @@ const submitForm = async () => {
       size: 0,
       constructionYear: 0,
       hasGarage: false,
-      description: ''
+      description: '',
+      image: null
     }
 
     router.push('/')
@@ -188,7 +209,10 @@ const submitForm = async () => {
 }
 
 const handleImageUpload = (event: Event) => {
-  console.log('upload image')
+  const target = event.target as HTMLInputElement
+  if (target.files && target.files.length > 0) {
+    newApartment.value.image = target.files[0]
+  }
 }
 </script>
 
