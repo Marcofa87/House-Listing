@@ -7,41 +7,45 @@
       </div>
 
       <form @submit.prevent="submitForm">
-        <div class="form-group">
-          <label for="streetName">Street Name*</label>
-          <input
-            id="streetName"
-            v-model="newApartment.streetName"
-            placeholder="Enter the street name"
+        <FormInput
+          id="streetName"
+          label="Street Name"
+          v-model="newApartment.streetName"
+          placeholder="Enter the street name"
+          required
+        />
+
+        <div class="form-row">
+          <FormInput
+            id="houseNumber"
+            label="House Number"
+            v-model="newApartment.houseNumber"
+            placeholder="Enter house number"
             required
+          />
+          <FormInput
+            id="numberAddition"
+            label="Number Addition"
+            v-model="newApartment.numberAddition"
+            placeholder="e.g. A"
           />
         </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label for="houseNumber">House Number*</label>
-            <input
-              id="houseNumber"
-              v-model="newApartment.houseNumber"
-              placeholder="Enter house number"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="numberAddition">Number Addition</label>
-            <input id="numberAddition" v-model="newApartment.numberAddition" placeholder="e.g. A" />
-          </div>
-        </div>
+        <FormInput
+          id="zip"
+          label="Postal Code"
+          v-model="newApartment.zip"
+          placeholder="e.g. 1000 AA"
+          required
+        />
 
-        <div class="form-group">
-          <label for="zip">Postal Code*</label>
-          <input id="zip" v-model="newApartment.zip" placeholder="e.g. 1000 AA" required />
-        </div>
-
-        <div class="form-group">
-          <label for="city">City*</label>
-          <input id="city" v-model="newApartment.city" placeholder="e.g. Utrecht" required />
-        </div>
+        <FormInput
+          id="city"
+          label="City"
+          v-model="newApartment.city"
+          placeholder="e.g. Utrecht"
+          required
+        />
 
         <div class="form-group">
           <label for="image">Upload Picture (PNG or JPG)*</label>
@@ -60,28 +64,24 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="price">Price*</label>
-          <input
-            id="price"
-            v-model.number="newApartment.price"
-            type="text"
-            placeholder="e.g. €150.000"
-            required
-          />
-        </div>
+        <FormInput
+          id="price"
+          label="Price"
+          v-model.number="newApartment.price"
+          type="text"
+          placeholder="e.g. €150.000"
+          required
+        />
 
         <div class="form-row">
-          <div class="form-group">
-            <label for="size">Size*</label>
-            <input
-              id="size"
-              v-model.number="newApartment.size"
-              type="text"
-              placeholder="e.g. 60m2"
-              required
-            />
-          </div>
+          <FormInput
+            id="size"
+            label="Size"
+            v-model.number="newApartment.size"
+            type="text"
+            placeholder="e.g. 60m2"
+            required
+          />
           <div class="form-group">
             <label for="hasGarage">Garage*</label>
             <select v-model="newApartment.hasGarage" id="hasGarage" required>
@@ -92,48 +92,41 @@
         </div>
 
         <div class="form-row">
-          <div class="form-group">
-            <label for="bedrooms">Bedrooms*</label>
-            <input
-              id="bedrooms"
-              v-model.number="newApartment.bedrooms"
-              type="text"
-              placeholder="Number of bedrooms"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="bathrooms">Bathrooms*</label>
-            <input
-              id="bathrooms"
-              v-model.number="newApartment.bathrooms"
-              type="text"
-              placeholder="Number of bathrooms"
-              required
-            />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="constructionYear">Construction Year*</label>
-          <input
-            id="constructionYear"
-            v-model.number="newApartment.constructionYear"
-            type="number"
-            placeholder="Construction year"
+          <FormInput
+            id="bedrooms"
+            label="Bedrooms"
+            v-model.number="newApartment.bedrooms"
+            type="text"
+            placeholder="Number of bedrooms"
+            required
+          />
+          <FormInput
+            id="bathrooms"
+            label="Bathrooms"
+            v-model.number="newApartment.bathrooms"
+            type="text"
+            placeholder="Number of bathrooms"
             required
           />
         </div>
 
-        <div class="form-group">
-          <label for="description">Description*</label>
-          <textarea
-            id="description"
-            v-model="newApartment.description"
-            placeholder="Description"
-            required
-          ></textarea>
-        </div>
+        <FormInput
+          id="constructionYear"
+          label="Construction Year"
+          v-model.number="newApartment.constructionYear"
+          type="number"
+          placeholder="Construction year"
+          required
+        />
+
+        <FormInput
+          id="description"
+          label="Description"
+          v-model="newApartment.description"
+          type="textarea"
+          placeholder="Description"
+          required
+        />
       </form>
       <div class="post-form-button">
         <CustomButtons @click="submitForm" class="post-button">POST</CustomButtons>
@@ -148,6 +141,7 @@ import { useApartmentStore } from '../../stores/createListingStore'
 import { useImageUploadStore } from '../../stores/uploadImageStore'
 import { useRouter } from 'vue-router'
 import CustomButtons from '@/shared/CustomButtons.vue'
+import FormInput from '@/shared/FormInput.vue'
 
 const router = useRouter()
 
