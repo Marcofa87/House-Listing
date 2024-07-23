@@ -1,0 +1,332 @@
+<template>
+  <div class="create-listing-container">
+    <div class="content-wrapper">
+      <div class="listing-header">
+        <img src="@/assets/ic_back_grey@3x.png" alt="Logo" class="back" @click="goBack" />
+        <h2>Edit listing</h2>
+      </div>
+
+      <form @submit.prevent="submitForm">
+        <FormInput
+          id="streetName"
+          label="Street Name"
+          v-model="newApartment.streetName"
+          placeholder="Enter the street name"
+          required
+        />
+
+        <div class="form-row">
+          <FormInput
+            id="houseNumber"
+            label="House Number"
+            v-model="newApartment.houseNumber"
+            placeholder="Enter house number"
+            required
+          />
+          <FormInput
+            id="numberAddition"
+            label="Number Addition"
+            v-model="newApartment.numberAddition"
+            placeholder="e.g. A"
+          />
+        </div>
+
+        <FormInput
+          id="zip"
+          label="Postal Code"
+          v-model="newApartment.zip"
+          placeholder="e.g. 1000 AA"
+          required
+        />
+
+        <FormInput
+          id="city"
+          label="City"
+          v-model="newApartment.city"
+          placeholder="e.g. Utrecht"
+          required
+        />
+
+        <div class="form-group">
+          <label for="image">Upload Picture (PNG or JPG)*</label>
+          <input
+            type="file"
+            id="image"
+            ref="fileInput"
+            @change="handleImageUpload"
+            accept="image/png, image/jpeg"
+            required
+            style="display: none"
+          />
+          <div class="upload-label" @click="$refs.fileInput.click()">
+            <img v-if="!imagePreview" src="../../assets/ic_upload@3x.png" alt="Upload" />
+            <img v-else :src="imagePreview" alt="Preview" class="image-preview" />
+          </div>
+        </div>
+
+        <FormInput
+          id="price"
+          label="Price"
+          v-model.number="newApartment.price"
+          type="text"
+          placeholder="e.g. €150.000"
+          required
+        />
+
+        <div class="form-row">
+          <FormInput
+            id="size"
+            label="Size"
+            v-model.number="newApartment.size"
+            type="text"
+            placeholder="e.g. 60m2"
+            required
+          />
+          <div class="form-group">
+            <label for="hasGarage">Garage*</label>
+            <select v-model="newApartment.hasGarage" id="hasGarage" required>
+              <option :value="true">Yes</option>
+              <option :value="false">No</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <FormInput
+            id="bedrooms"
+            label="Bedrooms"
+            v-model.number="newApartment.bedrooms"
+            type="text"
+            placeholder="Number of bedrooms"
+            required
+          />
+          <FormInput
+            id="bathrooms"
+            label="Bathrooms"
+            v-model.number="newApartment.bathrooms"
+            type="text"
+            placeholder="Number of bathrooms"
+            required
+          />
+        </div>
+
+        <FormInput
+          id="constructionYear"
+          label="Construction Year"
+          v-model.number="newApartment.constructionYear"
+          type="number"
+          placeholder="Construction year"
+          required
+        />
+
+        <FormInput
+          id="description"
+          label="Description"
+          v-model="newApartment.description"
+          type="textarea"
+          placeholder="Description"
+          required
+        />
+      </form>
+      <div class="post-form-button">
+        <CustomButtons @click="submitForm" class="post-button">POST</CustomButtons>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useApartmentStore } from '../../stores/createListingStore'
+import { useImageUploadStore } from '../../stores/uploadImageStore'
+import { useRouter } from 'vue-router'
+import CustomButtons from '@/shared/CustomButtons.vue'
+import FormInput from '@/shared/FormInput.vue'
+
+const router = useRouter()
+
+const goBack = () => {
+  router.go(-1)
+}
+
+const apartmentStore = useApartmentStore()
+const imageUploadStore = useImageUploadStore()
+
+const imagePreview = ref<string | null>(null)
+
+const newApartment = ref({
+  streetName: '',
+  houseNumber: '',
+  numberAddition: '',
+  zip: '',
+  city: '',
+  price: 0,
+  image: null as File | null,
+  bedrooms: 0,
+  bathrooms: 0,
+  size: 0,
+  constructionYear: 0,
+  hasGarage: false,
+  description: ''
+})
+console.log(newApartment)
+
+const submitForm = async () => {
+  try {
+    const createdApartment = await apartmentStore.createApartment(newApartment.value)
+
+    if (!createdApartment || !createdApartment.id) {
+      throw new Error('Failed to create apartment: No ID returned')
+    }
+
+    if (newApartment.value.image && createdApartment.id) {
+      await imageUploadStore.uploadHouseImage(
+        createdApartment.id.toString(),
+        newApartment.value.image
+      )
+    } else {
+      console.error('Missing image or apartment ID')
+    }
+
+    // Resetting form
+    newApartment.value = {
+      streetName: '',
+      houseNumber: '',
+      numberAddition: '',
+      zip: '',
+      city: '',
+      price: 0,
+      bedrooms: 0,
+      bathrooms: 0,
+      size: 0,
+      constructionYear: 0,
+      hasGarage: false,
+      description: '',
+      image: null
+    }
+    imagePreview.value = null
+
+    router.push('/')
+  } catch (error) {
+    console.error('There was an error during creation of the announce:', error)
+  }
+}
+
+const handleImageUpload = (event: Event) => {
+  const target = event.target as HTMLInputElement
+  if (target.files && target.files.length > 0) {
+    const file = target.files[0]
+    newApartment.value.image = file
+
+    // Create image preview
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      imagePreview.value = e.target?.result as string
+    }
+    reader.readAsDataURL(file)
+  }
+}
+</script>
+
+<style scoped>
+.create-listing-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 20px;
+  background-image: url('@/assets/img_background@3x.png');
+  background-size: cover;
+  background-position: center 50%;
+  background-attachment: fixed;
+}
+
+.content-wrapper {
+  max-width: 600px;
+  width: 100%;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.listing-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.listing-header .back {
+  width: 32px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.upload-label {
+  border: 3px grey dashed;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.upload-label img {
+  object-fit: cover;
+}
+
+.image-preview {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.listing-header h2 {
+  text-align: center;
+  width: 80%;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: lighter;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 15px;
+  height: 50px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.create-listing-container .content-wrapper .post-button {
+  width: 80%;
+}
+
+.post-form-button {
+  display: flex;
+  justify-content: center;
+}
+</style>

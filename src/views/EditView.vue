@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import NewListing from '../components/newListing/CreateListing.vue'
+import EditListing from '../components/editListing/EditListing.vue'
 </script>
 
 <template>
-  <NewListing />
+  <EditListing />
 </template>
