@@ -9,7 +9,7 @@
             <img src="@/assets/ic_back_white@3x.png" alt="back button" @click="goBack" />
           </div>
           <div class="edit-delete-buttons">
-            <router-link :to="{ name: 'new-listing' }">
+            <router-link :to="{ name: 'edit-listing', params: { id: houseStore.house.id } }">
               <img src="@/assets/ic_edit_white@3x.png" alt="edit button" />
             </router-link>
 
