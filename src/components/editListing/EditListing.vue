@@ -154,7 +154,7 @@ const imageUploadStore = useImageUploadStore()
 
 const imagePreview = ref<string | null>(null)
 
-const newApartment = ref({
+const editApartment = ref({
   streetName: '',
   houseNumber: '',
   numberAddition: '',
@@ -169,11 +169,11 @@ const newApartment = ref({
   hasGarage: false,
   description: ''
 })
-console.log(newApartment)
+console.log(editApartment)
 
 const submitForm = async () => {
   try {
-    const createdApartment = await apartmentStore.createApartment(newApartment.value)
+    const editedApartment = await apartmentStore.createApartment(newApartment.value)
 
     if (!createdApartment || !createdApartment.id) {
       throw new Error('Failed to create apartment: No ID returned')
