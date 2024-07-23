@@ -3,7 +3,7 @@
     <div class="content-wrapper">
       <div class="listing-header">
         <img src="@/assets/ic_back_grey@3x.png" alt="Logo" class="back" @click="goBack" />
-        <h2>Edit listing</h2>
+        <h2>Edit Listing</h2>
       </div>
 
       <form @submit.prevent="submitForm">
@@ -169,7 +169,7 @@ const editApartment = ref({
   hasGarage: false,
   description: ''
 })
-console.log(editApartment)
+
 
 const submitForm = async () => {
   try {
@@ -330,3 +330,4 @@ textarea {
   justify-content: center;
 }
 </style>
+
