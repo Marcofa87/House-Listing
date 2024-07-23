@@ -3,7 +3,7 @@
     <div class="content-wrapper">
       <div class="listing-header">
         <img src="@/assets/ic_back_grey@3x.png" alt="Logo" class="back" @click="goBack" />
-        <h2>Edit Listing</h2>
+        <h2>Edit listing</h2>
       </div>
 
       <form @submit.prevent="submitForm">
@@ -154,7 +154,7 @@ const imageUploadStore = useImageUploadStore()
 
 const imagePreview = ref<string | null>(null)
 
-const editApartment = ref({
+const newApartment = ref({
   streetName: '',
   houseNumber: '',
   numberAddition: '',
@@ -169,14 +169,11 @@ const editApartment = ref({
   hasGarage: false,
   description: ''
 })
-<<<<<<< HEAD
-console.log(editApartment)
-=======
->>>>>>> 2d68038bde9f4ef309e4f154eabb71976e197db2
+console.log(newApartment)
 
 const submitForm = async () => {
   try {
-    const editedApartment = await apartmentStore.createApartment(newApartment.value)
+    const createdApartment = await apartmentStore.createApartment(newApartment.value)
 
     if (!createdApartment || !createdApartment.id) {
       throw new Error('Failed to create apartment: No ID returned')
@@ -333,4 +330,3 @@ textarea {
   justify-content: center;
 }
 </style>
-
