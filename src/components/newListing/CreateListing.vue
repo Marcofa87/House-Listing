@@ -3,13 +3,13 @@
     <div class="content-wrapper">
       <div class="listing-header">
         <img src="@/assets/ic_back_grey@3x.png" alt="Logo" class="back" @click="goBack" />
-        <h2>Create new listing</h2>
+        <h2>Create New Listing</h2>
       </div>
 
       <form @submit.prevent="submitForm">
         <FormInput
           id="streetName"
-          label="Street Name"
+          label="Street name"
           v-model="newApartment.streetName"
           placeholder="Enter the street name"
           required
