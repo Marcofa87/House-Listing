@@ -1,11 +1,9 @@
 <template>
   <div class="about">
-    <InputField />
+    <h1>About page</h1>
   </div>
 </template>
 
-<script setup>
-import InputField from '@/components/newListing/InputField.vue'
-</script>
+<script setup></script>
 
 <style scoped></style>

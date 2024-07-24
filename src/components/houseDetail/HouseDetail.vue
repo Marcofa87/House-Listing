@@ -112,8 +112,10 @@ houseStore.fetchHouseDetails(id)
 .back-img img,
 .edit-delete-buttons img {
   width: 32px;
-  z-index: 4;
+  height: 32px;
   cursor: pointer;
+  margin: 5px;
+  z-index: 4;
 }
 
 .placeholder-container {
