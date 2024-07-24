@@ -15,10 +15,10 @@
               <p>{{ house.location.zip }} {{ house.location.city }}</p>
             </div>
             <div v-if="house.madeByMe" class="edit-delete">
-              <img src="../../assets/ic_edit@3x.png" alt="edit button" /><img
-                src="../../assets/ic_delete@3x.png"
-                alt=""
-              />
+              <router-link :to="{ name: 'edit-listing', params: { id: house.id } }">
+                <img src="../../assets/ic_edit@3x.png" alt="edit button" />
+              </router-link>
+              <img src="../../assets/ic_delete@3x.png" alt="" />
             </div>
           </div>
           <div class="house-detail-amenities">
@@ -94,6 +94,7 @@ const loading = computed(() => houseStore.loading)
 .house-detail-location-edit-delete img {
   width: 32px;
   margin: 5px;
+  cursor: pointer;
 }
 
 .house-detail-location h3 {
