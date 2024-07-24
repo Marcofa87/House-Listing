@@ -1,17 +1,17 @@
 <template>
-  <div class="create-listing-container">
+  <div class="edit-listing-container">
     <div class="content-wrapper">
       <div class="listing-header">
         <img src="@/assets/ic_back_grey@3x.png" alt="Logo" class="back" @click="goBack" />
-        <h2>Edit listing</h2>
+        <h2>Edit Listing</h2>
       </div>
 
       <form @submit.prevent="submitForm">
         <FormInput
           id="streetName"
-          label="Street Name"
-          v-model="newApartment.streetName"
-          placeholder="Enter the street name"
+          label="Street name"
+          v-model="editedHouse.streetName"
+          :placeholder="listedHouse.streetName"
           required
         />
 
@@ -19,14 +19,14 @@
           <FormInput
             id="houseNumber"
             label="House Number"
-            v-model="newApartment.houseNumber"
+            v-model="editedHouse.houseNumber"
             placeholder="Enter house number"
             required
           />
           <FormInput
             id="numberAddition"
             label="Number Addition"
-            v-model="newApartment.numberAddition"
+            v-model="editedHouse.numberAddition"
             placeholder="e.g. A"
           />
         </div>
@@ -34,7 +34,7 @@
         <FormInput
           id="zip"
           label="Postal Code"
-          v-model="newApartment.zip"
+          v-model="editedHouse.zip"
           placeholder="e.g. 1000 AA"
           required
         />
@@ -42,20 +42,19 @@
         <FormInput
           id="city"
           label="City"
-          v-model="newApartment.city"
+          v-model="editedHouse.city"
           placeholder="e.g. Utrecht"
           required
         />
 
         <div class="form-group">
-          <label for="image">Upload Picture (PNG or JPG)*</label>
+          <label for="image">Upload Picture (PNG or JPG)</label>
           <input
             type="file"
             id="image"
             ref="fileInput"
             @change="handleImageUpload"
             accept="image/png, image/jpeg"
-            required
             style="display: none"
           />
           <div class="upload-label" @click="$refs.fileInput.click()">
@@ -67,7 +66,7 @@
         <FormInput
           id="price"
           label="Price"
-          v-model.number="newApartment.price"
+          v-model="editedHouse.price"
           type="text"
           placeholder="e.g. €150.000"
           required
@@ -77,16 +76,16 @@
           <FormInput
             id="size"
             label="Size"
-            v-model.number="newApartment.size"
+            v-model="editedHouse.size"
             type="text"
             placeholder="e.g. 60m2"
             required
           />
           <div class="form-group">
             <label for="hasGarage">Garage*</label>
-            <select v-model="newApartment.hasGarage" id="hasGarage" required>
-              <option :value="true">Yes</option>
-              <option :value="false">No</option>
+            <select v-model="editedHouse.hasGarage" id="hasGarage" required>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
             </select>
           </div>
         </div>
@@ -95,7 +94,7 @@
           <FormInput
             id="bedrooms"
             label="Bedrooms"
-            v-model.number="newApartment.bedrooms"
+            v-model="editedHouse.bedrooms"
             type="text"
             placeholder="Number of bedrooms"
             required
@@ -103,7 +102,7 @@
           <FormInput
             id="bathrooms"
             label="Bathrooms"
-            v-model.number="newApartment.bathrooms"
+            v-model="editedHouse.bathrooms"
             type="text"
             placeholder="Number of bathrooms"
             required
@@ -113,7 +112,7 @@
         <FormInput
           id="constructionYear"
           label="Construction Year"
-          v-model.number="newApartment.constructionYear"
+          v-model="editedHouse.constructionYear"
           type="number"
           placeholder="Construction year"
           required
@@ -122,93 +121,152 @@
         <FormInput
           id="description"
           label="Description"
-          v-model="newApartment.description"
+          v-model="editedHouse.description"
           type="textarea"
           placeholder="Description"
           required
         />
       </form>
-      <div class="post-form-button">
-        <CustomButtons @click="submitForm" class="post-button">POST</CustomButtons>
+      <div class="edit-form-button">
+        <CustomButtons @click="submitForm" class="edit-button">SAVE CHANGES</CustomButtons>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useApartmentStore } from '../../stores/createListingStore'
+import { ref, onMounted } from 'vue'
+import { useEditHouseStore } from '../../stores/editListingStore'
+
 import { useImageUploadStore } from '../../stores/uploadImageStore'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import CustomButtons from '@/shared/CustomButtons.vue'
 import FormInput from '@/shared/FormInput.vue'
 
 const router = useRouter()
-
-const goBack = () => {
-  router.go(-1)
-}
-
-const apartmentStore = useApartmentStore()
+const route = useRoute()
+const editHouseStore = useEditHouseStore()
 const imageUploadStore = useImageUploadStore()
 
 const imagePreview = ref<string | null>(null)
 
-const newApartment = ref({
+const editedHouse = ref({
   streetName: '',
   houseNumber: '',
   numberAddition: '',
   zip: '',
   city: '',
-  price: 0,
+  price: '',
   image: null as File | null,
-  bedrooms: 0,
-  bathrooms: 0,
-  size: 0,
-  constructionYear: 0,
-  hasGarage: false,
+  bedrooms: '',
+  bathrooms: '',
+  size: '',
+  constructionYear: '',
+  hasGarage: 'false',
   description: ''
 })
-console.log(newApartment)
+
+const listedHouse = ref({
+  streetName: '',
+  houseNumber: '',
+  numberAddition: '',
+  zip: '',
+  city: '',
+  price: '',
+  image: null as File | null,
+  bedrooms: '',
+  bathrooms: '',
+  size: '',
+  constructionYear: '',
+  hasGarage: 'false',
+  description: ''
+})
+
+const fetchHouseData = async (houseId: string) => {
+  try {
+    const response = await fetch(`https://api.intern.d-tt.nl/api/houses/${houseId}`, {
+      method: 'GET',
+      headers: {
+        'X-Api-Key': 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
+      }
+    })
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const data = await response.json()
+
+    editedHouse.value = {
+      streetName: data?.streetName ?? '',
+      houseNumber: data?.houseNumber ?? '',
+      numberAddition: data?.numberAddition ?? '',
+      zip: data?.zip ?? '',
+      city: data?.city ?? '',
+      price: data?.price?.toString() ?? '',
+      image: null,
+      bedrooms: data?.bedrooms?.toString() ?? '',
+      bathrooms: data?.bathrooms?.toString() ?? '',
+      size: data?.size?.toString() ?? '',
+      constructionYear: data?.constructionYear?.toString() ?? '',
+      hasGarage: (data?.hasGarage ?? false).toString(),
+      description: data?.description ?? ''
+    }
+
+    if (data?.image) {
+      imagePreview.value = data.image
+    }
+  } catch (error) {
+    console.error('Error fetching house data:', error)
+  }
+}
+
+onMounted(async () => {
+  const houseId = route.params.id as string
+  await fetchHouseData(houseId)
+})
+
+const goBack = () => {
+  router.go(-1)
+}
 
 const submitForm = async () => {
   try {
-    const createdApartment = await apartmentStore.createApartment(newApartment.value)
+    validateForm()
+    const houseId = route.params.id as string
+    console.log('Submitting form for house ID:', houseId)
+    console.log('Form data:', editedHouse.value)
 
-    if (!createdApartment || !createdApartment.id) {
-      throw new Error('Failed to create apartment: No ID returned')
-    }
+    const result = await editHouseStore.editHouse(houseId, editedHouse.value)
+    console.log('Edit result:', result)
 
-    if (newApartment.value.image && createdApartment.id) {
-      await imageUploadStore.uploadHouseImage(
-        createdApartment.id.toString(),
-        newApartment.value.image
-      )
-    } else {
-      console.error('Missing image or apartment ID')
+    if (editedHouse.value.image) {
+      console.log('Uploading image...')
+      await imageUploadStore.uploadHouseImage(houseId, editedHouse.value.image)
     }
-
-    // Resetting form
-    newApartment.value = {
-      streetName: '',
-      houseNumber: '',
-      numberAddition: '',
-      zip: '',
-      city: '',
-      price: 0,
-      bedrooms: 0,
-      bathrooms: 0,
-      size: 0,
-      constructionYear: 0,
-      hasGarage: false,
-      description: '',
-      image: null
-    }
-    imagePreview.value = null
 
     router.push('/')
   } catch (error) {
-    console.error('There was an error during creation of the announce:', error)
+    console.error('There was an error during editing of the listing:', error)
+  }
+}
+
+const validateForm = () => {
+  const requiredFields = [
+    'streetName',
+    'houseNumber',
+    'zip',
+    'city',
+    'price',
+    'size',
+    'bedrooms',
+    'bathrooms',
+    'constructionYear'
+  ]
+  for (const field of requiredFields) {
+    if (!editedHouse.value[field]) {
+      throw new Error(`Field ${field} is required`)
+    }
   }
 }
 
@@ -216,7 +274,7 @@ const handleImageUpload = (event: Event) => {
   const target = event.target as HTMLInputElement
   if (target.files && target.files.length > 0) {
     const file = target.files[0]
-    newApartment.value.image = file
+    editedHouse.value.image = file
 
     // Create image preview
     const reader = new FileReader()

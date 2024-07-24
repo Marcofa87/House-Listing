@@ -1,3 +1,5 @@
+// editListingStore.ts
+
 import { defineStore } from 'pinia'
 
 interface HouseData {
@@ -36,6 +38,8 @@ export const useEditHouseStore = defineStore('editHouse', {
         formData.append(key, value)
       })
 
+      console.log('Sending data:', Object.fromEntries(formData))
+
       const requestOptions: RequestInit = {
         method: 'POST',
         headers: {
@@ -51,13 +55,32 @@ export const useEditHouseStore = defineStore('editHouse', {
           requestOptions
         )
 
+        console.log('Response status:', response.status)
+        console.log('Response headers:', Object.fromEntries(response.headers))
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
         }
 
-        const result = await response.json()
+        const text = await response.text()
+        console.log('Raw response:', text)
+
+        let result
+        if (text) {
+          try {
+            result = JSON.parse(text)
+          } catch (e) {
+            console.warn('Response is not JSON:', text)
+            result = text
+          }
+        } else {
+          console.warn('Empty response received')
+          result = null
+        }
+
         return result
       } catch (error) {
+        console.error('Error in editHouse:', error)
         if (error instanceof Error) {
           this.error = error.message || 'An error occurred while editing the house.'
         } else {
