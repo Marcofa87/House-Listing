@@ -91,10 +91,17 @@ const loading = computed(() => houseStore.loading)
   justify-content: space-between;
 }
 
+.house-detail-location-edit-delete .edit-delete {
+  width: 40%;
+  display: flex;
+  justify-content: end;
+}
+
 .house-detail-location-edit-delete img {
-  width: 32px;
-  margin: 5px;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
+  margin: 5px;
 }
 
 .house-detail-location h3 {

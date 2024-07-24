@@ -116,10 +116,6 @@ houseStore.fetchHouseDetails(id)
   cursor: pointer;
 }
 
-.edit-delete-buttons img {
-  margin: 0 10px;
-}
-
 .placeholder-container {
   width: 100%;
   display: flex;
