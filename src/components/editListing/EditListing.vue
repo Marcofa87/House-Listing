@@ -11,7 +11,7 @@
           id="streetName"
           label="Street name"
           v-model="editedHouse.streetName"
-          :placeholder="listedHouse.streetName"
+          placeholder="Enter street name"
           required
         />
 
@@ -166,22 +166,6 @@ const editedHouse = ref({
   description: ''
 })
 
-const listedHouse = ref({
-  streetName: '',
-  houseNumber: '',
-  numberAddition: '',
-  zip: '',
-  city: '',
-  price: '',
-  image: null as File | null,
-  bedrooms: '',
-  bathrooms: '',
-  size: '',
-  constructionYear: '',
-  hasGarage: 'false',
-  description: ''
-})
-
 const fetchHouseData = async (houseId: string) => {
   try {
     const response = await fetch(`https://api.intern.d-tt.nl/api/houses/${houseId}`, {
@@ -197,29 +181,37 @@ const fetchHouseData = async (houseId: string) => {
 
     const data = await response.json()
 
+    const houseData = data[0]
+    console.log(houseData)
+
     editedHouse.value = {
-      streetName: data?.streetName ?? '',
-      houseNumber: data?.houseNumber ?? '',
-      numberAddition: data?.numberAddition ?? '',
-      zip: data?.zip ?? '',
-      city: data?.city ?? '',
-      price: data?.price?.toString() ?? '',
+      streetName: houseData.location.street || '',
+      houseNumber: houseData.location.houseNumber?.toString() || '',
+      numberAddition: houseData.location.houseNumberAddition || '',
+      zip: houseData.location.zip || '',
+      city: houseData.location.city || '',
+      price: houseData.price?.toString() || '',
       image: null,
-      bedrooms: data?.bedrooms?.toString() ?? '',
-      bathrooms: data?.bathrooms?.toString() ?? '',
-      size: data?.size?.toString() ?? '',
-      constructionYear: data?.constructionYear?.toString() ?? '',
-      hasGarage: (data?.hasGarage ?? false).toString(),
-      description: data?.description ?? ''
+      bedrooms: houseData.rooms.bedrooms?.toString() || '',
+      bathrooms: houseData.rooms.bathrooms?.toString() || '',
+      size: houseData.size?.toString() || '',
+      constructionYear: houseData.constructionYear?.toString() || '',
+      hasGarage: houseData.hasGarage?.toString() || 'false',
+      description: houseData.description || ''
     }
 
-    if (data?.image) {
-      imagePreview.value = data.image
+    console.log('Dati recuperati:', editedHouse.value)
+    if (houseData.image) {
+      imagePreview.value = houseData.image
     }
+
+    console.log('Dati mappati:', editedHouse.value)
   } catch (error) {
     console.error('Error fetching house data:', error)
   }
 }
+
+console.log(editedHouse)
 
 onMounted(async () => {
   const houseId = route.params.id as string
