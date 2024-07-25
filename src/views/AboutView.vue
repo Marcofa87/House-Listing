@@ -1,9 +1,11 @@
 <template>
   <div class="about">
-    <h1>About page</h1>
+    <DeleteListing />
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import DeleteListing from '@/components/deleteListing/DeleteListing.vue'
+</script>
 
 <style scoped></style>

@@ -1,57 +1,69 @@
 <template>
-  <div class="delete-listing-popup">
-    <h2>Conferma eliminazione</h2>
-    <p>Sei sicuro di voler eliminare questo appartamento?</p>
-    <button @click="confirmDelete" :disabled="isDeleting">Conferma</button>
-    <button @click="cancelDelete" :disabled="isDeleting">Annulla</button>
-    <p v-if="error" class="error-message">{{ error }}</p>
+  <div class="delete-listing-container">
+    <div class="delete-listing-popup">
+      <div class="delete-listing-text">
+        <h2>Delete Listing</h2>
+        <p>Are you sure you want to delete this listing?</p>
+        <p>This action cannot be undone</p>
+      </div>
+      <div class="delete-listing-button-container">
+        <CustomButtons @click="deleteListing" borderRadius="8px">YES. DELETE</CustomButtons>
+        <CustomButtons @click="deleteListing" borderRadius="8px" color="#4A4B4C"
+          >GO BACK</CustomButtons
+        >
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useHouseStore } from '../../stores/deleteListingStore'
+import CustomButtons from '@/shared/CustomButtons.vue'
 
-const props = defineProps<{
-  houseId: string
-}>()
-
-const emit = defineEmits(['close', 'deleted'])
-
-const houseStore = useHouseStore()
-const isDeleting = ref(false)
-const error = ref('')
-
-const confirmDelete = async () => {
-  isDeleting.value = true
-  error.value = ''
-
-  try {
-    await houseStore.deleteHouse(props.houseId)
-    emit('deleted', props.houseId)
-    emit('close')
-  } catch (e: any) {
-    console.error(e)
-    error.value = `Si è verificato un errore durante l'eliminazione: ${e.message}`
-  } finally {
-    isDeleting.value = false
-  }
-}
-
-const cancelDelete = () => {
-  emit('close')
+const deleteListing = () => {
+  console.log('click delete')
 }
 </script>
 
 <style scoped>
+.delete-listing-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .delete-listing-popup {
   background-color: white;
+  width: 50%;
+  max-width: 500px;
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  text-align: center;
 }
-.error-message {
-  color: red;
-  margin-top: 10px;
+
+.delete-listing-text {
+  margin: 30px 0;
+}
+
+.delete-listing-text h2,
+p {
+  margin: 5px;
+}
+
+.delete-listing-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+  gap: 10px;
+}
+
+.delete-listing-button-container button {
+  width: 70%;
 }
 </style>

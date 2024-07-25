@@ -42,7 +42,6 @@ const buttonStyle = {
 <style scoped>
 .custom-button {
   padding: 15px;
-
   border: none;
   cursor: pointer;
   font-size: 12px;
