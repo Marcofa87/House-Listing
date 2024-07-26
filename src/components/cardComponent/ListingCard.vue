@@ -33,6 +33,7 @@
         </div>
       </div>
     </div>
+    <DeleteListing v-if="deletePopupStore.isOpen" />
   </div>
 </template>
 
@@ -41,9 +42,12 @@ import { computed, onMounted } from 'vue'
 import { useHouseListingStore } from '../../stores/houseListing'
 import { useSortingByStore } from '../../stores/sortByStore'
 import MadeByMeListing from '@/shared/MadeByMeListing.vue'
+import DeleteListing from '../deleteListing/DeleteListing.vue'
+import { useDeletePopupStore } from '@/stores/deletePopupStore'
 
 const houseStore = useHouseListingStore()
 const sortingByStore = useSortingByStore()
+const deletePopupStore = useDeletePopupStore()
 
 onMounted(() => {
   houseStore.fetchHouses()

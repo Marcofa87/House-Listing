@@ -66,16 +66,19 @@
         </div>
       </div>
     </div>
+    <DeleteListing v-if="deletePopupStore.isOpen" />
   </main>
 </template>
 
 <script setup lang="ts">
 import MadeByMeListing from '@/shared/MadeByMeListing.vue'
+import DeleteListing from '../deleteListing/DeleteListing.vue'
 import { useHouseDetailStore } from '@/stores/houseDetailStore'
+import { useDeletePopupStore } from '@/stores/deletePopupStore'
 import { useRoute, useRouter } from 'vue-router'
 
 const houseStore = useHouseDetailStore()
-console.log(houseStore.house?.madeByMe) // Uso dell'operatore di optional chaining
+const deletePopupStore = useDeletePopupStore()
 
 const route = useRoute()
 const router = useRouter()

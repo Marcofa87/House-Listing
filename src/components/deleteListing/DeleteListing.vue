@@ -7,8 +7,8 @@
         <p>This action cannot be undone</p>
       </div>
       <div class="delete-listing-button-container">
-        <CustomButtons @click="deleteListing" borderRadius="8px">YES. DELETE</CustomButtons>
-        <CustomButtons @click="deleteListing" borderRadius="8px" color="#4A4B4C"
+        <CustomButtons @click="confirmDelete" borderRadius="8px">YES. DELETE</CustomButtons>
+        <CustomButtons @click="cancelDelete" borderRadius="8px" color="#4A4B4C"
           >GO BACK</CustomButtons
         >
       </div>
@@ -18,9 +18,25 @@
 
 <script setup lang="ts">
 import CustomButtons from '@/shared/CustomButtons.vue'
+import { useDeleteListingStore } from '@/stores/deleteListingStore'
+import { useDeletePopupStore } from '@/stores/deletePopupStore'
 
-const deleteListing = () => {
-  console.log('click delete')
+const deletePopupStore = useDeletePopupStore()
+const deleteListingStore = useDeleteListingStore()
+
+const confirmDelete = async () => {
+  if (deletePopupStore.houseToDeleteId) {
+    try {
+      await deleteListingStore.deleteHouse(deletePopupStore.houseToDeleteId)
+      deletePopupStore.closeDeletePopup()
+    } catch (error) {
+      console.error('Failed to delete house:', error)
+    }
+  }
+}
+
+const cancelDelete = () => {
+  deletePopupStore.closeDeletePopup()
 }
 </script>
 
@@ -35,6 +51,7 @@ const deleteListing = () => {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10;
 }
 
 .delete-listing-popup {

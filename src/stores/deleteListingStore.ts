@@ -17,7 +17,7 @@ interface House {
   madeByMe: boolean
 }
 
-export const useHouseStore = defineStore('house', {
+export const useDeleteListingStore = defineStore('deleteListing', {
   state: () => ({
     houses: [] as House[]
   }),
