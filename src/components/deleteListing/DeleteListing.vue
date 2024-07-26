@@ -54,7 +54,7 @@ const cancelDelete = () => {
   z-index: 10;
 }
 
-.delete-listing-popup {
+. {
   background-color: white;
   width: 50%;
   max-width: 500px;
