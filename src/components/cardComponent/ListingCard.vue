@@ -39,11 +39,12 @@
 
 <script setup>
 import { computed, onMounted } from 'vue'
+
 import { useHouseListingStore } from '../../stores/houseListing'
 import { useSortingByStore } from '../../stores/sortByStore'
+import { useDeletePopupStore } from '@/stores/deletePopupStore'
 import MadeByMeListing from '@/shared/MadeByMeListing.vue'
 import DeleteListing from '../deleteListing/DeleteListing.vue'
-import { useDeletePopupStore } from '@/stores/deletePopupStore'
 
 const houseStore = useHouseListingStore()
 const sortingByStore = useSortingByStore()

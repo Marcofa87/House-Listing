@@ -20,15 +20,21 @@
 import CustomButtons from '@/shared/CustomButtons.vue'
 import { useDeleteListingStore } from '@/stores/deleteListingStore'
 import { useDeletePopupStore } from '@/stores/deletePopupStore'
+import { useHouseListingStore } from '@/stores/houseListing'
+import { useRouter } from 'vue-router'
 
 const deletePopupStore = useDeletePopupStore()
 const deleteListingStore = useDeleteListingStore()
+const houseListingStore = useHouseListingStore()
+const router = useRouter()
 
 const confirmDelete = async () => {
   if (deletePopupStore.houseToDeleteId) {
     try {
       await deleteListingStore.deleteHouse(deletePopupStore.houseToDeleteId)
       deletePopupStore.closeDeletePopup()
+      await houseListingStore.fetchHouses()
+      router.push({ name: 'home' })
     } catch (error) {
       console.error('Failed to delete house:', error)
     }
@@ -54,7 +60,7 @@ const cancelDelete = () => {
   z-index: 10;
 }
 
-. {
+.delete-listing-popup {
   background-color: white;
   width: 80%;
   padding: 20px;
