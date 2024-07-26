@@ -60,7 +60,10 @@
           />
           <div class="upload-label" @click="$refs.fileInput.click()">
             <img v-if="!imagePreview" src="../../assets/ic_upload@3x.png" alt="Upload" />
-            <img v-else :src="imagePreview" alt="Preview" class="image-preview" />
+            <div v-else class="image-container">
+              <img :src="imagePreview" alt="Preview" class="image-preview" />
+              <div class="remove-image" @click.stop="removeImage">×</div>
+            </div>
           </div>
         </div>
 
@@ -169,7 +172,6 @@ const newApartment = ref({
   hasGarage: false,
   description: ''
 })
-console.log(newApartment)
 
 const submitForm = async () => {
   try {
@@ -226,6 +228,11 @@ const handleImageUpload = (event: Event) => {
     reader.readAsDataURL(file)
   }
 }
+
+const removeImage = () => {
+  newApartment.value.image = null
+  imagePreview.value = null
+}
 </script>
 
 <style scoped>
@@ -263,22 +270,45 @@ const handleImageUpload = (event: Event) => {
 
 .upload-label {
   border: 3px grey dashed;
-  width: 72px;
-  height: 72px;
+  width: 110px;
+  height: 110px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  overflow: hidden;
+  position: relative;
 }
 
 .upload-label img {
   object-fit: cover;
 }
 
+.image-container {
+  position: relative;
+}
+
 .image-preview {
   max-width: 100%;
   max-height: 100%;
+}
+
+.remove-image {
+  position: absolute;
+  top: -15px;
+  right: 0;
+  transform: translate(50%, -50%);
+  width: 25px;
+  height: 25px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(153, 153, 153);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  z-index: 10;
+  font-size: 1.5rem;
 }
 
 .listing-header h2 {
