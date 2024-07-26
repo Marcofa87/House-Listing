@@ -8,13 +8,11 @@
           <div class="back-img">
             <img src="@/assets/ic_back_white@3x.png" alt="back button" @click="goBack" />
           </div>
-          <div class="edit-delete-buttons">
-            <router-link :to="{ name: 'edit-listing', params: { id: houseStore.house.id } }">
-              <img src="@/assets/ic_edit_white@3x.png" alt="edit button" />
-            </router-link>
-
-            <img src="@/assets/ic_delete_white@3x.png" alt="delete button" />
-          </div>
+          <MadeByMeListing
+            v-if="houseStore.house"
+            :house="houseStore.house"
+            :madeByMe="houseStore.house.madeByMe"
+          />
         </div>
         <div class="placeholder-container">
           <img
@@ -72,15 +70,17 @@
 </template>
 
 <script setup lang="ts">
+import MadeByMeListing from '@/shared/MadeByMeListing.vue'
 import { useHouseDetailStore } from '@/stores/houseDetailStore'
 import { useRoute, useRouter } from 'vue-router'
 
 const houseStore = useHouseDetailStore()
+console.log(houseStore.house?.madeByMe) // Uso dell'operatore di optional chaining
+
 const route = useRoute()
 const router = useRouter()
 
 const id = Number(route.params.id)
-console.log(id)
 
 const goBack = () => {
   router.go(-1)
