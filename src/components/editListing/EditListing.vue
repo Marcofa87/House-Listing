@@ -279,7 +279,7 @@ const handleImageUpload = (event: Event) => {
 </script>
 
 <style scoped>
-.create-listing-container {
+.edit-listing-container {
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -313,22 +313,45 @@ const handleImageUpload = (event: Event) => {
 
 .upload-label {
   border: 3px grey dashed;
-  width: 72px;
-  height: 72px;
+  width: 110px;
+  height: 110px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  overflow: hidden;
+  position: relative;
 }
 
 .upload-label img {
   object-fit: cover;
 }
 
+.image-container {
+  position: relative;
+}
+
 .image-preview {
   max-width: 100%;
   max-height: 100%;
+}
+
+.remove-image {
+  position: absolute;
+  top: -15px;
+  right: 0;
+  transform: translate(50%, -50%);
+  width: 25px;
+  height: 25px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(153, 153, 153);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  z-index: 10;
+  font-size: 1.5rem;
 }
 
 .listing-header h2 {
@@ -371,7 +394,7 @@ textarea {
   resize: vertical;
 }
 
-.create-listing-container .content-wrapper .post-button {
+.edit-listing-container .content-wrapper .post-button {
   width: 80%;
 }
 
