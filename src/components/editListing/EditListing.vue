@@ -331,8 +331,7 @@ const handleImageUpload = (event: Event) => {
 }
 
 .image-preview {
-  max-width: 100%;
-  max-height: 100%;
+  width: 104px;
 }
 
 .remove-image {

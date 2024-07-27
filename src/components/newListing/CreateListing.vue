@@ -288,10 +288,8 @@ const removeImage = () => {
 }
 
 .image-preview {
-  max-width: 100%;
-  max-height: 100%;
+  width: 104px;
 }
-
 .remove-image {
   position: absolute;
   top: -15px;
