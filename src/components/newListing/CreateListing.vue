@@ -117,7 +117,7 @@
           id="constructionYear"
           label="Construction Year"
           v-model.number="newApartment.constructionYear"
-          type="number"
+          type="text"
           placeholder="Construction year"
           required
         />

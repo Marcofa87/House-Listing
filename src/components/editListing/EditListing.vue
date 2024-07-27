@@ -113,7 +113,7 @@
           id="constructionYear"
           label="Construction Year"
           v-model="editedHouse.constructionYear"
-          type="number"
+          type="text"
           placeholder="Construction year"
           required
         />
