@@ -117,7 +117,7 @@
           id="constructionYear"
           label="Construction Year"
           v-model.number="newApartment.constructionYear"
-          type="text"
+          type="number"
           placeholder="Construction year"
           required
         />
@@ -288,8 +288,10 @@ const removeImage = () => {
 }
 
 .image-preview {
-  width: 104px;
+  max-width: 100%;
+  max-height: 100%;
 }
+
 .remove-image {
   position: absolute;
   top: -15px;
