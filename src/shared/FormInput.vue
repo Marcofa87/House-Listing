@@ -2,7 +2,6 @@
   <div class="form-group">
     <label :for="id">{{ label }}{{ required ? '*' : '' }}</label>
     <input
-      v-if="type !== 'textarea'"
       :id="id"
       :type="type"
       :placeholder="placeholder"
@@ -10,14 +9,6 @@
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
     />
-    <textarea
-      v-else
-      :id="id"
-      :placeholder="placeholder"
-      :required="required"
-      :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
-    ></textarea>
   </div>
 </template>
 
@@ -63,18 +54,12 @@ label {
   font-weight: lighter;
 }
 
-input,
-textarea {
+input {
   width: 100%;
   padding: 15px;
   height: 50px;
   border: 1px solid #ccc;
   border-radius: 12px;
   font-size: 16px;
-}
-
-textarea {
-  height: 100px;
-  resize: vertical;
 }
 </style>

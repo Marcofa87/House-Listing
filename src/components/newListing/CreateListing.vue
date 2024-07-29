@@ -122,16 +122,17 @@
           required
         />
 
-        <FormInput
-          id="description"
-          label="Description"
-          v-model="newApartment.description"
-          type="textarea"
-          placeholder="Description"
-          :class="{ 'error-border': isSubmitted && !newApartment.description }"
-          required
-        />
-        <p v-if="isSubmitted && !isValid" class="error-message">Required details</p>
+        <div class="form-group">
+          <label for="description">Description*</label>
+          <textarea
+            id="description"
+            v-model="newApartment.description"
+            placeholder="Description"
+            :class="{ 'error-border': isSubmitted && !newApartment.description }"
+            required
+          ></textarea>
+          <p v-if="isSubmitted && !isValid" class="error-message">Required details</p>
+        </div>
       </form>
       <div class="post-form-button">
         <CustomButtons @click="submitForm" class="post-button">POST</CustomButtons>
@@ -369,8 +370,21 @@ textarea {
 }
 
 textarea {
+  width: 100%;
+  padding: 15px;
   height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 16px;
   resize: vertical;
+}
+
+.error-border {
+  border: 2px solid red;
+}
+
+.error-message {
+  color: red;
 }
 
 .create-listing-container .content-wrapper .post-button {
@@ -380,13 +394,5 @@ textarea {
 .post-form-button {
   display: flex;
   justify-content: center;
-}
-
-.error-border {
-  border: 2px solid red;
-}
-
-.error-message {
-  color: red;
 }
 </style>
