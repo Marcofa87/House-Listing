@@ -128,8 +128,10 @@
           v-model="newApartment.description"
           type="textarea"
           placeholder="Description"
+          :class="{ 'error-border': isSubmitted && !newApartment.description }"
           required
         />
+        <p v-if="isSubmitted && !isValid" class="error-message">Required details</p>
       </form>
       <div class="post-form-button">
         <CustomButtons @click="submitForm" class="post-button">POST</CustomButtons>
@@ -139,7 +141,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useApartmentStore } from '../../stores/createListingStore'
 import { useImageUploadStore } from '../../stores/uploadImageStore'
 import { useRouter } from 'vue-router'
@@ -156,6 +158,7 @@ const apartmentStore = useApartmentStore()
 const imageUploadStore = useImageUploadStore()
 
 const imagePreview = ref<string | null>(null)
+const isSubmitted = ref(false)
 
 const newApartment = ref({
   streetName: '',
@@ -173,7 +176,25 @@ const newApartment = ref({
   description: ''
 })
 
+const isValid = computed(() => {
+  return (
+    newApartment.value.streetName &&
+    newApartment.value.houseNumber &&
+    newApartment.value.zip &&
+    newApartment.value.city &&
+    newApartment.value.price > 0 &&
+    newApartment.value.bedrooms > 0 &&
+    newApartment.value.bathrooms > 0 &&
+    newApartment.value.size > 0 &&
+    newApartment.value.constructionYear > 0 &&
+    newApartment.value.description
+  )
+})
+
 const submitForm = async () => {
+  isSubmitted.value = true
+
+  if (!isValid.value) return
   try {
     const createdApartment = await apartmentStore.createApartment(newApartment.value)
 
@@ -207,6 +228,7 @@ const submitForm = async () => {
       image: null
     }
     imagePreview.value = null
+    isSubmitted.value = false
 
     router.push('/')
   } catch (error) {
@@ -358,5 +380,13 @@ textarea {
 .post-form-button {
   display: flex;
   justify-content: center;
+}
+
+.error-border {
+  border: 2px solid red;
+}
+
+.error-message {
+  color: red;
 }
 </style>
