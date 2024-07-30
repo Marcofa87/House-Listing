@@ -156,8 +156,6 @@ input:focus {
     align-items: center;
     margin: 30px 5%;
     max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
   }
 
   .desktop-container {
