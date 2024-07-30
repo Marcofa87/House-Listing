@@ -2,37 +2,42 @@
   <div>
     <div class="header">
       <h1>Houses</h1>
-      <RouterLink to="/new-listing">
-        <img src="../../assets/ic_plus_grey@3x.png" alt="Edit listing" />
+      <RouterLink to="/new-listing" class="add-listing-link">
+        <img src="../../assets/ic_plus_grey@3x.png" alt="Edit listing" class="mobile-icon" />
+        <CustomButton color="#EB5440" borderRadius="15px" class="desktop-icon">
+          + CREATE NEW
+        </CustomButton>
       </RouterLink>
     </div>
 
-    <div class="search-container">
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Search for a house"
-        v-model="searchTerm"
-        @input="updateSearch"
-      />
-      <span v-if="showClearIcon" class="clear-icon" @click="clearSearch"></span>
-    </div>
+    <div class="desktop-container">
+      <div class="search-container">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search for a house"
+          v-model="searchTerm"
+          @input="updateSearch"
+        />
+        <span v-if="showClearIcon" class="clear-icon" @click="clearSearch"></span>
+      </div>
 
-    <div class="buttons">
-      <CustomButton
-        color="#EB5440"
-        borderRadius="15px 0 0 15px"
-        @click="sortingByStore.setSortBy('price')"
-      >
-        Price
-      </CustomButton>
-      <CustomButton
-        color="#C3C3C3"
-        borderRadius="0 15px 15px 0"
-        @click="sortingByStore.setSortBy('size')"
-      >
-        Size
-      </CustomButton>
+      <div class="buttons">
+        <CustomButton
+          color="#EB5440"
+          borderRadius="15px 0 0 15px"
+          @click="sortingByStore.setSortBy('price')"
+        >
+          Price
+        </CustomButton>
+        <CustomButton
+          color="#C3C3C3"
+          borderRadius="0 15px 15px 0"
+          @click="sortingByStore.setSortBy('size')"
+        >
+          Size
+        </CustomButton>
+      </div>
     </div>
 
     <NotFound
@@ -134,5 +139,58 @@ input:focus {
 .buttons {
   max-width: 90%;
   margin: 50px auto;
+}
+
+.mobile-icon {
+  display: block;
+}
+
+.desktop-icon {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 5%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .desktop-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 5%;
+  }
+
+  .search-container {
+    width: 40%;
+    margin: 0;
+  }
+
+  .buttons {
+    width: 35%;
+    margin: 0;
+  }
+
+  input {
+    margin-bottom: 0;
+  }
+
+  .mobile-icon {
+    display: none;
+  }
+
+  .desktop-icon {
+    display: block;
+    cursor: pointer;
+    width: 200px;
+    text-decoration: none;
+    font-size: 16px;
+  }
 }
 </style>
