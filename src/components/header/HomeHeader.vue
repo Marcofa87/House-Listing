@@ -155,7 +155,6 @@ input:focus {
     justify-content: space-between;
     align-items: center;
     margin: 30px 5%;
-    max-width: 1200px;
   }
 
   .desktop-container {
