@@ -118,14 +118,17 @@
           required
         />
 
-        <FormInput
-          id="description"
-          label="Description"
-          v-model="editedHouse.description"
-          type="textarea"
-          placeholder="Description"
-          required
-        />
+        <div class="form-group">
+          <label for="description">Description*</label>
+          <textarea
+            id="description"
+            v-model="editedHouse.description"
+            placeholder="Description"
+            :class="{ 'error-border': isSubmitted && !editedHouse.description }"
+            required
+          ></textarea>
+          <p v-if="isSubmitted && !isValid" class="error-message">Required details</p>
+        </div>
       </form>
       <div class="edit-form-button">
         <CustomButtons @click="submitForm" class="edit-button">SAVE CHANGES</CustomButtons>
@@ -135,7 +138,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useEditHouseStore } from '../../stores/editListingStore'
 
 import { useImageUploadStore } from '../../stores/uploadImageStore'
@@ -149,6 +152,7 @@ const editHouseStore = useEditHouseStore()
 const imageUploadStore = useImageUploadStore()
 
 const imagePreview = ref<string | null>(null)
+const isSubmitted = ref(false)
 
 const editedHouse = ref({
   streetName: '',
@@ -164,6 +168,21 @@ const editedHouse = ref({
   constructionYear: '',
   hasGarage: 'false',
   description: ''
+})
+
+const isValid = computed(() => {
+  return (
+    editedHouse.value.streetName &&
+    editedHouse.value.houseNumber &&
+    editedHouse.value.zip &&
+    editedHouse.value.city &&
+    Number(editedHouse.value.price) > 0 &&
+    Number(editedHouse.value.bedrooms) > 0 &&
+    Number(editedHouse.value.bathrooms) > 0 &&
+    Number(editedHouse.value.size) > 0 &&
+    Number(editedHouse.value.constructionYear) > 0 &&
+    editedHouse.value.description
+  )
 })
 
 const fetchHouseData = async (houseId: string) => {
@@ -223,6 +242,8 @@ const goBack = () => {
 }
 
 const submitForm = async () => {
+  isSubmitted.value = true
+  if (!isValid.value) return
   try {
     validateForm()
     const houseId = route.params.id as string
@@ -393,7 +414,24 @@ textarea {
   resize: vertical;
 }
 
+.error-border {
+  border: 2px solid red;
+}
+
+.error-message {
+  color: red;
+}
+
 .edit-listing-container .content-wrapper .post-button {
+  width: 80%;
+}
+
+.edit-form-button {
+  display: flex;
+  justify-content: center;
+}
+
+.edit-button {
   width: 80%;
 }
 
