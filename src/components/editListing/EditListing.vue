@@ -318,6 +318,7 @@ const handleImageUpload = (event: Event) => {
   width: 100%;
   border-radius: 8px;
   padding: 20px;
+  margin: 0 auto;
 }
 
 .listing-header {
@@ -438,5 +439,16 @@ textarea {
 .post-form-button {
   display: flex;
   justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .edit-listing-container {
+    justify-content: flex-start;
+    padding-left: 150px;
+  }
+
+  .content-wrapper {
+    margin: 0;
+  }
 }
 </style>
