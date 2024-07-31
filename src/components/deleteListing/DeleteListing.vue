@@ -62,7 +62,7 @@ const cancelDelete = () => {
 
 .delete-listing-popup {
   background-color: white;
-  width: 80%;
+  max-width: 80%;
   padding: 20px;
   border-radius: 12px;
   text-align: center;
@@ -87,5 +87,17 @@ p {
 
 .delete-listing-button-container button {
   width: 70%;
+}
+
+@media (min-width: 1024px) {
+  .house-detail-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+  }
+
+  .recommended {
+    width: 70%;
+  }
 }
 </style>
