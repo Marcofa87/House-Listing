@@ -143,8 +143,8 @@ import { useEditHouseStore } from '../../stores/editListingStore'
 
 import { useImageUploadStore } from '../../stores/uploadImageStore'
 import { useRouter, useRoute } from 'vue-router'
-import CustomButtons from '@/shared/CustomButtons.vue'
-import FormInput from '@/shared/FormInput.vue'
+import  CustomButtons from '@/shared/CustomButtons.vue'
+import  FormInput from '@/shared/FormInput.vue'
 
 const router = useRouter()
 const route = useRoute()

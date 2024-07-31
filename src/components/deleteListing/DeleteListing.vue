@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import CustomButtons from '@/shared/CustomButtons.vue'
+import  CustomButtons from '@/shared/CustomButtons.vue'
 import { useDeleteListingStore } from '@/stores/deleteListingStore'
 import { useDeletePopupStore } from '@/stores/deletePopupStore'
 import { useHouseListingStore } from '@/stores/houseListing'

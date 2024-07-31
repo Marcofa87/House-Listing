@@ -18,8 +18,7 @@ export const useHouseListingStore = defineStore('houseListingStore', {
       const requestOptions = {
         method: 'GET',
         headers: myHeaders,
-        redirect: 'follow',
-        mode: 'no-cors'
+        redirect: 'follow' as RequestRedirect
       }
 
       try {
@@ -35,7 +34,8 @@ export const useHouseListingStore = defineStore('houseListingStore', {
         this.houses = res
       } catch (error) {
         console.log('error', error)
-        this.error = error.message
+        const err = error as Error
+        this.error = err.message
       } finally {
         this.loading = false
       }

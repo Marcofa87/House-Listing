@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { useDeletePopupStore } from '@/stores/deletePopupStore'
+import { useDeletePopupStore } from '../stores/deletePopupStore'
 const props = defineProps({
   house: {
     type: Object,

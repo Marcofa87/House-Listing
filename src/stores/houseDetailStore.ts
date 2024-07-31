@@ -26,8 +26,9 @@ export const useHouseDetailStore = defineStore('house', {
         console.log('Fetched house details:', result)
         this.house = result[0]
       } catch (error) {
+        const err = error as Error
         console.error('Error fetching house details:', error)
-        this.error = error.message
+        this.error = err.message
       } finally {
         this.loading = false
       }

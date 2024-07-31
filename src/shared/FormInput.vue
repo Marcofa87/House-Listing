@@ -7,13 +7,15 @@
       :placeholder="placeholder"
       :required="required"
       :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
+      @input="handleInput"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-defineProps({
+import '../assets/base.css'
+import '../assets/main.css'
+const props = defineProps({
   id: {
     type: String,
     required: true
@@ -40,7 +42,12 @@ defineProps({
   }
 })
 
-defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue'])
+
+const handleInput = (event: Event) => {
+  const target = event.target as HTMLInputElement
+  emit('update:modelValue', target.value)
+}
 </script>
 
 <style scoped>
