@@ -1,13 +1,13 @@
 <template>
   <div class="form-group">
-    <label :for="id">{{ label }}{{ required ? '*' : '' }}</label>
+    <label :for="id">{{ label }}</label>
     <input
       :id="id"
-      :type="type"
-      :placeholder="placeholder"
-      :required="required"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
+      :placeholder="placeholder"
+      :required="required"
+      :type="type"
     />
   </div>
 </template>
@@ -22,9 +22,9 @@ defineProps({
     type: String,
     required: true
   },
-  type: {
-    type: String,
-    default: 'text'
+  modelValue: {
+    type: [String, Number],
+    required: true
   },
   placeholder: {
     type: String,
@@ -34,9 +34,9 @@ defineProps({
     type: Boolean,
     default: false
   },
-  modelValue: {
-    type: [String, Number],
-    default: ''
+  type: {
+    type: String,
+    default: 'text'
   }
 })
 
