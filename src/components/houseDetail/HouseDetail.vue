@@ -2,7 +2,7 @@
   <main>
     <div v-if="houseStore.loading">Loading...</div>
     <div v-else-if="houseStore.error">Error: {{ houseStore.error }}</div>
-    <div v-else-if="houseStore.house" class="house-detail-container">
+    <div v-else-if="houseStore.house">
       <div class="house-detail-images-container">
         <div class="house-detail-images">
           <div class="back-img">

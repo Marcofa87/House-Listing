@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <div class="house-detail-container">
     <HouseDetail />
-    <h2>Recommended for you</h2>
-    <ListingCard />
+    <div class="recommended">
+      <h2>Recommended for you</h2>
+      <ListingCard />
+    </div>
   </div>
 </template>
 
@@ -19,5 +21,17 @@ console.log(route.params.id)
 <style scoped>
 h2 {
   margin-left: 20px;
+}
+
+@media (min-width: 1024px) {
+  .house-detail-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+  }
+
+  .recommended {
+    width: 70%;
+  }
 }
 </style>
