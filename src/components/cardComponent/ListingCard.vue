@@ -125,7 +125,7 @@ const houses = computed(() => sortingByStore.filteredAndSortedHouses)
   margin-right: 5px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .house-detail-amenities {
     display: flex;
     justify-content: flex-start;

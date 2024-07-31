@@ -442,7 +442,7 @@ textarea {
   justify-content: center;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .edit-listing-container {
     justify-content: flex-start;
     padding-left: 150px;

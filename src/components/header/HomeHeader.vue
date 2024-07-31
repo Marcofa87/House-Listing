@@ -149,7 +149,7 @@ input:focus {
   display: none;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1024px) {
   .header {
     display: flex;
     justify-content: space-between;
