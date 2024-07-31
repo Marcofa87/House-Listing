@@ -18,7 +18,8 @@ export const useHouseListingStore = defineStore('houseListingStore', {
       const requestOptions = {
         method: 'GET',
         headers: myHeaders,
-        redirect: 'follow'
+        redirect: 'follow',
+        mode: 'no-cors'
       }
 
       try {
