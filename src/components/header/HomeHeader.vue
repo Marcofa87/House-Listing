@@ -53,6 +53,7 @@ import { ref, computed, watch } from 'vue'
 import { useSortingByStore } from '@/stores/sortByStore'
 import CustomButton from '../../shared/CustomButtons.vue'
 import NotFound from '../cardComponent/NotFound.vue'
+import '../../assets/base.css'
 
 const sortingByStore = useSortingByStore()
 const searchTerm = ref('')
@@ -62,7 +63,7 @@ const filteredHousesCount = computed(() => sortingByStore.filteredAndSortedHouse
 const isSearching = computed(() => searchTerm.value.length > 0)
 
 const resultText = computed(() => {
-  return `Find ${filteredHousesCount.value} House${filteredHousesCount.value !== 1 ? 's' : ''}`
+  return `Find ${filteredHousesCount.value} House${filteredHousesCount.value === 1 ? '' : 's'}`
 })
 
 const updateSearch = () => {

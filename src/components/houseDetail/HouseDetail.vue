@@ -76,6 +76,8 @@ import DeleteListing from '../deleteListing/DeleteListing.vue'
 import { useHouseDetailStore } from '@/stores/houseDetailStore'
 import { useDeletePopupStore } from '@/stores/deletePopupStore'
 import { useRoute, useRouter } from 'vue-router'
+import '../../assets/base.css'
+import '../../assets/main.css'
 
 const houseStore = useHouseDetailStore()
 const deletePopupStore = useDeletePopupStore()

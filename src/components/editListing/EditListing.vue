@@ -127,7 +127,7 @@
             :class="{ 'error-border': isSubmitted && !editedHouse.description }"
             required
           ></textarea>
-          <p v-if="isSubmitted && !isValid" class="error-message">Required details</p>
+          <p v-if="isSubmitted && !isValid" class="error-message">Required field missing</p>
         </div>
       </form>
       <div class="edit-form-button">
