@@ -150,7 +150,7 @@ houseStore.fetchHouseDetails(id)
 .house-detail-zip-house-city,
 .house-detail-price-size-construction-container,
 .house-detail-description {
-  margin: 40px;
+  margin: 20px;
 }
 
 .house-detail-zip-house-city {
@@ -163,12 +163,22 @@ houseStore.fetchHouseDetails(id)
   justify-content: space-between;
 }
 
-.house-detail-price-size-construction-container > div {
+.house-detail-price-size-construction-container div {
   display: flex;
   align-items: center;
 }
 
 .house-detail-price-size-construction-container img {
   margin-right: 10px;
+}
+
+@media (min-width: 1024px) {
+  .house-detail-price-size-construction-container {
+    justify-content: flex-start;
+  }
+
+  .house-detail-price-size-construction-container div {
+    margin: 10px;
+  }
 }
 </style>
