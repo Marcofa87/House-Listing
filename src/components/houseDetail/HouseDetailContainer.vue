@@ -1,6 +1,6 @@
 <template>
   <div class="house-detail-container">
-    <HouseDetail />
+    <HouseDetail :key="route.params.id" />
     <div class="recommended">
       <h2>Recommended for you</h2>
       <ListingCard />
@@ -9,13 +9,12 @@
 </template>
 
 <script setup lang="ts">
+import { watch } from 'vue'
 import HouseDetail from './HouseDetail.vue'
 import ListingCard from '../cardComponent/ListingCard.vue'
 
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 const route = useRoute()
-const router = useRouter()
-console.log(route.params.id)
 </script>
 
 <style scoped>
