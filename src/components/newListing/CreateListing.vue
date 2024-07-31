@@ -239,17 +239,18 @@ const submitForm = async () => {
 
 const handleImageUpload = (event: Event) => {
   const target = event.target as HTMLInputElement
-  if (target.files && target.files.length > 0) {
-    const file = target.files[0]
-    newApartment.value.image = file
-
-    // Create image preview
-    const reader = new FileReader()
-    reader.onload = (e) => {
-      imagePreview.value = e.target?.result as string
-    }
-    reader.readAsDataURL(file)
+  if (!(target.files && target.files.length > 0)) {
+    return
   }
+  const file = target.files[0]
+  newApartment.value.image = file
+
+  // Create image preview
+  const reader = new FileReader()
+  reader.onload = (e) => {
+    imagePreview.value = e.target?.result as string
+  }
+  reader.readAsDataURL(file)
 }
 
 const removeImage = () => {

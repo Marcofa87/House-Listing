@@ -124,4 +124,16 @@ const houses = computed(() => sortingByStore.filteredAndSortedHouses)
   height: 24px;
   margin-right: 5px;
 }
+
+@media (min-width: 768px) {
+  .house-detail-amenities {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 10px;
+  }
+
+  .house-detail-amenities .house-detail-intern {
+    margin: 0 10px;
+  }
+}
 </style>
