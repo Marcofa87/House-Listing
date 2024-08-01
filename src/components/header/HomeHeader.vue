@@ -51,9 +51,9 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { useSortingByStore } from '@/stores/sortByStore'
-import CustomButton from '../../shared/CustomButtons.vue'
-import NotFound from '../cardComponent/NotFound.vue'
-import '../../assets/base.css'
+import CustomButton from '@/shared/CustomButtons.vue'
+import NotFound from '@/components/cardComponent/NotFound.vue'
+import '@/assets/base.css'
 
 const sortingByStore = useSortingByStore()
 const searchTerm = ref('')

@@ -143,8 +143,8 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useApartmentStore } from '../../stores/createListingStore'
-import { useImageUploadStore } from '../../stores/uploadImageStore'
+import { useApartmentStore } from '@/stores/createListingStore'
+import { useImageUploadStore } from '@/stores/uploadImageStore'
 import { useRouter } from 'vue-router'
 import CustomButtons from '@/shared/CustomButtons.vue'
 import FormInput from '@/shared/FormInput.vue'

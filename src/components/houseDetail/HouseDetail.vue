@@ -71,10 +71,10 @@
 </template>
 
 <script setup lang="ts">
-import MadeByMeListing from '../../shared/MadeByMeListing.vue'
-import DeleteListing from '../deleteListing/DeleteListing.vue'
-import { useHouseDetailStore } from '../../stores/houseDetailStore'
-import { useDeletePopupStore } from '../../stores/deletePopupStore'
+import MadeByMeListing from '@/shared/MadeByMeListing.vue'
+import DeleteListing from '@/components/deleteListing/DeleteListing.vue'
+import { useHouseDetailStore } from '@/stores/houseDetailStore'
+import { useDeletePopupStore } from '@/stores/deletePopupStore'
 import { useRoute, useRouter } from 'vue-router'
 import '../../assets/base.css'
 import '../../assets/main.css'
