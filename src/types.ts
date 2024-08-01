@@ -23,19 +23,14 @@ export interface House {
 export interface Apartment {
   price: number
   image?: File | null
-
-  rooms: {
-    bedrooms: number
-    bathrooms: number
-  }
+  bedrooms: number
+  bathrooms: number
   size: number
-  location: {
-    street: string
-    houseNumber: string
-    numberAddition?: string
-    zip: string
-    city: string
-  }
+  streetName: string
+  houseNumber: string
+  numberAddition?: string
+  zip: string
+  city: string
   constructionYear: number
   hasGarage: boolean
   description: string
