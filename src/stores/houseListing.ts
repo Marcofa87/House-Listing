@@ -34,8 +34,7 @@ export const useHouseListingStore = defineStore('houseListingStore', {
         this.houses = res
       } catch (error) {
         console.log('error', error)
-        const err = error as Error
-        this.error = err.message
+        this.error = error instanceof Error ? error.message : String(error)
       } finally {
         this.loading = false
       }

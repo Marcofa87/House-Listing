@@ -20,10 +20,10 @@
 
 <script setup lang="ts">
 import { useRoute, RouterLink, RouterView } from 'vue-router'
-import homeIcon from './assets/ic_mobile_navigarion_home@3x.png'
-import homeActiveIcon from './assets/ic_mobile_navigarion_home_active@3x.png'
-import infoIcon from './assets/ic_mobile_navigarion_info@3x.png'
-import infoActiveIcon from './assets/ic_mobile_navigarion_info_active@3x.png'
+import homeIcon from '@/assets/ic_mobile_navigarion_home@3x.png'
+import homeActiveIcon from '@/assets/ic_mobile_navigarion_home_active@3x.png'
+import infoIcon from '@/assets/ic_mobile_navigarion_info@3x.png'
+import infoActiveIcon from '@/assets/ic_mobile_navigarion_info_active@3x.png'
 
 const route = useRoute()
 
