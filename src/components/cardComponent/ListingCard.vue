@@ -69,6 +69,9 @@ const houses = computed(() => sortingByStore.filteredAndSortedHouses)
 
 .detail-image {
   width: 35%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .house-image {
@@ -104,7 +107,7 @@ const houses = computed(() => sortingByStore.filteredAndSortedHouses)
   margin: 5px;
 }
 
-.house-detail-location h3 {
+.house-detail-location h2 {
   margin: 0;
 }
 
