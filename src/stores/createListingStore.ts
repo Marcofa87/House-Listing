@@ -1,10 +1,10 @@
 // stores/apartmentStore.ts
 import { defineStore } from 'pinia'
-import type { House } from '../types'
+import type { Apartment } from '../types'
 
 export const useApartmentStore = defineStore('apartment', {
   state: () => ({
-    apartments: [] as House[]
+    apartments: [] as Apartment[]
   }),
   actions: {
     async fetchApartments() {
@@ -20,21 +20,21 @@ export const useApartmentStore = defineStore('apartment', {
         console.log('error', error)
       }
     },
-    async createApartment(newApartment: House) {
+    async createApartment(newApartment: Apartment) {
       const myHeaders = new Headers()
       myHeaders.append('X-Api-Key', 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg')
 
       const formdata = new FormData()
       formdata.append('price', newApartment.price.toString())
-      formdata.append('bedrooms', newApartment.rooms.bedrooms.toString())
-      formdata.append('bathrooms', newApartment.rooms.bathrooms.toString())
+      formdata.append('bedrooms', newApartment.bedrooms.toString())
+      formdata.append('bathrooms', newApartment.bathrooms.toString())
       formdata.append('size', newApartment.size.toString())
-      formdata.append('streetName', newApartment.location.street)
-      formdata.append('houseNumber', newApartment.location.houseNumber)
-      if (newApartment.location.numberAddition)
-        formdata.append('numberAddition', newApartment.location.numberAddition)
-      formdata.append('zip', newApartment.location.zip)
-      formdata.append('city', newApartment.location.city)
+      formdata.append('streetName', newApartment.streetName)
+      formdata.append('houseNumber', newApartment.houseNumber)
+      if (newApartment.numberAddition)
+        formdata.append('numberAddition', newApartment.numberAddition)
+      formdata.append('zip', newApartment.zip)
+      formdata.append('city', newApartment.city)
       formdata.append('constructionYear', newApartment.constructionYear.toString())
       formdata.append('hasGarage', newApartment.hasGarage.toString())
       formdata.append('description', newApartment.description)

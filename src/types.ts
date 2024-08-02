@@ -13,6 +13,8 @@ export interface Rooms {
 
 // types.ts
 
+// types.ts
+
 export interface House {
   id: number
   price: number
@@ -33,4 +35,20 @@ export interface House {
   hasGarage: boolean
   description: string
   madeByMe: boolean
+}
+
+export interface Apartment {
+  streetName: string
+  houseNumber: string
+  numberAddition?: string
+  zip: string
+  city: string
+  price: number
+  image: File | null
+  bedrooms: number
+  bathrooms: number
+  size: number
+  constructionYear: number
+  hasGarage: boolean
+  description: string
 }
