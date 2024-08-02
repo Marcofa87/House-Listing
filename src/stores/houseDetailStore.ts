@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
-import type { Apartment } from '../types'
+import type { House } from '../types'
 
 export const useHouseDetailStore = defineStore('house', {
   state: () => ({
-    house: null as Apartment | null,
+    house: null as House | null,
     loading: false,
     error: null as string | null
   }),

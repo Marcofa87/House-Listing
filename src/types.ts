@@ -14,7 +14,7 @@ export interface Rooms {
 // types.ts
 
 export interface House {
-  id: number
+  id?: number
   price: number
   image?: File | null
   location: {
@@ -32,5 +32,5 @@ export interface House {
   constructionYear: number
   hasGarage: boolean
   description: string
-  madeByMe: boolean
+  madeByMe?: boolean
 }
