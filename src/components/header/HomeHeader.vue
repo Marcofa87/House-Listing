@@ -187,7 +187,8 @@ input:focus {
     display: block;
     cursor: pointer;
     width: 200px;
-    text-decoration: none;
+    border: none;
+    outline: none;
     font-size: 16px;
   }
 }
