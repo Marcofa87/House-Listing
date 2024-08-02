@@ -1,5 +1,3 @@
-// types.ts
-
 export interface Location {
   street: string
   city: string
@@ -10,10 +8,6 @@ export interface Rooms {
   bedrooms: number
   bathrooms: number
 }
-
-// types.ts
-
-// types.ts
 
 export interface House {
   id: number
