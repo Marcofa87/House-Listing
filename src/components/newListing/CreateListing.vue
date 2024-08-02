@@ -134,7 +134,13 @@
         </div>
       </form>
       <div class="post-form-button">
-        <CustomButtons @click="submitForm" class="post-button">POST</CustomButtons>
+        <CustomButtons
+          @click="submitForm"
+          class="post-button"
+          :disabled="!isValid"
+          :class="{ 'disabled-button': !isValid }"
+          >POST</CustomButtons
+        >
       </div>
     </div>
   </div>
@@ -333,9 +339,8 @@ const triggerFileInput = () => {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 1.5rem; /* Fixed font-size redundancy */
   z-index: 10;
-  font-size: 1.5rem;
 }
 
 .listing-header h2 {
@@ -367,19 +372,18 @@ select,
 textarea {
   width: 100%;
   padding: 15px;
-  height: 50px;
   border: 1px solid #ccc;
   border-radius: 12px;
   font-size: 16px;
 }
 
+input,
+select {
+  height: 50px;
+}
+
 textarea {
-  width: 100%;
-  padding: 15px;
   height: 100px;
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  font-size: 16px;
   resize: vertical;
 }
 
@@ -395,9 +399,23 @@ textarea {
   width: 80%;
 }
 
+.disabled-button {
+  background-color: #d3d3d3;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.disabled-button:focus {
+  outline: none;
+}
+
 .post-form-button {
   display: flex;
   justify-content: center;
+}
+
+.post-form-button .post-button {
+  width: 80%;
 }
 
 @media (min-width: 1024px) {

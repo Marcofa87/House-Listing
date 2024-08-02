@@ -27,9 +27,5 @@ h2 {
     grid-template-columns: 1fr 1fr;
     gap: 50px;
   }
-
-  .recommended {
-    width: 70%;
-  }
 }
 </style>

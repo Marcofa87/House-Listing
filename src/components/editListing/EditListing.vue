@@ -134,7 +134,13 @@
         </div>
       </form>
       <div class="edit-form-button">
-        <CustomButtons @click="submitForm" class="edit-button">SAVE CHANGES</CustomButtons>
+        <CustomButtons
+          @click="submitForm"
+          class="post-button"
+          :disabled="!isValid"
+          :class="{ 'disabled-button': !isValid }"
+          >SAVE CHANGES</CustomButtons
+        >
       </div>
     </div>
   </div>
@@ -438,6 +444,26 @@ textarea {
 }
 
 .edit-listing-container .content-wrapper .post-button {
+  width: 80%;
+}
+
+.disabled-button {
+  background-color: #d3d3d3;
+  cursor: not-allowed;
+  color: #000;
+  opacity: 0.5;
+}
+
+.disabled-button:focus {
+  outline: none;
+}
+
+.post-form-button {
+  display: flex;
+  justify-content: center;
+}
+
+.post-form-button .post-button {
   width: 80%;
 }
 
