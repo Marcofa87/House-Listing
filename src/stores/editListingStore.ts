@@ -1,5 +1,3 @@
-// editListingStore.ts
-
 import { defineStore } from 'pinia'
 import type { EditHouseState, HouseData } from '../types'
 
@@ -19,7 +17,12 @@ export const useEditHouseStore = defineStore('editHouse', {
         formData.append(key, value)
       })
 
-      console.log('Sending data:', Object.fromEntries(formData))
+      // Convert `FormData` to a plain object for logging or other purposes
+      const formDataObject: Record<string, any> = {}
+      formData.forEach((value, key) => {
+        formDataObject[key] = value
+      })
+      console.log('Sending data:', formDataObject)
 
       const requestOptions: RequestInit = {
         method: 'POST',
@@ -36,8 +39,13 @@ export const useEditHouseStore = defineStore('editHouse', {
           requestOptions
         )
 
+        // Convert response headers to an object
+        const headersObject: Record<string, string> = {}
+        response.headers.forEach((value, key) => {
+          headersObject[key] = value
+        })
         console.log('Response status:', response.status)
-        console.log('Response headers:', Object.fromEntries(response.headers))
+        console.log('Response headers:', headersObject)
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
