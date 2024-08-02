@@ -68,7 +68,7 @@ const houses = computed(() => sortingByStore.filteredAndSortedHouses)
 }
 
 .detail-image {
-  width: 25%;
+  width: 35%;
 }
 
 .house-image {

@@ -13,6 +13,95 @@ body {
   font-size: 18px;
 }
 
-button {
-  font-size: 32px;
+/* global.css */
+
+/* Colori principali */
+
+.header {
+  background-color: #ffffff; /* BACKGROUND 2 */
+}
+
+/* Tipografia */
+h1 {
+  font-size: 32px; /* Header 1 Desktop */
+}
+
+h1.mobile {
+  font-size: 18px; /* Header 1 Mobile */
+}
+
+h2 {
+  font-size: 22px; /* Header 2 Desktop */
+}
+
+h2.mobile {
+  font-size: 14px; /* Header 2 Mobile */
+}
+
+p {
+  font-size: 18px; /* Body Text Desktop */
+}
+
+p.mobile {
+  font-size: 12px; /* Body Text Mobile */
+}
+
+/* Link */
+a {
+  color: #067bc2; /* HYPERLINK */
+  text-decoration: none;
+}
+
+a.active {
+  color: #000000; /* PRIMARY */
+}
+
+/* Errori */
+.error-message {
+  font-size: 14px; /* Error Message Desktop */
+}
+
+.error-message.mobile {
+  font-size: 12px; /* Error Message Mobile */
+}
+
+/* Input field title */
+.input-title {
+  font-size: 14px; /* Input Field Title Desktop */
+}
+
+.input-title.mobile {
+  font-size: 12px; /* Input Field Title Mobile */
+}
+
+/* Bottoni e tab */
+.button {
+  font-size: 18px; /* Buttons and Tabs Desktop */
+}
+
+.button.mobile {
+  font-size: 12px; /* Buttons and Tabs Mobile */
+}
+
+/* Stili per la versione desktop */
+@media screen and (min-width: 1024px) {
+  .mobile {
+    display: none;
+  }
+  .desktop {
+    display: block;
+  }
+  .desktop-header {
+    font-size: 18px; /* Desktop Header Active Menu */
+  }
+}
+
+/* Stili per la versione mobile */
+@media screen and (max-width: 1023px) {
+  .desktop {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
 }

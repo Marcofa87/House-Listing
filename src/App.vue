@@ -116,7 +116,7 @@ img {
   }
 
   ul img {
-    width: 100px;
+    width: 110px;
   }
 
   .desktop-header a {
