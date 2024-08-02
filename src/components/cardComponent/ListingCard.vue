@@ -10,7 +10,7 @@
         <div class="house-detail-container">
           <div class="house-detail-location-edit-delete">
             <div class="house-detail-location">
-              <h3>{{ house.location.street }}</h3>
+              <h2>{{ house.location.street }}</h2>
               <p>€ {{ house.price }}</p>
               <p>{{ house.location.zip }} {{ house.location.city }}</p>
             </div>

@@ -1,107 +1,67 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-body {
-  min-height: 100vh;
-  color: rgb(0, 0, 0);
-  background: rgb(246, 246, 246);
-  font-family: 'Montserrat', 'Open Sans';
-  font-size: 18px;
-}
-
-/* global.css */
-
-/* Colori principali */
-
-.header {
-  background-color: #ffffff; /* BACKGROUND 2 */
+/* Colori */
+:root {
+  --color-primary: #eb5440;
+  --color-secondary: #4a4b4c;
+  --color-tertiary-1: #e8e8e8;
+  --color-tertiary-2: #c3c3c3;
+  --color-background-1: #f6f6f6;
+  --color-background-2: #ffffff;
+  --color-hyperlink: #067bc2;
 }
 
 /* Tipografia */
-h1 {
-  font-size: 32px; /* Header 1 Desktop */
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px; /* Default for body text */
+  color: var(--color-secondary);
 }
 
-h1.mobile {
-  font-size: 18px; /* Header 1 Mobile */
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
 }
 
 h2 {
-  font-size: 22px; /* Header 2 Desktop */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 22px;
 }
 
-h2.mobile {
-  font-size: 14px; /* Header 2 Mobile */
-}
-
-p {
-  font-size: 18px; /* Body Text Desktop */
-}
-
-p.mobile {
-  font-size: 12px; /* Body Text Mobile */
-}
-
-/* Link */
-a {
-  color: #067bc2; /* HYPERLINK */
-  text-decoration: none;
-}
-
-a.active {
-  color: #000000; /* PRIMARY */
-}
-
-/* Errori */
-.error-message {
-  font-size: 14px; /* Error Message Desktop */
-}
-
-.error-message.mobile {
-  font-size: 12px; /* Error Message Mobile */
-}
-
-/* Input field title */
-.input-title {
-  font-size: 14px; /* Input Field Title Desktop */
-}
-
-.input-title.mobile {
-  font-size: 12px; /* Input Field Title Mobile */
-}
-
-/* Bottoni e tab */
 .button {
-  font-size: 18px; /* Buttons and Tabs Desktop */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  color: var(--color-background-1);
+  background-color: var(--color-primary);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
 }
 
-.button.mobile {
-  font-size: 12px; /* Buttons and Tabs Mobile */
+.error-message {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  color: red;
 }
 
-/* Stili per la versione desktop */
-@media screen and (min-width: 1024px) {
-  .mobile {
-    display: none;
-  }
-  .desktop {
-    display: block;
-  }
-  .desktop-header {
-    font-size: 18px; /* Desktop Header Active Menu */
-  }
+.input-field {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  color: var(--color-secondary);
 }
 
-/* Stili per la versione mobile */
-@media screen and (max-width: 1023px) {
-  .desktop {
-    display: none;
+@media (max-width: 768px) {
+  body {
+    font-size: 12px;
   }
-  .mobile {
-    display: block;
+
+  h1 {
+    font-size: 18px;
+  }
+
+  h2 {
+    font-size: 14px;
+  }
+
+  .button {
+    font-size: 12px;
   }
 }
