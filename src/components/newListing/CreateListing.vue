@@ -51,14 +51,13 @@
           <label for="image">Upload Picture (PNG or JPG)*</label>
           <input
             type="file"
-            id="image"
             ref="fileInput"
             @change="handleImageUpload"
             accept="image/png, image/jpeg"
             required
             style="display: none"
           />
-          <div class="upload-label" @click="$refs.fileInput.click()">
+          <div class="upload-label" @click="triggerFileInput">
             <img v-if="!imagePreview" src="../../assets/ic_upload@3x.png" alt="Upload" />
             <div v-else class="image-container">
               <img :src="imagePreview" alt="Preview" class="image-preview" />
@@ -150,14 +149,12 @@ import CustomButtons from '@/shared/CustomButtons.vue'
 import FormInput from '@/shared/FormInput.vue'
 
 const router = useRouter()
-
-const goBack = () => {
-  router.go(-1)
-}
+const goBack = () => router.go(-1)
 
 const apartmentStore = useApartmentStore()
 const imageUploadStore = useImageUploadStore()
 
+const fileInput = ref<HTMLInputElement | null>(null)
 const imagePreview = ref<string | null>(null)
 const isSubmitted = ref(false)
 
@@ -196,6 +193,7 @@ const submitForm = async () => {
   isSubmitted.value = true
 
   if (!isValid.value) return
+
   try {
     const createdApartment = await apartmentStore.createApartment(newApartment.value)
 
@@ -245,7 +243,7 @@ const handleImageUpload = (event: Event) => {
   const file = target.files[0]
   newApartment.value.image = file
 
-  // Create image preview
+  // Creazione della preview dell'immagine
   const reader = new FileReader()
   reader.onload = (e) => {
     imagePreview.value = e.target?.result as string
@@ -256,6 +254,10 @@ const handleImageUpload = (event: Event) => {
 const removeImage = () => {
   newApartment.value.image = null
   imagePreview.value = null
+}
+
+const triggerFileInput = () => {
+  fileInput.value?.click()
 }
 </script>
 
