@@ -302,6 +302,15 @@ const handleImageUpload = (event: Event) => {
   }
   reader.readAsDataURL(file)
 }
+
+const triggerFileInput = () => {
+  fileInput.value?.click()
+}
+
+const removeImage = () => {
+  imagePreview.value = null
+  editedHouse.value.image = null
+}
 </script>
 
 <style scoped>
