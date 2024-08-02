@@ -52,3 +52,23 @@ export interface Apartment {
   hasGarage: boolean
   description: string
 }
+
+export interface HouseData {
+  price: string
+  bedrooms: string
+  bathrooms: string
+  size: string
+  streetName: string
+  houseNumber: string
+  numberAddition: string
+  zip: string
+  city: string
+  constructionYear: string
+  hasGarage: string
+  description: string
+}
+
+export interface EditHouseState {
+  isLoading: boolean
+  error: string | null
+}

@@ -1,26 +1,7 @@
 // editListingStore.ts
 
 import { defineStore } from 'pinia'
-
-interface HouseData {
-  price: string
-  bedrooms: string
-  bathrooms: string
-  size: string
-  streetName: string
-  houseNumber: string
-  numberAddition: string
-  zip: string
-  city: string
-  constructionYear: string
-  hasGarage: string
-  description: string
-}
-
-interface EditHouseState {
-  isLoading: boolean
-  error: string | null
-}
+import type { EditHouseState, HouseData } from '../types'
 
 export const useEditHouseStore = defineStore('editHouse', {
   state: (): EditHouseState => ({
