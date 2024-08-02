@@ -60,7 +60,7 @@ export const useEditHouseStore = defineStore('editHouse', {
             result = JSON.parse(text)
           } catch (e) {
             console.warn('Response is not JSON:', text)
-            result = text
+            return text
           }
         } else {
           console.warn('Empty response received')
