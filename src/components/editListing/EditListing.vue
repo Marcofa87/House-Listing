@@ -48,18 +48,21 @@
         />
 
         <div class="form-group">
-          <label for="image">Upload Picture (PNG or JPG)</label>
+          <label for="image">Upload Picture (PNG or JPG)*</label>
           <input
             type="file"
-            id="image"
             ref="fileInput"
             @change="handleImageUpload"
             accept="image/png, image/jpeg"
+            required
             style="display: none"
           />
-          <div class="upload-label" @click="$refs.fileInput.click()">
+          <div class="upload-label" @click="triggerFileInput">
             <img v-if="!imagePreview" src="../../assets/ic_upload@3x.png" alt="Upload" />
-            <img v-else :src="imagePreview" alt="Preview" class="image-preview" />
+            <div v-else class="image-container">
+              <img :src="imagePreview" alt="Preview" class="image-preview" />
+              <div class="remove-image" @click.stop="removeImage">×</div>
+            </div>
           </div>
         </div>
 
@@ -151,6 +154,7 @@ const route = useRoute()
 const editHouseStore = useEditHouseStore()
 const imageUploadStore = useImageUploadStore()
 
+const fileInput = ref<HTMLInputElement | null>(null)
 const imagePreview = ref<string | null>(null)
 const isSubmitted = ref(false)
 
