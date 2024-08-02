@@ -11,26 +11,24 @@ export interface Rooms {
   bathrooms: number
 }
 
+// types.ts
+
 export interface House {
   id: number
-  image: string
-  price: number
-  location: Location
-  rooms: Rooms
-  size: number
-}
-
-export interface Apartment {
   price: number
   image?: File | null
-  bedrooms: number
-  bathrooms: number
+  location: {
+    street: string
+    houseNumber: string
+    numberAddition?: string
+    zip: string
+    city: string
+  }
+  rooms: {
+    bedrooms: number
+    bathrooms: number
+  }
   size: number
-  streetName: string
-  houseNumber: string
-  numberAddition?: string
-  zip: string
-  city: string
   constructionYear: number
   hasGarage: boolean
   description: string

@@ -25,7 +25,7 @@ export const useImageUploadStore = defineStore('imageUpload', {
         method: 'POST',
         headers: myHeaders,
         body: formData,
-        redirect: 'follow'
+        redirect: 'follow' as RequestRedirect
       }
 
       try {

@@ -46,7 +46,7 @@ export const useEditHouseStore = defineStore('editHouse', {
           'X-Api-Key': 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
         },
         body: formData,
-        redirect: 'follow'
+        redirect: 'follow' as RequestRedirect
       }
 
       try {
