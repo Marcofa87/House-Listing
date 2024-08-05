@@ -118,7 +118,6 @@ watch(searchTerm, (newValue) => {
 
 /* Styling for search input field */
 input[type='text'] {
-  font-size: 12px;
   font-weight: 600;
   font-family: 'Open Sans', 'Regular';
 }

@@ -403,7 +403,6 @@ textarea {
   padding: 15px;
   border: 1px solid #ccc;
   border-radius: 12px;
-  font-size: 16px;
 }
 
 input,

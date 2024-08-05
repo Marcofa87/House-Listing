@@ -47,7 +47,6 @@ p {
   text-align: center;
   font-family: 'Montserrat';
   font-weight: 400;
-  font-size: 14px;
   margin: 10px 0;
 }
 </style>

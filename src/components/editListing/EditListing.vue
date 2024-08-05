@@ -433,7 +433,6 @@ const removeImage = () => {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  font-size: 14px;
   z-index: 10;
   font-size: 1.5rem;
 }
@@ -476,7 +475,6 @@ textarea {
   height: 50px;
   border: 1px solid #ccc;
   border-radius: 12px;
-  font-size: 16px;
 }
 
 /* Styling for textarea */
