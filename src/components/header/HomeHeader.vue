@@ -185,7 +185,8 @@ input:focus {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 30px 5%;
+    margin: 30px auto;
+    width: 80%;
   }
 
   .desktop-container {
