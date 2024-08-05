@@ -87,7 +87,7 @@ const houses = computed(() => sortingByStore.filteredAndSortedHouses)
 
 /* Styles for the house image */
 .house-image {
-  width: 100%;
+  max-width: 60%;
   height: 150px;
   object-fit: cover;
   border-radius: 5px;

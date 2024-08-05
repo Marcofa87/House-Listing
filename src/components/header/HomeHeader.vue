@@ -108,6 +108,10 @@ watch(searchTerm, (newValue) => {
   margin: 30px 0;
 }
 
+.desktop-container {
+  margin: 30px auto;
+}
+
 /* Input container styling for the search field */
 .input {
   display: flex;
@@ -188,7 +192,7 @@ input:focus {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 30px 5%;
+    width: 80%;
   }
 
   .search-container {
