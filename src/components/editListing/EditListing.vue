@@ -155,6 +155,8 @@ import { useRouter, useRoute } from 'vue-router'
 import CustomButtons from '@/shared/CustomButtons.vue'
 import FormInput from '@/shared/FormInput.vue'
 
+const VUE_LISTING_API = import.meta.env.VITE_LISTING_API_KEY
+
 const router = useRouter()
 const route = useRoute()
 const editHouseStore = useEditHouseStore()
@@ -200,7 +202,7 @@ const fetchHouseData = async (houseId: string) => {
     const response = await fetch(`https://api.intern.d-tt.nl/api/houses/${houseId}`, {
       method: 'GET',
       headers: {
-        'X-Api-Key': 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
+        'X-Api-Key': VUE_LISTING_API
       }
     })
 

@@ -1,6 +1,8 @@
 // imageUploadStore.ts
 import { defineStore } from 'pinia'
 
+const VUE_LISTING_API = import.meta.env.VITE_LISTING_API_KEY
+
 interface ImageUploadState {
   isUploading: boolean
   lastUploadedImageUrl: string | null
@@ -16,7 +18,7 @@ export const useImageUploadStore = defineStore('imageUpload', {
       this.isUploading = true
 
       const myHeaders = new Headers()
-      myHeaders.append('X-Api-Key', 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg')
+      myHeaders.append('X-Api-Key', VUE_LISTING_API)
 
       const formData = new FormData()
       formData.append('image', file, file.name)
