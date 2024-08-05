@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="filteredHousesCount > 0">
-      <h3 class="filtered-result">{{ resultText }}</h3>
+      <h2 class="filtered-result">{{ resultText }}</h2>
     </div>
     <div v-else>
       <img src="../../assets/img_empty_houses@3x.png" class="not-found" alt="Not found image" />

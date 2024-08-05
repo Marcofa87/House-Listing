@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
 
+const VUE_LISTING_API = import.meta.env.VITE_LISTING_API_KEY
+
 interface House {
   id: string
   location: {
@@ -24,7 +26,7 @@ export const useDeleteListingStore = defineStore('deleteListing', {
   actions: {
     async fetchHouses() {
       const myHeaders = new Headers()
-      myHeaders.append('X-Api-Key', 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg')
+      myHeaders.append('X-Api-Key', VUE_LISTING_API)
 
       const requestOptions = {
         method: 'GET',
@@ -46,7 +48,7 @@ export const useDeleteListingStore = defineStore('deleteListing', {
     },
     async deleteHouse(houseId: string) {
       const myHeaders = new Headers()
-      myHeaders.append('X-Api-Key', 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg')
+      myHeaders.append('X-Api-Key', VUE_LISTING_API)
 
       const requestOptions = {
         method: 'DELETE',
