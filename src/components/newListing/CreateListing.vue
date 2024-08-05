@@ -365,7 +365,6 @@ const triggerFileInput = () => {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  font-size: 1.5rem;
   z-index: 10;
 }
 

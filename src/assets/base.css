@@ -19,22 +19,22 @@ body {
   min-height: 100vh;
   color: var(--color-secondary);
   font-family: 'Montserrat', 'Open Sans';
-  font-size: 18px;
+  font-size: 12px;
 }
 
 h1 {
   font-family: 'Montserrat', sans-serif;
-  font-size: 32px;
+  font-size: 18px;
 }
 
 h2 {
   font-family: 'Montserrat', sans-serif;
-  font-size: 22px;
+  font-size: 14px;
 }
 
 .button {
   font-family: 'Montserrat', sans-serif;
-  font-size: 18px;
+  font-size: 12px;
   color: var(--color-background-1);
   background-color: var(--color-primary);
   border: none;
@@ -44,38 +44,38 @@ h2 {
 
 .error-message {
   font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   color: red;
 }
 
 .input-field {
   font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   color: var(--color-secondary);
 }
 
-@media (max-width: 768px) {
+@media screen and (min-width: 1025px) {
   body {
-    font-size: 12px;
-  }
-
-  h1 {
     font-size: 18px;
   }
 
+  h1 {
+    font-size: 32px;
+  }
+
   h2 {
-    font-size: 14px;
+    font-size: 22px;
   }
 
   .button {
-    font-size: 12px;
+    font-size: 18px;
   }
 
   .input-field {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .error-message {
-    font-size: 12px;
+    font-size: 14px;
   }
 }

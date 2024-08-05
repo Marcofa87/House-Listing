@@ -50,8 +50,15 @@ const buttonStyle = {
   padding: 15px;
   border: none;
   cursor: pointer;
-  font-size: 12px;
   transition: background-color 0.3s;
   width: 50%;
+  font-family: 'Montserrat', 'Open Sans';
+  font-size: 12px;
+}
+
+@media (min-width: 1024px) {
+  .custom-button {
+    font-size: 18px;
+  }
 }
 </style>

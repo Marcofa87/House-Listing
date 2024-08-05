@@ -72,6 +72,5 @@ input {
   height: 50px;
   border: 1px solid #ccc;
   border-radius: 12px;
-  font-size: 16px;
 }
 </style>

@@ -434,7 +434,6 @@ const removeImage = () => {
   align-items: center;
   cursor: pointer;
   z-index: 10;
-  font-size: 1.5rem;
 }
 
 /* Header text styling */

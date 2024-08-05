@@ -63,7 +63,6 @@ import { ref, computed, watch } from 'vue'
 import { useSortingByStore } from '@/stores/sortByStore'
 import CustomButton from '@/shared/CustomButtons.vue'
 import NotFound from '@/components/cardComponent/NotFound.vue'
-import '@/assets/base.css'
 
 // Using a store to handle sorting and search term
 const sortingByStore = useSortingByStore()
@@ -216,7 +215,6 @@ input:focus {
     width: 200px;
     border: none;
     outline: none;
-    font-size: 16px;
   }
 }
 </style>
