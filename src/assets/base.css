@@ -5,58 +5,43 @@
   margin: 0;
 }
 
+:root {
+  --color-primary: #eb5440;
+  --color-secondary: #4a4b4c;
+  --color-tertiary-1: #e8e8e8;
+  --color-tertiary-2: #c3c3c3;
+  --color-background-1: #f6f6f6;
+  --color-background-2: #ffffff;
+  --color-hyperlink: #067bc2;
+}
+
 body {
   min-height: 100vh;
-  color: rgb(0, 0, 0);
-  background: rgb(246, 246, 246);
+  color: var(--color-secondary);
   font-family: 'Montserrat', 'Open Sans';
   font-size: 18px;
 }
 
-/* global.css */
-
-/* Colori principali */
-
-.header {
-  background-color: #ffffff; /* BACKGROUND 2 */
-}
-
-/* Tipografia */
 h1 {
-  font-size: 32px; /* Header 1 Desktop */
-}
-
-h1.mobile {
-  font-size: 18px; /* Header 1 Mobile */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
 }
 
 h2 {
-  font-size: 22px; /* Header 2 Desktop */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 22px;
 }
 
-h2.mobile {
-  font-size: 14px; /* Header 2 Mobile */
+.button {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  color: var(--color-background-1);
+  background-color: var(--color-primary);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
 }
 
-p {
-  font-size: 18px; /* Body Text Desktop */
-}
-
-p.mobile {
-  font-size: 12px; /* Body Text Mobile */
-}
-
-/* Link */
-a {
-  color: #067bc2; /* HYPERLINK */
-  text-decoration: none;
-}
-
-a.active {
-  color: #000000; /* PRIMARY */
-}
-
-/* Errori */
 .error-message {
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;

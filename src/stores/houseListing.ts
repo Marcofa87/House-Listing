@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 import type { House } from '@/types'
 
-const VUE_LISTING_API = import.meta.env.VITE_LISTING_API_KEY
+const HOUSE_LISTING_API_KEY = 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
 
 export const useHouseListingStore = defineStore('houseListingStore', {
   state: () => ({
@@ -16,7 +16,7 @@ export const useHouseListingStore = defineStore('houseListingStore', {
       this.loading = true
 
       const myHeaders = new Headers()
-      myHeaders.append('X-Api-Key', VUE_LISTING_API)
+      myHeaders.append('X-Api-Key', HOUSE_LISTING_API_KEY)
 
       const requestOptions = {
         method: 'GET',

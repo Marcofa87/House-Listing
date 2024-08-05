@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import type { Apartment } from '../types'
 
-const VUE_LISTING_API = import.meta.env.VITE_LISTING_API_KEY
+const HOUSE_LISTING_API_KEY = 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
 
 export const useApartmentStore = defineStore('apartment', {
   state: () => ({
@@ -12,7 +12,7 @@ export const useApartmentStore = defineStore('apartment', {
       try {
         const response = await fetch('https://api.intern.d-tt.nl/api/houses', {
           headers: {
-            'X-Api-Key': VUE_LISTING_API
+            'X-Api-Key': HOUSE_LISTING_API_KEY
           }
         })
         const data = await response.json()
@@ -23,7 +23,7 @@ export const useApartmentStore = defineStore('apartment', {
     },
     async createApartment(newApartment: Apartment) {
       const myHeaders = new Headers()
-      myHeaders.append('X-Api-Key', VUE_LISTING_API)
+      myHeaders.append('X-Api-Key', HOUSE_LISTING_API_KEY)
 
       const formdata = new FormData()
       formdata.append('price', newApartment.price.toString())

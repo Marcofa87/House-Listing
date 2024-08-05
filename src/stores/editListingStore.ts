@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import type { EditHouseState, HouseData } from '../types'
 
-const VUE_LISTING_API = import.meta.env.VITE_LISTING_API_KEY
+const HOUSE_LISTING_API_KEY = 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
 
 export const useEditHouseStore = defineStore('editHouse', {
   state: (): EditHouseState => ({
@@ -29,7 +29,7 @@ export const useEditHouseStore = defineStore('editHouse', {
       const requestOptions: RequestInit = {
         method: 'POST',
         headers: {
-          'X-Api-Key': VUE_LISTING_API
+          'X-Api-Key': HOUSE_LISTING_API_KEY
         },
         body: formData,
         redirect: 'follow' as RequestRedirect

@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 import type { House } from '../types'
 
-const VUE_LISTING_API = import.meta.env.VITE_LISTING_API_KEY
+const HOUSE_LISTING_API_KEY = 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
 
 export const useHouseDetailStore = defineStore('house', {
   state: () => ({
@@ -19,7 +19,7 @@ export const useHouseDetailStore = defineStore('house', {
         const response = await fetch(`https://api.intern.d-tt.nl/api/houses/${id}`, {
           method: 'GET',
           headers: {
-            'X-Api-Key': VUE_LISTING_API
+            'X-Api-Key': HOUSE_LISTING_API_KEY
           }
         })
         if (!response.ok) {
