@@ -1,8 +1,10 @@
 <template>
   <div>
+    <!-- Message displayed when there are filtered houses -->
     <div v-if="filteredHousesCount > 0">
       <h2 class="filtered-result">{{ resultText }}</h2>
     </div>
+    <!-- Message displayed when no results are found -->
     <div v-else>
       <img src="../../assets/img_empty_houses@3x.png" class="not-found" alt="Not found image" />
       <p>No results found.</p>
@@ -25,10 +27,13 @@ const props = defineProps({
 </script>
 
 <style scoped>
+/* Styles for filtered result text */
 .filtered-result {
   text-align: left;
   margin-left: 10px;
 }
+
+/* Styles for the not found image */
 .not-found {
   display: block;
   margin: 0 auto;
@@ -37,6 +42,7 @@ const props = defineProps({
   height: auto;
 }
 
+/* Styles for messages */
 p {
   text-align: center;
   font-family: 'Montserrat';

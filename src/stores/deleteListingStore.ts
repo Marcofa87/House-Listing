@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
 
 const HOUSE_LISTING_API_KEY = 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
+
+// Interface for a house object
 interface House {
   id: string
   location: {
@@ -20,9 +22,11 @@ interface House {
 
 export const useDeleteListingStore = defineStore('deleteListing', {
   state: () => ({
+    // State to hold the list of houses
     houses: [] as House[]
   }),
   actions: {
+    // Action to fetch the list of houses from the API
     async fetchHouses() {
       const myHeaders = new Headers()
       myHeaders.append('X-Api-Key', HOUSE_LISTING_API_KEY)
@@ -41,10 +45,11 @@ export const useDeleteListingStore = defineStore('deleteListing', {
         const data = await response.json()
         this.houses = data
       } catch (error) {
-        console.error('Errore durante il recupero delle case:', error)
+        console.error('Error fetching houses:', error)
         throw error
       }
     },
+    // Action to delete a house by ID
     async deleteHouse(houseId: string) {
       const myHeaders = new Headers()
       myHeaders.append('X-Api-Key', HOUSE_LISTING_API_KEY)
@@ -64,11 +69,12 @@ export const useDeleteListingStore = defineStore('deleteListing', {
           throw new Error(`HTTP error! status: ${response.status}`)
         }
 
+        // Remove the deleted house from the state
         this.houses = this.houses.filter((house) => house.id !== houseId)
-        console.log('Casa eliminata con successo')
+        console.log('House deleted successfully')
         return true
       } catch (error) {
-        console.error("Errore durante l'eliminazione della casa:", error)
+        console.error('Error deleting house:', error)
         throw error
       }
     }

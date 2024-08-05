@@ -5,21 +5,23 @@ const HOUSE_LISTING_API_KEY = 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
 
 export const useEditHouseStore = defineStore('editHouse', {
   state: (): EditHouseState => ({
-    isLoading: false,
-    error: null
+    isLoading: false, // Whether the edit action is in progress
+    error: null // Error message if an error occurs
   }),
 
   actions: {
+    // Action to edit a house by ID
     async editHouse(houseId: string, houseData: HouseData) {
       this.isLoading = true
       this.error = null
 
+      // Prepare form data for the update
       const formData = new FormData()
       Object.entries(houseData).forEach(([key, value]) => {
         formData.append(key, value)
       })
 
-      // Convert `FormData` to a plain object for logging or other purposes
+      // Convert `FormData` to a plain object for debugging
       const formDataObject: Record<string, any> = {}
       formData.forEach((value, key) => {
         formDataObject[key] = value
@@ -41,7 +43,7 @@ export const useEditHouseStore = defineStore('editHouse', {
           requestOptions
         )
 
-        // Convert response headers to an object
+        // Convert response headers to an object for debugging
         const headersObject: Record<string, string> = {}
         response.headers.forEach((value, key) => {
           headersObject[key] = value
@@ -56,22 +58,19 @@ export const useEditHouseStore = defineStore('editHouse', {
         const text = await response.text()
         console.log('Raw response:', text)
 
-        let result
         if (text) {
           try {
-            result = JSON.parse(text)
+            return JSON.parse(text)
           } catch (e) {
             console.warn('Response is not JSON:', text)
             return text
           }
         } else {
           console.warn('Empty response received')
-          result = null
+          return null
         }
-
-        return result
       } catch (error) {
-        console.error('Error in editHouse:', error)
+        console.error('Error editing house:', error)
         if (error instanceof Error) {
           this.error = error.message || 'An error occurred while editing the house.'
         } else {

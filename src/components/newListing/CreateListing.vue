@@ -1,12 +1,16 @@
 <template>
   <div class="create-listing-container">
     <div class="content-wrapper">
+      <!-- Header for the listing creation form -->
       <div class="listing-header">
+        <!-- Back button to navigate to the previous page -->
         <img src="@/assets/ic_back_grey@3x.png" alt="Logo" class="back" @click="goBack" />
         <h2>Create New Listing</h2>
       </div>
 
+      <!-- Form to create a new listing -->
       <form @submit.prevent="submitForm">
+        <!-- Input for street name -->
         <FormInput
           id="streetName"
           label="Street name"
@@ -15,6 +19,7 @@
           required
         />
 
+        <!-- Row for house number and number addition -->
         <div class="form-row">
           <FormInput
             id="houseNumber"
@@ -31,6 +36,7 @@
           />
         </div>
 
+        <!-- Input for postal code and city -->
         <FormInput
           id="zip"
           label="Postal Code"
@@ -47,6 +53,7 @@
           required
         />
 
+        <!-- Section for image upload -->
         <div class="form-group">
           <label for="image">Upload Picture (PNG or JPG)*</label>
           <input
@@ -58,6 +65,7 @@
             style="display: none"
           />
           <div class="upload-label" @click="triggerFileInput">
+            <!-- Show upload icon or image preview -->
             <img v-if="!imagePreview" src="../../assets/ic_upload@3x.png" alt="Upload" />
             <div v-else class="image-container">
               <img :src="imagePreview" alt="Preview" class="image-preview" />
@@ -66,6 +74,7 @@
           </div>
         </div>
 
+        <!-- Inputs for price, size, and garage -->
         <FormInput
           id="price"
           label="Price"
@@ -93,6 +102,7 @@
           </div>
         </div>
 
+        <!-- Inputs for bedrooms, bathrooms, and construction year -->
         <div class="form-row">
           <FormInput
             id="bedrooms"
@@ -121,6 +131,7 @@
           required
         />
 
+        <!-- Input for description -->
         <div class="form-group">
           <label for="description">Description*</label>
           <textarea
@@ -133,6 +144,8 @@
           <p v-if="isSubmitted && !isValid" class="error-message">Required field missing</p>
         </div>
       </form>
+
+      <!-- Button to submit the form -->
       <div class="post-form-button">
         <CustomButtons
           @click="submitForm"
@@ -154,9 +167,11 @@ import { useRouter } from 'vue-router'
 import CustomButtons from '@/shared/CustomButtons.vue'
 import FormInput from '@/shared/FormInput.vue'
 
+// Router for navigation
 const router = useRouter()
 const goBack = () => router.go(-1)
 
+// Store for apartment data
 const apartmentStore = useApartmentStore()
 const imageUploadStore = useImageUploadStore()
 
@@ -164,6 +179,7 @@ const fileInput = ref<HTMLInputElement | null>(null)
 const imagePreview = ref<string | null>(null)
 const isSubmitted = ref(false)
 
+// Data for the new apartment listing
 const newApartment = ref({
   streetName: '',
   houseNumber: '',
@@ -180,6 +196,7 @@ const newApartment = ref({
   description: ''
 })
 
+// Validation computed property
 const isValid = computed(() => {
   return (
     newApartment.value.streetName &&
@@ -195,6 +212,7 @@ const isValid = computed(() => {
   )
 })
 
+// Submit form handler
 const submitForm = async () => {
   isSubmitted.value = true
 
@@ -216,7 +234,7 @@ const submitForm = async () => {
       console.error('Missing image or apartment ID')
     }
 
-    // Resetting form
+    // Reset form fields
     newApartment.value = {
       streetName: '',
       houseNumber: '',
@@ -241,6 +259,7 @@ const submitForm = async () => {
   }
 }
 
+// Handle image upload and preview
 const handleImageUpload = (event: Event) => {
   const target = event.target as HTMLInputElement
   if (!(target.files && target.files.length > 0)) {
@@ -249,7 +268,7 @@ const handleImageUpload = (event: Event) => {
   const file = target.files[0]
   newApartment.value.image = file
 
-  // Creazione della preview dell'immagine
+  // Create image preview
   const reader = new FileReader()
   reader.onload = (e) => {
     imagePreview.value = e.target?.result as string
@@ -257,17 +276,20 @@ const handleImageUpload = (event: Event) => {
   reader.readAsDataURL(file)
 }
 
+// Remove selected image
 const removeImage = () => {
   newApartment.value.image = null
   imagePreview.value = null
 }
 
+// Trigger file input click
 const triggerFileInput = () => {
   fileInput.value?.click()
 }
 </script>
 
 <style scoped>
+/* Main container styles: full width, flex layout, background image, and fixed positioning */
 .create-listing-container {
   width: 100%;
   min-height: 100vh;
@@ -281,6 +303,7 @@ const triggerFileInput = () => {
   background-attachment: fixed;
 }
 
+/* Wrapper for content, with a max width, padding, and centered alignment */
 .content-wrapper {
   max-width: 600px;
   width: 100%;
@@ -289,6 +312,7 @@ const triggerFileInput = () => {
   margin: 0 auto;
 }
 
+/* Header section with flex alignment and spacing for back button and title */
 .listing-header {
   display: flex;
   align-items: center;
@@ -301,6 +325,7 @@ const triggerFileInput = () => {
   cursor: pointer;
 }
 
+/* Image upload area with dashed border, centered content, and click-to-upload functionality */
 .upload-label {
   border: 3px grey dashed;
   width: 110px;
@@ -316,6 +341,7 @@ const triggerFileInput = () => {
   object-fit: cover;
 }
 
+/* Image preview container with absolute positioning for the remove button */
 .image-container {
   position: relative;
 }
@@ -339,15 +365,17 @@ const triggerFileInput = () => {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  font-size: 1.5rem; /* Fixed font-size redundancy */
+  font-size: 1.5rem;
   z-index: 10;
 }
 
+/* Header text alignment */
 .listing-header h2 {
   text-align: center;
   width: 80%;
 }
 
+/* Form group and row layout with spacing */
 .form-group {
   margin-bottom: 20px;
 }
@@ -361,6 +389,7 @@ const triggerFileInput = () => {
   flex: 1;
 }
 
+/* General form element styling with padding, border, and font size */
 label {
   display: block;
   margin-bottom: 5px;
@@ -387,6 +416,7 @@ textarea {
   resize: vertical;
 }
 
+/* Error styling for form fields and messages */
 .error-border {
   border: 2px solid red;
 }
@@ -395,6 +425,7 @@ textarea {
   color: red;
 }
 
+/* Post button styling and disabled state */
 .create-listing-container .content-wrapper .post-button {
   width: 80%;
 }
@@ -418,6 +449,7 @@ textarea {
   width: 80%;
 }
 
+/* Responsive adjustments for larger screens */
 @media (min-width: 1024px) {
   .create-listing-container {
     justify-content: flex-start;

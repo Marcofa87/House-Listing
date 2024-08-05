@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+// route index of the application
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_BASE_URL), // Correctly reference environment variable
   routes: [

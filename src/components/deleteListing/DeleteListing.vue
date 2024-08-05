@@ -1,5 +1,6 @@
 <template>
   <div class="delete-listing-container">
+    <!-- Popup for confirming listing deletion -->
     <div class="delete-listing-popup">
       <div class="delete-listing-text">
         <h2>Delete Listing</h2>
@@ -17,17 +18,19 @@
 </template>
 
 <script setup lang="ts">
-import  CustomButtons from '@/shared/CustomButtons.vue'
+import CustomButtons from '@/shared/CustomButtons.vue'
 import { useDeleteListingStore } from '@/stores/deleteListingStore'
 import { useDeletePopupStore } from '@/stores/deletePopupStore'
 import { useHouseListingStore } from '@/stores/houseListing'
 import { useRouter } from 'vue-router'
 
+// Initialize stores
 const deletePopupStore = useDeletePopupStore()
 const deleteListingStore = useDeleteListingStore()
 const houseListingStore = useHouseListingStore()
 const router = useRouter()
 
+// Function to confirm deletion of the listing
 const confirmDelete = async () => {
   if (deletePopupStore.houseToDeleteId) {
     try {
@@ -41,12 +44,14 @@ const confirmDelete = async () => {
   }
 }
 
+// Function to cancel deletion
 const cancelDelete = () => {
   deletePopupStore.closeDeletePopup()
 }
 </script>
 
 <style scoped>
+/* Styles for the delete listing popup container */
 .delete-listing-container {
   position: fixed;
   top: 0;
@@ -60,6 +65,7 @@ const cancelDelete = () => {
   z-index: 10;
 }
 
+/* Styles for the popup box */
 .delete-listing-popup {
   background-color: white;
   max-width: 80%;
@@ -68,6 +74,7 @@ const cancelDelete = () => {
   text-align: center;
 }
 
+/* Styles for text inside the popup */
 .delete-listing-text {
   margin: 30px 0;
 }
@@ -77,6 +84,7 @@ p {
   margin: 5px;
 }
 
+/* Styles for button container inside the popup */
 .delete-listing-button-container {
   display: flex;
   flex-direction: column;
@@ -87,17 +95,5 @@ p {
 
 .delete-listing-button-container button {
   width: 70%;
-}
-
-@media (min-width: 1024px) {
-  .house-detail-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-  }
-
-  .recommended {
-    width: 70%;
-  }
 }
 </style>

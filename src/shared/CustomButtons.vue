@@ -1,10 +1,13 @@
 <template>
+  <!-- A button element with dynamic classes and inline styles -->
   <button :class="['custom-button', buttonClass]" :style="buttonStyle" @click="handleClick">
+    <!-- Slot for custom content inside the button -->
     <slot></slot>
   </button>
 </template>
 
 <script setup lang="ts">
+// Define the properties that can be passed to the button
 const props = defineProps({
   buttonClass: {
     type: String,
@@ -12,11 +15,11 @@ const props = defineProps({
   },
   color: {
     type: String,
-    default: '#EB5440'
+    default: '#EB5440' // Default button color
   },
   borderRadius: {
     type: String,
-    default: '0'
+    default: '0' // Default border radius
   },
   disabled: {
     type: Boolean,
@@ -24,14 +27,16 @@ const props = defineProps({
   },
   onClick: {
     type: Function,
-    default: () => {}
+    default: () => {} // Default click handler
   }
 })
 
+// Function to handle button clicks
 const handleClick = () => {
   props.onClick()
 }
 
+// Inline styles based on props for dynamic styling
 const buttonStyle = {
   backgroundColor: props.color,
   color: 'white',
@@ -40,6 +45,7 @@ const buttonStyle = {
 </script>
 
 <style scoped>
+/* Basic styles for the button */
 .custom-button {
   padding: 15px;
   border: none;

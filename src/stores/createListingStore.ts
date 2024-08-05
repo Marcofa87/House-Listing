@@ -1,13 +1,16 @@
 import { defineStore } from 'pinia'
 import type { Apartment } from '../types'
 
+// API key for accessing the house listing API
 const HOUSE_LISTING_API_KEY = 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
 
 export const useApartmentStore = defineStore('apartment', {
   state: () => ({
+    // State to hold the list of apartments
     apartments: [] as Apartment[]
   }),
   actions: {
+    // Action to fetch apartments from the API
     async fetchApartments() {
       try {
         const response = await fetch('https://api.intern.d-tt.nl/api/houses', {
@@ -18,13 +21,15 @@ export const useApartmentStore = defineStore('apartment', {
         const data = await response.json()
         this.apartments = data
       } catch (error) {
-        console.log('error', error)
+        console.log('Error fetching apartments:', error)
       }
     },
+    // Action to create a new apartment and add it to the list
     async createApartment(newApartment: Apartment) {
       const myHeaders = new Headers()
       myHeaders.append('X-Api-Key', HOUSE_LISTING_API_KEY)
 
+      // Prepare form data for the new apartment
       const formdata = new FormData()
       formdata.append('price', newApartment.price.toString())
       formdata.append('bedrooms', newApartment.bedrooms.toString())
@@ -54,10 +59,10 @@ export const useApartmentStore = defineStore('apartment', {
           throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`)
         }
         const result = await response.json()
-        this.apartments.push(result)
+        this.apartments.push(result) // Add new apartment to the list
         return result
       } catch (error) {
-        console.log('error', error)
+        console.log('Error creating apartment:', error)
       }
     }
   }

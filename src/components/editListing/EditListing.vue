@@ -1,12 +1,17 @@
 <template>
   <div class="edit-listing-container">
+    <!-- Container for the whole editing form -->
     <div class="content-wrapper">
+      <!-- Header for the edit form with back button and title -->
       <div class="listing-header">
+        <!-- Back button to return to the previous page -->
         <img src="@/assets/ic_back_grey@3x.png" alt="Logo" class="back" @click="goBack" />
         <h2>Edit Listing</h2>
       </div>
 
+      <!-- Form to edit the house details -->
       <form @submit.prevent="submitForm">
+        <!-- Input field for street name -->
         <FormInput
           id="streetName"
           label="Street name"
@@ -15,6 +20,7 @@
           required
         />
 
+        <!-- Row for house number and optional number addition -->
         <div class="form-row">
           <FormInput
             id="houseNumber"
@@ -31,6 +37,7 @@
           />
         </div>
 
+        <!-- Input field for postal code -->
         <FormInput
           id="zip"
           label="Postal Code"
@@ -39,6 +46,7 @@
           required
         />
 
+        <!-- Input field for city -->
         <FormInput
           id="city"
           label="City"
@@ -47,6 +55,7 @@
           required
         />
 
+        <!-- File upload input for the house image -->
         <div class="form-group">
           <label for="image">Upload Picture (PNG or JPG)*</label>
           <input
@@ -57,6 +66,7 @@
             required
             style="display: none"
           />
+          <!-- Label for file input with image preview or upload icon -->
           <div class="upload-label" @click="triggerFileInput">
             <img v-if="!imagePreview" src="../../assets/ic_upload@3x.png" alt="Upload" />
             <div v-else class="image-container">
@@ -66,6 +76,7 @@
           </div>
         </div>
 
+        <!-- Input field for price -->
         <FormInput
           id="price"
           label="Price"
@@ -75,6 +86,7 @@
           required
         />
 
+        <!-- Row for size and garage information -->
         <div class="form-row">
           <FormInput
             id="size"
@@ -93,6 +105,7 @@
           </div>
         </div>
 
+        <!-- Row for bedrooms and bathrooms -->
         <div class="form-row">
           <FormInput
             id="bedrooms"
@@ -112,6 +125,7 @@
           />
         </div>
 
+        <!-- Input field for construction year -->
         <FormInput
           id="constructionYear"
           label="Construction Year"
@@ -121,6 +135,7 @@
           required
         />
 
+        <!-- Textarea for description with validation error display -->
         <div class="form-group">
           <label for="description">Description*</label>
           <textarea
@@ -133,6 +148,7 @@
           <p v-if="isSubmitted && !isValid" class="error-message">Required field missing</p>
         </div>
       </form>
+      <!-- Button to save changes -->
       <div class="edit-form-button">
         <CustomButtons
           @click="submitForm"
@@ -149,7 +165,6 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { useEditHouseStore } from '@/stores/editListingStore'
-
 import { useImageUploadStore } from '@/stores/uploadImageStore'
 import { useRouter, useRoute } from 'vue-router'
 import CustomButtons from '@/shared/CustomButtons.vue'
@@ -162,10 +177,14 @@ const route = useRoute()
 const editHouseStore = useEditHouseStore()
 const imageUploadStore = useImageUploadStore()
 
+// Reference to the file input element
 const fileInput = ref<HTMLInputElement | null>(null)
+// Reference for the image preview
 const imagePreview = ref<string | null>(null)
+// Flag to indicate if the form has been submitted
 const isSubmitted = ref(false)
 
+// Object holding the details of the house to be edited
 const editedHouse = ref({
   streetName: '',
   houseNumber: '',
@@ -182,6 +201,7 @@ const editedHouse = ref({
   description: ''
 })
 
+// Computed property to check if the form is valid
 const isValid = computed(() => {
   return (
     editedHouse.value.streetName &&
@@ -197,6 +217,7 @@ const isValid = computed(() => {
   )
 })
 
+// Function to fetch house data from API and populate the form
 const fetchHouseData = async (houseId: string) => {
   try {
     const response = await fetch(`https://api.intern.d-tt.nl/api/houses/${houseId}`, {
@@ -215,6 +236,7 @@ const fetchHouseData = async (houseId: string) => {
     const houseData = data[0]
     console.log(houseData)
 
+    // Populate the form with fetched data
     editedHouse.value = {
       streetName: houseData.location.street || '',
       houseNumber: houseData.location.houseNumber?.toString() || '',
@@ -244,15 +266,18 @@ const fetchHouseData = async (houseId: string) => {
 
 console.log(editedHouse)
 
+// Fetch house data when the component is mounted
 onMounted(async () => {
   const houseId = route.params.id as string
   await fetchHouseData(houseId)
 })
 
+// Navigate back to the previous page
 const goBack = () => {
   router.go(-1)
 }
 
+// Handle form submission
 const submitForm = async () => {
   isSubmitted.value = true
   if (!isValid.value) return
@@ -262,20 +287,24 @@ const submitForm = async () => {
     console.log('Submitting form for house ID:', houseId)
     console.log('Form data:', editedHouse.value)
 
+    // Send updated house data to the server
     const result = await editHouseStore.editHouse(houseId, editedHouse.value)
     console.log('Edit result:', result)
 
+    // Upload the image if provided
     if (editedHouse.value.image) {
       console.log('Uploading image...')
       await imageUploadStore.uploadHouseImage(houseId, editedHouse.value.image)
     }
 
+    // Redirect to home page after successful submission
     router.push('/')
   } catch (error) {
     console.error('There was an error during editing of the listing:', error)
   }
 }
 
+// Validate required fields in the form
 const validateForm = () => {
   const requiredFields = [
     'streetName',
@@ -295,6 +324,7 @@ const validateForm = () => {
   }
 }
 
+// Handle image file upload
 const handleImageUpload = (event: Event) => {
   const target = event.target as HTMLInputElement
   if (!(target.files && target.files.length > 0)) {
@@ -311,10 +341,12 @@ const handleImageUpload = (event: Event) => {
   reader.readAsDataURL(file)
 }
 
+// Trigger the file input click
 const triggerFileInput = () => {
   fileInput.value?.click()
 }
 
+// Remove the selected image and clear the preview
 const removeImage = () => {
   imagePreview.value = null
   editedHouse.value.image = null
@@ -322,6 +354,7 @@ const removeImage = () => {
 </script>
 
 <style scoped>
+/* Container for the entire edit listing form */
 .edit-listing-container {
   width: 100%;
   min-height: 100vh;
@@ -335,6 +368,7 @@ const removeImage = () => {
   background-attachment: fixed;
 }
 
+/* Wrapper for form content */
 .content-wrapper {
   max-width: 600px;
   width: 100%;
@@ -343,18 +377,21 @@ const removeImage = () => {
   margin: 0 auto;
 }
 
+/* Header for the form */
 .listing-header {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 }
 
+/* Styling for the back button */
 .listing-header .back {
   width: 32px;
   margin-bottom: 10px;
   cursor: pointer;
 }
 
+/* Styling for file upload label */
 .upload-label {
   border: 3px grey dashed;
   width: 110px;
@@ -366,18 +403,22 @@ const removeImage = () => {
   position: relative;
 }
 
+/* Style for upload icon or preview image */
 .upload-label img {
   object-fit: cover;
 }
 
+/* Container for the image preview and removal button */
 .image-container {
   position: relative;
 }
 
+/* Size of the image preview */
 .image-preview {
   width: 104px;
 }
 
+/* Style for the remove image button */
 .remove-image {
   position: absolute;
   top: -15px;
@@ -397,30 +438,36 @@ const removeImage = () => {
   font-size: 1.5rem;
 }
 
+/* Header text styling */
 .listing-header h2 {
   text-align: center;
   width: 80%;
 }
 
+/* Margin for form group elements */
 .form-group {
   margin-bottom: 20px;
 }
 
+/* Row layout for grouped form inputs */
 .form-row {
   display: flex;
   gap: 20px;
 }
 
+/* Flex style for form row items */
 .form-row .form-group {
   flex: 1;
 }
 
+/* Styling for form labels */
 label {
   display: block;
   margin-bottom: 5px;
   font-weight: lighter;
 }
 
+/* Styling for input fields, select elements, and textarea */
 input,
 select,
 textarea {
@@ -432,23 +479,28 @@ textarea {
   font-size: 16px;
 }
 
+/* Styling for textarea */
 textarea {
   height: 100px;
   resize: vertical;
 }
 
+/* Style for input fields with validation error */
 .error-border {
   border: 2px solid red;
 }
 
+/* Styling for error message */
 .error-message {
   color: red;
 }
 
+/* Styling for save button */
 .edit-listing-container .content-wrapper .post-button {
   width: 80%;
 }
 
+/* Style for disabled button */
 .disabled-button {
   background-color: #d3d3d3;
   cursor: not-allowed;
@@ -456,33 +508,18 @@ textarea {
   opacity: 0.5;
 }
 
+/* Remove outline for disabled button */
 .disabled-button:focus {
   outline: none;
 }
 
-.post-form-button {
-  display: flex;
-  justify-content: center;
-}
-
-.post-form-button .post-button {
-  width: 80%;
-}
-
+/* Center button in form */
 .edit-form-button {
   display: flex;
   justify-content: center;
 }
 
-.edit-button {
-  width: 80%;
-}
-
-.post-form-button {
-  display: flex;
-  justify-content: center;
-}
-
+/* Media query for larger screens */
 @media (min-width: 1024px) {
   .edit-listing-container {
     justify-content: flex-start;

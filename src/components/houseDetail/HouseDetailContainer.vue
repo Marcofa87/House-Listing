@@ -1,8 +1,11 @@
 <template>
   <div class="house-detail-container">
+    <!-- Render the HouseDetail component, passing the current house ID as a key -->
     <HouseDetail :key="String(route.params.id)" />
+    <!-- Section for recommended listings -->
     <div class="recommended">
       <h2>Recommended for you</h2>
+      <!-- Render the ListingCard component -->
       <ListingCard />
     </div>
   </div>

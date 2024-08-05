@@ -1,17 +1,16 @@
 import { defineStore } from 'pinia'
-
 import type { House } from '@/types'
 
 const HOUSE_LISTING_API_KEY = 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
 
 export const useHouseListingStore = defineStore('houseListingStore', {
   state: () => ({
-    houses: [] as House[],
-    loading: false,
-    error: null as string | null
+    houses: [] as House[], // List of houses
+    loading: false, // Whether the houses are being loaded
+    error: null as string | null // Error message if an error occurs
   }),
-  getters: {},
   actions: {
+    // Action to fetch the list of houses from the API
     async fetchHouses() {
       this.loading = true
 
@@ -36,7 +35,7 @@ export const useHouseListingStore = defineStore('houseListingStore', {
 
         this.houses = res
       } catch (error) {
-        console.log('error', error)
+        console.log('Error fetching houses:', error)
         this.error = error instanceof Error ? error.message : String(error)
       } finally {
         this.loading = false

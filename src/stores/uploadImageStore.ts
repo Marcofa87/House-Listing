@@ -1,10 +1,12 @@
-// imageUploadStore.ts
 import { defineStore } from 'pinia'
+
+// API key for accessing the house listing API
 const HOUSE_LISTING_API_KEY = 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
 
+// Interface for image upload state
 interface ImageUploadState {
-  isUploading: boolean
-  lastUploadedImageUrl: string | null
+  isUploading: boolean // Whether an image is currently being uploaded
+  lastUploadedImageUrl: string | null // URL of the last successfully uploaded image
 }
 
 export const useImageUploadStore = defineStore('imageUpload', {
@@ -13,6 +15,7 @@ export const useImageUploadStore = defineStore('imageUpload', {
     lastUploadedImageUrl: null
   }),
   actions: {
+    // Action to upload an image for a specific house
     async uploadHouseImage(houseId: string, file: File) {
       this.isUploading = true
 
@@ -41,7 +44,7 @@ export const useImageUploadStore = defineStore('imageUpload', {
 
         const text = await response.text()
 
-        // Se la risposta è vuota, assumiamo che l'upload sia andato a buon fine
+        // If the response is empty, assume the upload was successful
         if (!text) {
           console.log('Image upload successful, but received empty response')
           return { success: true }

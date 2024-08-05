@@ -2,12 +2,14 @@ import { defineStore } from 'pinia'
 import { useHouseListingStore } from './houseListing'
 import type { House } from '@/types'
 
+// Store to handle search functionality
 export const useSearchStore = defineStore('searchStore', {
   state: () => ({
-    searchTerm: ''
+    searchTerm: '' // Current search term
   }),
 
   getters: {
+    // Getter to filter houses based on the search term
     filteredHouses(): House[] {
       const houseStore = useHouseListingStore()
       const searchLower = this.searchTerm.toLowerCase().trim()
@@ -26,6 +28,7 @@ export const useSearchStore = defineStore('searchStore', {
   },
 
   actions: {
+    // Action to set the search term
     setSearchTerm(term: string) {
       this.searchTerm = term
     }

@@ -1,4 +1,5 @@
 <template>
+  <!-- Form group containing a label and input field -->
   <div class="form-group">
     <label :for="id">{{ label }}{{ required ? '*' : '' }}</label>
     <input
@@ -15,6 +16,8 @@
 <script setup lang="ts">
 import '../assets/base.css'
 import '../assets/main.css'
+
+// Define the properties for the input field
 const props = defineProps({
   id: {
     type: String,
@@ -26,11 +29,11 @@ const props = defineProps({
   },
   type: {
     type: String,
-    default: 'text'
+    default: 'text' // Default input type
   },
   placeholder: {
     type: String,
-    default: ''
+    default: '' // Default placeholder text
   },
   required: {
     type: Boolean,
@@ -38,10 +41,11 @@ const props = defineProps({
   },
   modelValue: {
     type: [String, Number],
-    default: ''
+    default: '' // Default value for the input field
   }
 })
 
+// Emit an event to update the model value when input changes
 const emit = defineEmits(['update:modelValue'])
 
 const handleInput = (event: Event) => {
@@ -51,6 +55,7 @@ const handleInput = (event: Event) => {
 </script>
 
 <style scoped>
+/* Styles for the form group, label, and input field */
 .form-group {
   margin-bottom: 20px;
 }
