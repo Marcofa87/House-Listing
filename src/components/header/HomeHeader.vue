@@ -130,6 +130,8 @@ input[type='text'] {
   position: relative;
   width: 90%;
   margin: 0 auto;
+  background-color: var(--color-tertiary-1);
+  border-radius: 10px;
 }
 
 /* Styling for the input field */

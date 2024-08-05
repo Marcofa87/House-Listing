@@ -71,7 +71,7 @@ const houses = computed(() => sortingByStore.filteredAndSortedHouses)
 
 <style scoped>
 /* Styles for house detail card */
-.house-detail-card {
+.d {
   display: flex;
   border: 1px solid #ddd;
   margin: 10px;
@@ -145,6 +145,7 @@ const houses = computed(() => sortingByStore.filteredAndSortedHouses)
   padding: 10px;
   border-radius: 5px;
   overflow: hidden;
+  background-color: var(--color-background-2);
 }
 
 /* Styles for the image section */
