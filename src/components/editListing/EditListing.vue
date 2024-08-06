@@ -1,5 +1,5 @@
 <template>
-  <div class="edit-listing-container">
+  <div class="listing-container">
     <!-- Container for the whole editing form -->
     <div class="content-wrapper">
       <!-- Header for the edit form with back button and title -->
@@ -149,10 +149,10 @@
         </div>
       </form>
       <!-- Button to save changes -->
-      <div class="edit-form-button">
+      <div class="form-button">
         <CustomButtons
           @click="submitForm"
-          class="post-button"
+          class="action-button"
           :disabled="!isValid"
           :class="{ 'disabled-button': !isValid }"
           >SAVE CHANGES</CustomButtons
@@ -353,178 +353,4 @@ const removeImage = () => {
 }
 </script>
 
-<style scoped>
-/* Container for the entire edit listing form */
-.edit-listing-container {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-  padding: 20px;
-  background-image: url('@/assets/img_background@3x.png');
-  background-size: cover;
-  background-position: center 50%;
-  background-attachment: fixed;
-}
-
-/* Wrapper for form content */
-.content-wrapper {
-  max-width: 600px;
-  width: 100%;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 0 auto;
-}
-
-/* Header for the form */
-.listing-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-/* Styling for the back button */
-.listing-header .back {
-  width: 32px;
-  margin-bottom: 10px;
-  cursor: pointer;
-}
-
-/* Styling for file upload label */
-.upload-label {
-  border: 3px grey dashed;
-  width: 110px;
-  height: 110px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-}
-
-/* Style for upload icon or preview image */
-.upload-label img {
-  object-fit: cover;
-}
-
-/* Container for the image preview and removal button */
-.image-container {
-  position: relative;
-}
-
-/* Size of the image preview */
-.image-preview {
-  width: 104px;
-}
-
-/* Style for the remove image button */
-.remove-image {
-  position: absolute;
-  top: -15px;
-  right: 0;
-  transform: translate(50%, -50%);
-  width: 25px;
-  height: 25px;
-  background-color: rgb(255, 255, 255);
-  color: rgb(153, 153, 153);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 10;
-}
-
-/* Header text styling */
-.listing-header h2 {
-  text-align: center;
-  width: 80%;
-}
-
-/* Margin for form group elements */
-.form-group {
-  margin-bottom: 20px;
-}
-
-/* Row layout for grouped form inputs */
-.form-row {
-  display: flex;
-  gap: 20px;
-}
-
-/* Flex style for form row items */
-.form-row .form-group {
-  flex: 1;
-}
-
-/* Styling for form labels */
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: lighter;
-}
-
-/* Styling for input fields, select elements, and textarea */
-input,
-select,
-textarea {
-  width: 100%;
-  padding: 15px;
-  height: 50px;
-  border: 1px solid #ccc;
-  border-radius: 12px;
-}
-
-/* Styling for textarea */
-textarea {
-  height: 100px;
-  resize: vertical;
-}
-
-/* Style for input fields with validation error */
-.error-border {
-  border: 2px solid red;
-}
-
-/* Styling for error message */
-.error-message {
-  color: red;
-}
-
-/* Styling for save button */
-.edit-listing-container .content-wrapper .post-button {
-  width: 80%;
-}
-
-/* Style for disabled button */
-.disabled-button {
-  background-color: #d3d3d3;
-  cursor: not-allowed;
-  color: #000;
-  opacity: 0.5;
-}
-
-/* Remove outline for disabled button */
-.disabled-button:focus {
-  outline: none;
-}
-
-/* Center button in form */
-.edit-form-button {
-  display: flex;
-  justify-content: center;
-}
-
-/* Media query for larger screens */
-@media (min-width: 1024px) {
-  .edit-listing-container {
-    justify-content: flex-start;
-    padding-left: 150px;
-  }
-
-  .content-wrapper {
-    margin: 0;
-  }
-}
-</style>
+<style src="@/assets/styles/shared-listing-styles.css" scoped></style>

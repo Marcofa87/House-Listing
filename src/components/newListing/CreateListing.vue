@@ -1,5 +1,5 @@
 <template>
-  <div class="create-listing-container">
+  <div class="listing-container">
     <div class="content-wrapper">
       <!-- Header for the listing creation form -->
       <div class="listing-header">
@@ -146,10 +146,10 @@
       </form>
 
       <!-- Button to submit the form -->
-      <div class="post-form-button">
+      <div class="form-button">
         <CustomButtons
           @click="submitForm"
-          class="post-button"
+          class="action-button"
           :disabled="!isValid"
           :class="{ 'disabled-button': !isValid }"
           >POST</CustomButtons
@@ -288,174 +288,4 @@ const triggerFileInput = () => {
 }
 </script>
 
-<style scoped>
-/* Main container styles: full width, flex layout, background image, and fixed positioning */
-.create-listing-container {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-  padding: 20px;
-  background-image: url('@/assets/img_background@3x.png');
-  background-size: cover;
-  background-position: center 50%;
-  background-attachment: fixed;
-}
-
-/* Wrapper for content, with a max width, padding, and centered alignment */
-.content-wrapper {
-  max-width: 600px;
-  width: 100%;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 0 auto;
-}
-
-/* Header section with flex alignment and spacing for back button and title */
-.listing-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.listing-header .back {
-  width: 32px;
-  margin-bottom: 10px;
-  cursor: pointer;
-}
-
-/* Image upload area with dashed border, centered content, and click-to-upload functionality */
-.upload-label {
-  border: 3px grey dashed;
-  width: 110px;
-  height: 110px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-}
-
-.upload-label img {
-  object-fit: cover;
-}
-
-/* Image preview container with absolute positioning for the remove button */
-.image-container {
-  position: relative;
-}
-
-.image-preview {
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.remove-image {
-  position: absolute;
-  top: -15px;
-  right: 0;
-  transform: translate(50%, -50%);
-  width: 25px;
-  height: 25px;
-  background-color: rgb(255, 255, 255);
-  color: rgb(153, 153, 153);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 10;
-}
-
-/* Header text alignment */
-.listing-header h2 {
-  text-align: center;
-  width: 80%;
-}
-
-/* Form group and row layout with spacing */
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-row {
-  display: flex;
-  gap: 20px;
-}
-
-.form-row .form-group {
-  flex: 1;
-}
-
-/* General form element styling with padding, border, and font size */
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: lighter;
-}
-
-input,
-select,
-textarea {
-  width: 100%;
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 12px;
-}
-
-input,
-select {
-  height: 50px;
-}
-
-textarea {
-  height: 100px;
-  resize: vertical;
-}
-
-/* Error styling for form fields and messages */
-.error-border {
-  border: 2px solid red;
-}
-
-.error-message {
-  color: red;
-}
-
-/* Post button styling and disabled state */
-.create-listing-container .content-wrapper .post-button {
-  width: 80%;
-}
-
-.disabled-button {
-  background-color: #d3d3d3;
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-.disabled-button:focus {
-  outline: none;
-}
-
-.post-form-button {
-  display: flex;
-  justify-content: center;
-}
-
-.post-form-button .post-button {
-  width: 80%;
-}
-
-/* Responsive adjustments for larger screens */
-@media (min-width: 1024px) {
-  .create-listing-container {
-    justify-content: flex-start;
-    padding-left: 150px;
-  }
-
-  .content-wrapper {
-    margin: 0;
-  }
-}
-</style>
+<style src="@/assets/styles/shared-listing-styles.css" scoped></style>
