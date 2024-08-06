@@ -70,74 +70,13 @@ const houses = computed(() => sortingByStore.filteredAndSortedHouses)
 </script>
 
 <style scoped>
-/* Styles for house detail card */
-.d {
-  display: flex;
-  border: 1px solid #ddd;
-  margin: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  overflow: hidden;
+/* Styles for the main container */
+.houses-container {
+  width: 80%;
+  margin: 0 auto;
 }
 
-/* Styles for the image section */
-.detail-image {
-  width: 35%;
-}
-
-/* Styles for the house image */
-.house-image {
-  max-width: 60%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-/* Styles for the container of house details */
-.house-detail-container {
-  flex: 1;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* Styles for the location and edit/delete section */
-.house-detail-location-edit-delete {
-  display: flex;
-  justify-content: space-between;
-}
-
-/* Styles for amenities section */
-.house-detail-amenities {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-
-/* Styles for individual amenities */
-.house-detail-intern {
-  display: flex;
-  align-items: center;
-}
-
-.house-detail-intern img {
-  width: 24px;
-  height: 24px;
-  margin-right: 5px;
-}
-
-/* Responsive design for larger screens */
-@media (min-width: 1024px) {
-  .houses-container {
-    width: 80%;
-    margin: 0 auto;
-  }
-}
-</style>
-
-<style scoped>
-/* Styles for house detail card */
+/* Styles for the house detail card */
 .house-detail-card {
   display: flex;
   border: 1px solid #ddd;
@@ -150,24 +89,26 @@ const houses = computed(() => sortingByStore.filteredAndSortedHouses)
 
 /* Styles for the image section */
 .detail-image {
-  width: 35%;
+  width: 200px;
+  height: 150px;
 }
 
 /* Styles for the house image */
 .house-image {
   width: 100%;
-  height: 150px;
+  height: 100%;
   object-fit: cover;
   border-radius: 5px;
 }
 
-/* Styles for the container of house details */
+/* Styles for the house details container */
 .house-detail-container {
   flex: 1;
   padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-left: 15px; /* Add some space between the image and details */
 }
 
 /* Styles for the location and edit/delete section */
@@ -176,10 +117,16 @@ const houses = computed(() => sortingByStore.filteredAndSortedHouses)
   justify-content: space-between;
 }
 
-/* Styles for amenities section */
+/* Styles for the text in the location section */
+.house-detail-location h2,
+.house-detail-location p {
+  margin: 5px 0;
+}
+
+/* Styles for the amenities section */
 .house-detail-amenities {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-top: 10px;
 }
 
@@ -187,6 +134,7 @@ const houses = computed(() => sortingByStore.filteredAndSortedHouses)
 .house-detail-intern {
   display: flex;
   align-items: center;
+  margin-right: 20px;
 }
 
 .house-detail-intern img {
@@ -195,11 +143,18 @@ const houses = computed(() => sortingByStore.filteredAndSortedHouses)
   margin-right: 5px;
 }
 
-/* Responsive design for larger screens */
-@media (min-width: 1024px) {
+/* Responsive design for smaller screens */
+@media (max-width: 1024px) {
   .houses-container {
-    width: 80%;
-    margin: 0 auto;
+    width: 95%;
+  }
+
+  .detail-image {
+    margin-bottom: 10px;
+  }
+
+  .house-detail-container {
+    margin-left: 0;
   }
 }
 </style>
