@@ -137,7 +137,7 @@ textarea {
 }
 
 .form-button .action-button {
-  width: 40%;
+  width: 80%;
 }
 
 .disabled-button {
@@ -159,5 +159,9 @@ textarea {
 
   .content-wrapper {
     margin: 0;
+  }
+
+  .form-button .action-button {
+    width: 40%;
   }
 }
