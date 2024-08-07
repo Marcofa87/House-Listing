@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia'
 import type { EditHouseState, HouseData } from '../types'
 
-const HOUSE_LISTING_API_KEY = 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
+import { API_LISTING_KEY } from '@/config/envConfig'
+
+if (!API_LISTING_KEY) throw new Error('API key is not defined in the environment variables')
 
 export const useEditHouseStore = defineStore('editHouse', {
   state: (): EditHouseState => ({
@@ -31,7 +33,7 @@ export const useEditHouseStore = defineStore('editHouse', {
       const requestOptions: RequestInit = {
         method: 'POST',
         headers: {
-          'X-Api-Key': HOUSE_LISTING_API_KEY
+          'X-Api-Key': API_LISTING_KEY
         },
         body: formData,
         redirect: 'follow' as RequestRedirect

@@ -1,7 +1,5 @@
 import { defineStore } from 'pinia'
-
-// API key for accessing the house listing API
-const HOUSE_LISTING_API_KEY = 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
+import { API_LISTING_KEY } from '@/config/envConfig'
 
 // Interface for image upload state
 interface ImageUploadState {
@@ -20,7 +18,7 @@ export const useImageUploadStore = defineStore('imageUpload', {
       this.isUploading = true
 
       const myHeaders = new Headers()
-      myHeaders.append('X-Api-Key', HOUSE_LISTING_API_KEY)
+      myHeaders.append('X-Api-Key', API_LISTING_KEY)
 
       const formData = new FormData()
       formData.append('image', file, file.name)

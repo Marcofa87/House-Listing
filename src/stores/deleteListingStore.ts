@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
-
-const HOUSE_LISTING_API_KEY = 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
+import { API_LISTING_KEY } from '@/config/envConfig'
 
 // Interface for a house object
 interface House {
@@ -29,7 +28,7 @@ export const useDeleteListingStore = defineStore('deleteListing', {
     // Action to fetch the list of houses from the API
     async fetchHouses() {
       const myHeaders = new Headers()
-      myHeaders.append('X-Api-Key', HOUSE_LISTING_API_KEY)
+      myHeaders.append('X-Api-Key', API_LISTING_KEY)
 
       const requestOptions = {
         method: 'GET',
@@ -52,7 +51,7 @@ export const useDeleteListingStore = defineStore('deleteListing', {
     // Action to delete a house by ID
     async deleteHouse(houseId: string) {
       const myHeaders = new Headers()
-      myHeaders.append('X-Api-Key', HOUSE_LISTING_API_KEY)
+      myHeaders.append('X-Api-Key', API_LISTING_KEY)
 
       const requestOptions = {
         method: 'DELETE',

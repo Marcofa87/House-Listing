@@ -1,8 +1,6 @@
 import { defineStore } from 'pinia'
 import type { Apartment } from '../types'
-
-// API key for accessing the house listing API
-const HOUSE_LISTING_API_KEY = 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
+import { API_LISTING_KEY } from '@/config/envConfig'
 
 export const useApartmentStore = defineStore('apartment', {
   state: () => ({
@@ -15,7 +13,7 @@ export const useApartmentStore = defineStore('apartment', {
       try {
         const response = await fetch('https://api.intern.d-tt.nl/api/houses', {
           headers: {
-            'X-Api-Key': HOUSE_LISTING_API_KEY
+            'X-Api-Key': API_LISTING_KEY
           }
         })
         const data = await response.json()
@@ -27,7 +25,7 @@ export const useApartmentStore = defineStore('apartment', {
     // Action to create a new apartment and add it to the list
     async createApartment(newApartment: Apartment) {
       const myHeaders = new Headers()
-      myHeaders.append('X-Api-Key', HOUSE_LISTING_API_KEY)
+      myHeaders.append('X-Api-Key', API_LISTING_KEY)
 
       // Prepare form data for the new apartment
       const formdata = new FormData()

@@ -28,3 +28,13 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# Environment variables files
+.env
+.env.local
+.env.*.local
+
+# Optional: ignore environment files in specific directories
+config/.env
+config/*.env
+

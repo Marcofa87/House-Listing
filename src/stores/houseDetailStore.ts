@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import type { House } from '../types'
-
-const HOUSE_LISTING_API_KEY = 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
+import { API_LISTING_KEY } from '@/config/envConfig'
 
 export const useHouseDetailStore = defineStore('house', {
   state: () => ({
@@ -19,7 +18,7 @@ export const useHouseDetailStore = defineStore('house', {
         const response = await fetch(`https://api.intern.d-tt.nl/api/houses/${id}`, {
           method: 'GET',
           headers: {
-            'X-Api-Key': HOUSE_LISTING_API_KEY
+            'X-Api-Key': API_LISTING_KEY
           }
         })
         if (!response.ok) {

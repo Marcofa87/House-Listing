@@ -4,10 +4,10 @@
     <label :for="id">{{ label }}{{ required ? '*' : '' }}</label>
     <input
       :id="id"
-      :type="type"
-      :placeholder="placeholder"
-      :required="required"
-      :value="modelValue"
+      :type="props.type"
+      :placeholder="props.placeholder"
+      :required="props.required"
+      :value="props.modelValue"
       @input="handleInput"
     />
   </div>

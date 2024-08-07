@@ -172,7 +172,7 @@ import FormInput from '@/shared/FormInput.vue'
 import uploadImage from '@/assets/ic_upload@3x.png'
 import backGrey from '@/assets/ic_back_grey@3x.png'
 
-const HOUSE_LISTING_API_KEY = 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
+import { API_LISTING_KEY } from '@/config/envConfig'
 
 const router = useRouter()
 const route = useRoute()
@@ -225,7 +225,7 @@ const fetchHouseData = async (houseId: string) => {
     const response = await fetch(`https://api.intern.d-tt.nl/api/houses/${houseId}`, {
       method: 'GET',
       headers: {
-        'X-Api-Key': HOUSE_LISTING_API_KEY
+        'X-Api-Key': API_LISTING_KEY
       }
     })
 
