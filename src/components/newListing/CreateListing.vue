@@ -255,7 +255,7 @@ const submitForm = async () => {
     imagePreview.value = null
     isSubmitted.value = false
 
-    router.push('/')
+    router.push(`/house/${createdApartment.id}`)
   } catch (error) {
     console.error('There was an error during creation of the announce:', error)
   }
