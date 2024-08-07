@@ -7,7 +7,7 @@
       <!-- Link to create a new listing -->
       <RouterLink to="/new-listing" class="add-listing-link">
         <!-- Icon for mobile view -->
-        <img src="../../assets/ic_plus_grey@3x.png" alt="Edit listing" class="mobile-icon" />
+        <img :src="plusGreyButton" alt="Edit listing" class="mobile-icon" />
         <!-- Button for desktop view -->
         <CustomButton color="#EB5440" borderRadius="15px" class="desktop-icon">
           + CREATE NEW
@@ -63,6 +63,8 @@ import { ref, computed, watch } from 'vue'
 import { useSortingByStore } from '@/stores/sortByStore'
 import CustomButton from '@/shared/CustomButtons.vue'
 import NotFound from '@/components/cardComponent/NotFound.vue'
+
+import plusGreyButton from '@/assets/ic_plus_grey@3x.png'
 
 // Using a store to handle sorting and search term
 const sortingByStore = useSortingByStore()
@@ -142,7 +144,7 @@ input {
   background-color: #c3c3c3;
   padding-left: 45px;
   padding-right: 45px;
-  background: url('../../assets/ic_search@3x.png') no-repeat left 15px center;
+  background: url('@/assets/ic_search@3x.png') no-repeat left 15px center;
   background-size: 20px 20px;
   border: 2px solid #000;
   outline: none;
@@ -161,7 +163,7 @@ input:focus {
   transform: translateY(-50%);
   width: 20px;
   height: 20px;
-  background: url('../../assets/ic_clear@3x.png') no-repeat center;
+  background: url('@/assets/ic_clear@3x.png') no-repeat center;
   background-size: contain;
   cursor: pointer;
 }

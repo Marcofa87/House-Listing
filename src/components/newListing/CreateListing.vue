@@ -4,7 +4,7 @@
       <!-- Header for the listing creation form -->
       <div class="listing-header">
         <!-- Back button to navigate to the previous page -->
-        <img src="@/assets/ic_back_grey@3x.png" alt="Logo" class="back" @click="goBack" />
+        <img :src="backGrey" alt="Logo" class="back" @click="goBack" />
         <h2>Create New Listing</h2>
       </div>
 
@@ -66,7 +66,7 @@
           />
           <div class="upload-label" @click="triggerFileInput">
             <!-- Show upload icon or image preview -->
-            <img v-if="!imagePreview" src="../../assets/ic_upload@3x.png" alt="Upload" />
+            <img v-if="!imagePreview" :src="uploadImage" alt="Upload" />
             <div v-else class="image-container">
               <img :src="imagePreview" alt="Preview" class="image-preview" />
               <div class="remove-image" @click.stop="removeImage">×</div>
@@ -166,6 +166,8 @@ import { useImageUploadStore } from '@/stores/uploadImageStore'
 import { useRouter } from 'vue-router'
 import CustomButtons from '@/shared/CustomButtons.vue'
 import FormInput from '@/shared/FormInput.vue'
+import uploadImage from '@/assets/ic_upload@3x.png'
+import backGrey from '@/assets/ic_back_grey@3x.png'
 
 // Router for navigation
 const router = useRouter()

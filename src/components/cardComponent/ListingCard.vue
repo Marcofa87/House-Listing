@@ -25,15 +25,15 @@
           <!-- Amenities details like bedrooms, bathrooms, and size -->
           <div class="house-detail-amenities">
             <div class="house-detail-intern">
-              <img src="../../assets/ic_bed@3x.png" alt="Bed picture" />
+              <img :src="bedSize" alt="Bed picture" />
               <p>{{ house.rooms.bedrooms }}</p>
             </div>
             <div class="house-detail-intern">
-              <img src="../../assets/ic_bath@3x.png" alt="Bath picture" />
+              <img :src="bathNum" alt="Bath picture" />
               <p>{{ house.rooms.bathrooms }}</p>
             </div>
             <div class="house-detail-intern">
-              <img src="../../assets/ic_size@3x.png" alt="Square meter picture" />
+              <img :src="squareMeterSize" alt="Square meter picture" />
               <p>{{ house.size }} m²</p>
             </div>
           </div>
@@ -54,6 +54,9 @@ import { useSortingByStore } from '@/stores/sortByStore'
 import { useDeletePopupStore } from '@/stores/deletePopupStore'
 import MadeByMeListing from '@/shared/MadeByMeListing.vue'
 import DeleteListing from '@/components/deleteListing/DeleteListing.vue'
+import bedSize from '@/assets/ic_bed@3x.png'
+import bathNum from '@/assets/ic_bath@3x.png'
+import squareMeterSize from '@/assets/ic_size@3x.png'
 
 // Initialize stores
 const houseStore = useHouseListingStore()

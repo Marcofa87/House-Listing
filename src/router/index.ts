@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '@/views/HomeView.vue'
 
 // route index of the application
 
@@ -14,22 +14,22 @@ const router = createRouter({
     {
       path: '/house/:id',
       name: 'house-detail',
-      component: () => import('../views/HouseDetail.vue')
+      component: () => import('@/views/HouseDetail.vue')
     },
     {
       path: '/about',
       name: 'about',
-      component: () => import('../views/AboutView.vue')
+      component: () => import('@/views/AboutView.vue')
     },
     {
       path: '/new-listing',
       name: 'new-listing',
-      component: () => import('../views/NewListing.vue')
+      component: () => import('@/views/NewListing.vue')
     },
     {
       path: '/edit-listing/:id',
       name: 'edit-listing',
-      component: () => import('../views/EditView.vue')
+      component: () => import('@/views/EditView.vue')
     }
   ]
 })

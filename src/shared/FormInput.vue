@@ -14,9 +14,6 @@
 </template>
 
 <script setup lang="ts">
-import '../assets/base.css'
-import '../assets/main.css'
-
 // Define the properties for the input field
 const props = defineProps({
   id: {

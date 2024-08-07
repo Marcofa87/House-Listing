@@ -5,7 +5,7 @@
       <!-- Header for the edit form with back button and title -->
       <div class="listing-header">
         <!-- Back button to return to the previous page -->
-        <img src="@/assets/ic_back_grey@3x.png" alt="Logo" class="back" @click="goBack" />
+        <img :src="backGrey" alt="Logo" class="back" @click="goBack" />
         <h2>Edit Listing</h2>
       </div>
 
@@ -68,7 +68,7 @@
           />
           <!-- Label for file input with image preview or upload icon -->
           <div class="upload-label" @click="triggerFileInput">
-            <img v-if="!imagePreview" src="../../assets/ic_upload@3x.png" alt="Upload" />
+            <img v-if="!imagePreview" :src="uploadImage" alt="Upload" />
             <div v-else class="image-container">
               <img :src="imagePreview" alt="Preview" class="image-preview" />
               <div class="remove-image" @click.stop="removeImage">×</div>
@@ -169,6 +169,8 @@ import { useImageUploadStore } from '@/stores/uploadImageStore'
 import { useRouter, useRoute } from 'vue-router'
 import CustomButtons from '@/shared/CustomButtons.vue'
 import FormInput from '@/shared/FormInput.vue'
+import uploadImage from '@/assets/ic_upload@3x.png'
+import backGrey from '@/assets/ic_back_grey@3x.png'
 
 const HOUSE_LISTING_API_KEY = 'FPNh7v3pOKHkqtEJ2IB1o8zjLWyAmrxg'
 

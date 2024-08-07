@@ -6,7 +6,7 @@
     </div>
     <!-- Message displayed when no results are found -->
     <div v-else>
-      <img src="../../assets/img_empty_houses@3x.png" class="not-found" alt="Not found image" />
+      <img :src="emptyHouse" class="not-found" alt="Not found image" />
       <p>No results found.</p>
       <p>Please try another keyword.</p>
     </div>
@@ -14,6 +14,7 @@
 </template>
 
 <script setup>
+import emptyHouse from '@/assets/img_empty_houses@3x.png'
 const props = defineProps({
   filteredHousesCount: {
     type: Number,

@@ -11,7 +11,7 @@
         <div class="house-detail-images">
           <!-- Back button to navigate to the previous page -->
           <div class="back-img">
-            <img src="@/assets/ic_back_white@3x.png" alt="back button" @click="goBack" />
+            <img :src="backWhite" alt="back button" @click="goBack" />
           </div>
           <!-- Component to display listing details -->
           <MadeByMeListing
@@ -22,11 +22,7 @@
         </div>
         <!-- Placeholder image displayed when no actual images are available -->
         <div class="placeholder-container">
-          <img
-            class="placeholder-image"
-            src="../../assets/img_placeholder_house@3x.png"
-            alt="placeholder_house_image"
-          />
+          <img class="placeholder-image" :src="placeholderHouse" alt="placeholder_house_image" />
         </div>
       </div>
 
@@ -40,36 +36,36 @@
         </div>
         <!-- Location, zip code, and city -->
         <div class="house-detail-zip-house-city">
-          <img src="@/assets/ic_location@3x.png" alt="location icon" />
+          <img :src="location" alt="location icon" />
           <p>{{ houseStore.house.location.zip }} {{ houseStore.house.location.city }}</p>
         </div>
         <!-- Price, size, and construction year -->
         <div class="house-detail-price-size-construction-container">
           <div>
-            <img src="@/assets/ic_price@3x.png" alt="euro icon" />
+            <img :src="price" alt="euro icon" />
             <p>{{ houseStore.house.price }}</p>
           </div>
           <div>
-            <img src="@/assets/ic_size@3x.png" alt="size icon" />
+            <img :src="size" alt="size icon" />
             <p>{{ houseStore.house.size }}m²</p>
           </div>
           <div>
-            <img src="@/assets/ic_construction_date@3x.png" alt="construction date icon" />
+            <img :src="constructionDate" alt="construction date icon" />
             <p>Built in {{ houseStore.house.constructionYear }}</p>
           </div>
         </div>
         <!-- Number of bedrooms, bathrooms, and garage availability -->
         <div class="house-detail-price-size-construction-container">
           <div class="house-detail-price-bed-bath">
-            <img src="@/assets/ic_bed@3x.png" alt="bed icon" />
+            <img :src="bed" alt="bed icon" />
             <p>{{ houseStore.house.rooms.bedrooms }}</p>
           </div>
           <div>
-            <img src="@/assets/ic_bath@3x.png" alt="bath icon" />
+            <img :src="bath" alt="bath icon" />
             <p>{{ houseStore.house.rooms.bathrooms }}</p>
           </div>
           <div class="house-detail-price-garage">
-            <img src="@/assets/ic_garage@3x.png" alt="garage icon" />
+            <img :src="garage" alt="garage icon" />
             <p>{{ houseStore.house.hasGarage ? 'Yes' : 'No' }}</p>
           </div>
         </div>
@@ -90,8 +86,16 @@ import DeleteListing from '@/components/deleteListing/DeleteListing.vue'
 import { useHouseDetailStore } from '@/stores/houseDetailStore'
 import { useDeletePopupStore } from '@/stores/deletePopupStore'
 import { useRoute, useRouter } from 'vue-router'
-import '../../assets/base.css'
-import '../../assets/main.css'
+
+import backWhite from '@/assets/ic_back_white@3x.png'
+import placeholderHouse from '@/assets/img_placeholder_house@3x.png'
+import location from '@/assets/ic_location@3x.png'
+import price from '@/assets/ic_price@3x.png'
+import size from '@/assets/ic_size@3x.png'
+import constructionDate from '@/assets/ic_construction_date@3x.png'
+import bed from '@/assets/ic_bed@3x.png'
+import bath from '@/assets/ic_bath@3x.png'
+import garage from '@/assets/ic_garage@3x.png'
 
 // Importing store and router hooks for handling house details and deletion
 const houseStore = useHouseDetailStore()
