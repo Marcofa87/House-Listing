@@ -64,14 +64,11 @@ const isActive = (path: string) => {
 </script>
 
 <style scoped>
+/* General Header Styles */
 .header {
-  display: flex;
-  position: fixed;
-  bottom: 0;
   width: 100%;
-  margin: 0 auto;
-  padding: 20px;
   background: #ffffff;
+  z-index: 1000; /* Ensure it is above other content */
 }
 
 nav {
@@ -83,15 +80,15 @@ nav {
 ul {
   display: flex;
   justify-content: space-around;
-  margin: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 li {
-  list-style: none;
-  margin: 0;
-  width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 img {
@@ -101,11 +98,26 @@ img {
 
 /* Mobile header styles */
 .mobile-header {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  background-color: #ffffff;
 }
 
+/* Desktop header styles */
 .desktop-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   display: none;
+  justify-content: center;
+  padding: 20px 0;
+  background-color: #ffffff;
 }
 
 /* Styles for screens 1024px and wider (desktop) */
@@ -117,10 +129,9 @@ img {
     display: flex;
   }
 
+  /* Adjust spacing for desktop */
   .header {
     height: 80px;
-    position: absolute;
-    top: 0;
   }
 
   ul {
@@ -129,9 +140,7 @@ img {
   }
 
   ul li {
-    display: flex;
-    justify-content: flex-start;
-    width: 15%;
+    width: auto;
   }
 
   ul img {
@@ -146,6 +155,17 @@ img {
   .desktop-header a.active {
     color: black;
     font-weight: bold;
+  }
+}
+
+/* Ensure content is not hidden behind the headers */
+body {
+  padding-bottom: 60px;
+  padding-top: 80px;
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  body {
+    padding-bottom: 70px;
   }
 }
 </style>
