@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- Message displayed when there are filtered houses -->
-    <div v-if="filteredHousesCount > 0">
-      <h2 class="filtered-result">{{ resultText }}</h2>
+    <div v-if="props.filteredHousesCount > 0">
+      <h2 class="filtered-result">{{ props.resultText }}</h2>
     </div>
     <!-- Message displayed when no results are found -->
     <div v-else>
