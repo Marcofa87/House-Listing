@@ -20,7 +20,12 @@
               <p>{{ house.location.zip }} {{ house.location.city }}</p>
             </div>
             <!-- Component to display whether the listing is created by the user -->
-            <MadeByMeListing :house="house" :madeByMe="house.madeByMe" />
+            <MadeByMeListing
+              :house="house"
+              :madeByMe="house.madeByMe"
+              :deleteButton="deleteButton"
+              :editButton="editButton"
+            />
           </div>
           <!-- Amenities details like bedrooms, bathrooms, and size -->
           <div class="house-detail-amenities">
@@ -57,6 +62,8 @@ import DeleteListing from '@/components/deleteListing/DeleteListing.vue'
 import bedSize from '@/assets/ic_bed@3x.png'
 import bathNum from '@/assets/ic_bath@3x.png'
 import squareMeterSize from '@/assets/ic_size@3x.png'
+import deleteButton from '@/assets/ic_delete@3x.png'
+import editButton from '@/assets/ic_edit@3x.png'
 
 // Initialize stores
 const houseStore = useHouseListingStore()
@@ -82,7 +89,6 @@ const houses = computed(() => sortingByStore.filteredAndSortedHouses)
 /* Styles for the house detail card */
 .house-detail-card {
   display: flex;
-  border: 1px solid #ddd;
   margin: 10px;
   padding: 10px;
   border-radius: 5px;

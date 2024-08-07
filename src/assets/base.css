@@ -8,6 +8,7 @@
 :root {
   --color-primary: #eb5440;
   --color-secondary: #4a4b4c;
+  --color-primary-text: #000000;
   --color-tertiary-1: #e8e8e8;
   --color-tertiary-2: #c3c3c3;
   --color-background-1: #f6f6f6;
@@ -26,11 +27,13 @@ body {
 h1 {
   font-family: 'Montserrat', sans-serif;
   font-size: 18px;
+  color: var(--color-primary-text);
 }
 
 h2 {
   font-family: 'Montserrat', sans-serif;
   font-size: 14px;
+  color: var(--color-primary-text);
 }
 
 .button {

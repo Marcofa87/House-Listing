@@ -18,6 +18,8 @@
             v-if="houseStore.house"
             :house="houseStore.house"
             :madeByMe="houseStore.house.madeByMe"
+            :editButton="editButton"
+            :deleteButton="deleteButton"
           />
         </div>
         <!-- Placeholder image displayed when no actual images are available -->
@@ -96,7 +98,8 @@ import constructionDate from '@/assets/ic_construction_date@3x.png'
 import bed from '@/assets/ic_bed@3x.png'
 import bath from '@/assets/ic_bath@3x.png'
 import garage from '@/assets/ic_garage@3x.png'
-
+import editButton from '@/assets/ic_edit_white@3x.png'
+import deleteButton from '@/assets/ic_delete_white@3x.png'
 // Importing store and router hooks for handling house details and deletion
 const houseStore = useHouseDetailStore()
 const deletePopupStore = useDeletePopupStore()
