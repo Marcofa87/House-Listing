@@ -66,6 +66,7 @@ const isActive = (path: string) => {
 <style scoped>
 .header {
   display: flex;
+  position: fixed;
   bottom: 0;
   width: 100%;
   margin: 0 auto;
@@ -114,6 +115,12 @@ img {
   }
   .desktop-header {
     display: flex;
+  }
+
+  .header {
+    height: 80px;
+    position: absolute;
+    top: 0;
   }
 
   ul {
